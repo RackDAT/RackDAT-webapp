@@ -6,8 +6,6 @@ import Link from "next/link";
 import React from "react";
 ContentTemplate;
 import TextInput from "@/components/forms/TextInput";
-import Logo from "@/assets/img/logo.svg";
-import logo from "../../assets/img/logo.svg";
 import Btn from "@/components/global/Btn";
 
 type Props = {};
@@ -15,24 +13,23 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={{
-        matricula: "",
+        correo: "",
         contraseña: "",
       }}
       onSubmit={(values) => {
-        alert(values);
+        alert(JSON.stringify(values));
       }}
     >
       <Form className="h-full">
         <div className="w-1/2 h-full ml-20 flex flex-col gap-5 justify-center">
           {/* imagen */}
-          <img src={logo} alt="logo" />
-          <span className="text-xl font-bold">Bienvenidos nuevamente</span>
+          <span className="text-xl font-bold">Bienvenido nuevamente</span>
           <div className="flex flex-col gap-2">
             <label>Correo</label>
             <Field
               as={TextInput}
-              id="firstName"
-              name="firstName"
+              id="correo"
+              name="correo"
               placeholder="John"
               type="text"
             />
