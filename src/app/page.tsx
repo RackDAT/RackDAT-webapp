@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div className="w-full h-screen bg-black">
+    <div className="w-full h-screen">
       <div className="m-auto w-fit">
         <h1 className="text-3xl uppercase text-white">RackDat home page</h1>
         <Btn>hello</Btn>
