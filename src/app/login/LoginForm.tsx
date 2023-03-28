@@ -14,7 +14,7 @@ const LoginForm = () => {
     <Formik
       initialValues={{
         correo: "",
-        contraseña: "",
+        contrasena: "",
       }}
       onSubmit={(values) => {
         alert(JSON.stringify(values));
@@ -26,22 +26,20 @@ const LoginForm = () => {
           <span className="text-xl font-bold">Bienvenido nuevamente</span>
           <div className="flex flex-col gap-2">
             <label>Correo</label>
-            <Field
-              as={TextInput}
-              id="correo"
-              name="correo"
-              placeholder="John"
+            <TextInput
               type="text"
+              id={"correo"}
+              name="correo"
+              placeholder="daniel.barocio@cetys.edu.mx"
             />
           </div>
           <div className="flex flex-col gap-2">
             <label>Contraseña</label>
-            <Field
-              as={TextInput}
-              id="contraseña"
-              name="contraseña"
-              placeholder="*******"
-              type="password"
+            <TextInput
+              type="text"
+              id={"contrasena"}
+              name="contrasena"
+              placeholder="**********"
             />
           </div>
           <label className="text-center">
