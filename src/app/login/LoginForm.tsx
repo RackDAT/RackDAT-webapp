@@ -36,7 +36,7 @@ const LoginForm = () => {
           <div className="flex flex-col gap-2">
             <label>Contraseña</label>
             <TextInput
-              type="text"
+              type="password"
               id={"contrasena"}
               name="contrasena"
               placeholder="**********"

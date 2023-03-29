@@ -3,9 +3,9 @@ import { Field } from "formik";
 
 type Props = {
   type: "text" | "password";
-  id: "string";
-  name: "string";
-  placeholder: "string";
+  id: string;
+  name: string;
+  placeholder: string;
 };
 
 const TextInput = (props: Props) => {
