@@ -40,8 +40,8 @@ const SolicitudDiv = (props: Props) => {
         </div>
         {/* buttons */}
         <div className="flex flex-col gap-2">
-          <Btn>Ver solicitud</Btn>
-          <Btn>Volver a solicitar</Btn>
+          <Btn style="strong">Ver solicitud</Btn>
+          <Btn style="light">Volver a solicitar</Btn>
         </div>
       </div>
     </div>
