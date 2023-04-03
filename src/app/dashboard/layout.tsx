@@ -57,7 +57,9 @@ export default function RootLayout({
           </div>
         </div>
       </div>
-      <div className="w-full rounded-l-2xl  bg-[#F5F5F5]">{children}</div>
+      <div className="w-full h-screen rounded-l-2xl  bg-[#F5F5F5]  overflow-y-auto">
+        {children}
+      </div>
     </div>
   );
 }
