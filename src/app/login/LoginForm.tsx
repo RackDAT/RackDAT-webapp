@@ -7,7 +7,6 @@ import React from "react";
 ContentTemplate;
 import Image from "next/image";
 import TextInput from "@/components/forms/TextInput";
-import logo from "../../assets/img/logo.svg";
 import Btn from "@/components/global/Btn";
 
 type Props = {};
@@ -15,38 +14,33 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={{
-        matricula: "",
-        contraseña: "",
+        correo: "",
+        contrasena: "",
       }}
       onSubmit={(values) => {
-        alert(values);
+        alert(JSON.stringify(values));
       }}
     >
       <Form className="h-full">
         <div className="w-1/2 h-full ml-20 flex flex-col gap-5 justify-center">
           {/* imagen */}
-          <div style={{ width: "100px", height: "100px" }} className="border border-l-green-800">
-            <Image src={logo} alt="logo" width={300} height={100} onError={(e) => console.log(e)} />
-          </div>
-          <span className="text-xl font-bold">Bienvenidos nuevamente</span>
+          <span className="text-xl font-bold">Bienvenido nuevamente</span>
           <div className="flex flex-col gap-2">
             <label>Correo</label>
-            <Field
-              as={TextInput}
-              id="firstName"
-              name="firstName"
-              placeholder="John"
+            <TextInput
               type="text"
+              id={"correo"}
+              name="correo"
+              placeholder="daniel.barocio@cetys.edu.mx"
             />
           </div>
           <div className="flex flex-col gap-2">
             <label>Contraseña</label>
-            <Field
-              as={TextInput}
-              id="contraseña"
-              name="contraseña"
-              placeholder="*******"
+            <TextInput
               type="password"
+              id={"contrasena"}
+              name="contrasena"
+              placeholder="**********"
             />
           </div>
           <label className="text-center">
