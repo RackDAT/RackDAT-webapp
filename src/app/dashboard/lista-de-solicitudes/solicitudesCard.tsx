@@ -8,7 +8,7 @@ const Card = () => {
       <div className="h-full row-span-1 border-b border-gray-400 p-1 flex flex-row justify-between px-5">
         <div className='flex flex-row items-center justify-center space-x-3.5'>
           <p className='text-lg font-extrabold'>Items</p>
-          <p className='text-gray-500 font-semibold'>8 de diciembre de 2021</p>
+          <p className='text-gray-400 font-semibold'>8 de diciembre de 2021</p>
         </div>
         <div className='flex flex-row items-center justify-center space-x-3'>
           <div className='h-3.5 w-3.5 bg-green-600 rounded-full' />
