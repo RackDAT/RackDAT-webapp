@@ -20,13 +20,13 @@ const SolicitudDiv = (props: Props) => {
 
       {/* content? */}
       <div className="p-4 flex gap-2 items-center justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-3.5">
           <img
             src="https://picsum.photos/200/300"
             alt=""
             className="w-20 h-20 rounded"
           />
-          <div className="flex flex-col justify-between ">
+          <div className="flex flex-col justify-between">
             <h1>Tableta para dibujar</h1>
             <label className="text-neutral-500 text-sm">4 unidades</label>
           </div>
