@@ -5,6 +5,7 @@ import { Form, Formik, Field } from "formik";
 import Link from "next/link";
 import React from "react";
 ContentTemplate;
+import Image from "next/image";
 import TextInput from "@/components/forms/TextInput";
 import Btn from "@/components/global/Btn";
 
@@ -43,13 +44,13 @@ const LoginForm = () => {
             />
           </div>
           <label className="text-center">
-            No tienes cuenta? Crea una{" "}
-            <Link href="/hello" className="text-yellow-400">
+            ¿No tienes cuenta? Crea una{" "}
+            <Link href="/hello" className="text-yellow-500">
               {" "}
               aqui
             </Link>
           </label>
-          <Btn>Ingresar</Btn>
+          <Btn style="strong">Ingresar</Btn>
         </div>
       </Form>
     </Formik>

@@ -10,7 +10,7 @@ export default function Home() {
     <div className="w-full h-screen">
       <div className="m-auto w-fit">
         <h1 className="text-3xl uppercase text-white">RackDat home page</h1>
-        <Btn>hello</Btn>
+        <Btn style="strong">hello</Btn>
       </div>
     </div>
   );
