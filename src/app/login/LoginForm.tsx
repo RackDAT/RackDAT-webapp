@@ -44,13 +44,13 @@ const LoginForm = () => {
             />
           </div>
           <label className="text-center">
-            No tienes cuenta? Crea una{" "}
-            <Link href="/hello" className="text-yellow-400">
+            ¿No tienes cuenta? Crea una{" "}
+            <Link href="/hello" className="text-yellow-500">
               {" "}
               aqui
             </Link>
           </label>
-          <Btn>Ingresar</Btn>
+          <Btn style="strong">Ingresar</Btn>
         </div>
       </Form>
     </Formik>
