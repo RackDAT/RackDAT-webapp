@@ -5,6 +5,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import Btn from "@/components/global/Btn";
 import SelectInput from "@/components/forms/SelectInput";
+import TextArea from "@/components/forms/TextArea";
 
 const AnadirForm = () => {
   interface ILaboratorio {
@@ -35,7 +36,7 @@ const AnadirForm = () => {
       }}
     >
       <Form className="h-screen flex flex-col justify-center items-center border border-black">
-        <div className="grid grid-cols-3 place-items-center gap-4 w-2/4">
+        <div className="grid grid-cols-3 place-items-center gap-4 w-2/4 border border-black">
           <div className="border border-black">Column 1</div>
           <div className="border border-black flex flex-col">
             <div className="p-2 flex flex-col">
@@ -103,16 +104,28 @@ const AnadirForm = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 place-items-center gap-4 w-2/4">
-          <div className="col-span-2 flex items-center justify-center flex-col">
-            <div>
-              aloh aloh
+        <div className="grid grid-cols-3 justify-between gap-4 w-2/4 border border-black">
+          <div className="col-span-2 flex items-center justify-center flex-col h-[350px]">
+            <div className="p-2 flex flex-col border border-black w-full h-[50%]">
+              <label>Fecha de alta</label>
+              <TextArea
+                type="text"
+                id={"fecha"}
+                name="fecha"
+                placeholder="01/01/1900"
+              />
             </div>
-            <div>
-              hola hola
+            <div className="p-2 flex flex-col border border-black w-full h-[50%]">
+              <label>Fecha de alta</label>
+              <TextArea
+                type="text"
+                id={"fecha"}
+                name="fecha"
+                placeholder="01/01/1900"
+              />
             </div>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col content-between justify-center">
             hola
           </div>
         </div>
