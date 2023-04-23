@@ -6,6 +6,8 @@ import React from "react";
 import Btn from "@/components/global/Btn";
 import SelectInput from "@/components/forms/SelectInput";
 import TextArea from "@/components/forms/TextArea";
+import SelectNums from "@/components/forms/SelectNums";
+import Dropzone from "@/components/forms/Dropzone";
 
 const AnadirForm = () => {
   interface ILaboratorio {
@@ -37,7 +39,10 @@ const AnadirForm = () => {
     >
       <Form className="h-screen flex flex-col justify-center items-center border border-black">
         <div className="grid grid-cols-3 place-items-center gap-4 w-2/4 border border-black">
-          <div className="border border-black">Column 1</div>
+          <div className="p-2 flex flex-col justify-center items-center">
+            <h1 className='title text-2xl font-bold'>Subir archivos</h1>
+            <Dropzone filetype="image/*" />
+          </div>
           <div className="border border-black flex flex-col">
             <div className="p-2 flex flex-col">
               <label>Nombre</label>
@@ -125,8 +130,22 @@ const AnadirForm = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col content-between justify-center">
-            hola
+          <div className="flex flex-col content-between justify-between items-end p-2">
+            <SelectNums
+              id="quantity"
+              name="quantity"
+              placeholder="0"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </SelectNums>
+              <Btn style="strong">
+                Registrar
+              </Btn>
+
           </div>
         </div>
       </Form>
