@@ -14,11 +14,11 @@ const AnadirForm = () => {
     id: number;
     nombre: string;
   }
-  
+
   const labs: ILaboratorio[] = [
-    { id: 1, nombre: 'Redes' },
-    { id: 2, nombre: 'Industrial' },
-    { id: 3, nombre: 'Energías renovables' },
+    { id: 1, nombre: "Redes" },
+    { id: 2, nombre: "Industrial" },
+    { id: 3, nombre: "Energías renovables" },
   ];
 
   return (
@@ -31,7 +31,7 @@ const AnadirForm = () => {
         modelo: "",
         fecha: new Date().toLocaleDateString(),
         cantidad: 0,
-        observaciones: ""
+        observaciones: "",
       }}
       onSubmit={(values) => {
         alert(JSON.stringify(values));
@@ -40,7 +40,7 @@ const AnadirForm = () => {
       <Form className="h-screen flex flex-col justify-center items-center">
         <div className="grid grid-cols-3 justify-items-between gap-3 w-8/12">
           <div className="p-2 flex flex-col justify-center items-center col-span-1 h-full w-full">
-            <Dropzone filetype="image/*" />
+            <Dropzone w={500} h={40} fileType="image/*" />
           </div>
           <div className="flex flex-col col-span-1">
             <div className="p-2 flex flex-col">
@@ -49,7 +49,7 @@ const AnadirForm = () => {
                 type="text"
                 id={"nombre"}
                 name="nombre"
-                placeholder="Juan"
+                placeholder="Calculadora"
               />
             </div>
             <div className="p-2 flex flex-col">
@@ -75,24 +75,24 @@ const AnadirForm = () => {
             <div className="p-2 flex flex-col">
               <label>Laboratorio</label>
               <SelectInput
-              id="carrera"
-              name="carrera"
-              placeholder="Select an option"
-            >
-              <option value="">Selecciona tu carrera</option>
-              {labs.map((lab) => (
-                <option key={lab.id} value={lab.id}>
-                  {lab.nombre}
-                </option>
-              ))}
-            </SelectInput>
+                id="carrera"
+                name="carrera"
+                placeholder="Select an option"
+              >
+                <option value="">Selecciona tu carrera</option>
+                {labs.map((lab) => (
+                  <option key={lab.id} value={lab.id}>
+                    {lab.nombre}
+                  </option>
+                ))}
+              </SelectInput>
             </div>
             <div className="p-2 flex flex-col">
               <label>Inventario</label>
               <SelectInput
-              id="carrera"
-              name="carrera"
-              placeholder="Select an option"
+                id="carrera"
+                name="carrera"
+                placeholder="Select an option"
               >
                 <option value="">Selecciona el inventario</option>
               </SelectInput>
@@ -111,13 +111,8 @@ const AnadirForm = () => {
         <div className="grid grid-cols-3 justify-between gap-4 w-8/12 ">
           <div className="col-span-2 flex items-center justify-center flex-col h-[350px]">
             <div className="p-2 flex flex-col w-full h-[50%]">
-              <label>Fecha de alta</label>
-              <TextArea
-                type="text"
-                id={"fecha"}
-                name="fecha"
-                placeholder="01/01/1900"
-              />
+              <label>Adjunta manual o documentación aquí</label>
+              <Dropzone h="full" w="full" fileType="document/*" />
             </div>
             <div className="p-2 flex flex-col w-full h-[50%]">
               <label>Observaciones</label>
@@ -130,21 +125,17 @@ const AnadirForm = () => {
             </div>
           </div>
           <div className="flex flex-col content-between justify-between items-end p-2">
-            <SelectNums
-              id="quantity"
-              name="quantity"
-              placeholder="0"
-              >
+            <div className="flex flex-col w-full items-end">
+              <label>Cantidad</label>
+              <SelectNums id="quantity" name="quantity" placeholder="0">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
               </SelectNums>
-              <Btn style="strong">
-                Registrar
-              </Btn>
-
+            </div>
+            <Btn style="strong">Registrar</Btn>
           </div>
         </div>
       </Form>
