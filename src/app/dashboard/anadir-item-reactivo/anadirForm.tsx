@@ -37,13 +37,12 @@ const AnadirForm = () => {
         alert(JSON.stringify(values));
       }}
     >
-      <Form className="h-screen flex flex-col justify-center items-center border border-black">
-        <div className="grid grid-cols-3 place-items-center gap-4 w-2/4 border border-black">
-          <div className="p-2 flex flex-col justify-center items-center">
-            <h1 className='title text-2xl font-bold'>Subir archivos</h1>
+      <Form className="h-screen flex flex-col justify-center items-center">
+        <div className="grid grid-cols-3 justify-items-between gap-3 w-8/12">
+          <div className="p-2 flex flex-col justify-center items-center col-span-1 h-full w-full">
             <Dropzone filetype="image/*" />
           </div>
-          <div className="border border-black flex flex-col">
+          <div className="flex flex-col col-span-1">
             <div className="p-2 flex flex-col">
               <label>Nombre</label>
               <TextInput
@@ -72,7 +71,7 @@ const AnadirForm = () => {
               />
             </div>
           </div>
-          <div className="border border-black flex flex-col">
+          <div className=" flex flex-col col-span-1">
             <div className="p-2 flex flex-col">
               <label>Laboratorio</label>
               <SelectInput
@@ -109,9 +108,9 @@ const AnadirForm = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 justify-between gap-4 w-2/4 border border-black">
+        <div className="grid grid-cols-3 justify-between gap-4 w-8/12 ">
           <div className="col-span-2 flex items-center justify-center flex-col h-[350px]">
-            <div className="p-2 flex flex-col border border-black w-full h-[50%]">
+            <div className="p-2 flex flex-col w-full h-[50%]">
               <label>Fecha de alta</label>
               <TextArea
                 type="text"
@@ -120,13 +119,13 @@ const AnadirForm = () => {
                 placeholder="01/01/1900"
               />
             </div>
-            <div className="p-2 flex flex-col border border-black w-full h-[50%]">
-              <label>Fecha de alta</label>
+            <div className="p-2 flex flex-col w-full h-[50%]">
+              <label>Observaciones</label>
               <TextArea
                 type="text"
-                id={"fecha"}
-                name="fecha"
-                placeholder="01/01/1900"
+                id={"observaciones"}
+                name="observaciones"
+                placeholder="Anota observaciones, notas o especifícaciones aquí"
               />
             </div>
           </div>
