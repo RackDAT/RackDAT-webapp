@@ -15,7 +15,7 @@ const SelectNums = ({ id, name, placeholder, children }: Props) => {
       id={id}
       name={name}
       placeholder={placeholder}
-      className="px-4 py-2 rounded focus:outline-none border-[#B2C1D6] border w-[26%]"
+      className="px-4 py-2 rounded focus:outline-none border-[#B2C1D6] border lg:w-[15%] sm:w-[26%]"
     >
       {children}
     </Field>

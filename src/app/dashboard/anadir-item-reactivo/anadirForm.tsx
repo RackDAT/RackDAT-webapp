@@ -14,11 +14,11 @@ const AnadirForm = () => {
     id: number;
     nombre: string;
   }
-  
+
   const labs: ILaboratorio[] = [
-    { id: 1, nombre: 'Redes' },
-    { id: 2, nombre: 'Industrial' },
-    { id: 3, nombre: 'Energías renovables' },
+    { id: 1, nombre: "Redes" },
+    { id: 2, nombre: "Industrial" },
+    { id: 3, nombre: "Energías renovables" },
   ];
 
   return (
@@ -31,7 +31,7 @@ const AnadirForm = () => {
         modelo: "",
         fecha: new Date().toLocaleDateString(),
         cantidad: 0,
-        observaciones: ""
+        observaciones: "",
       }}
       onSubmit={(values) => {
         alert(JSON.stringify(values));
@@ -75,24 +75,24 @@ const AnadirForm = () => {
             <div className="p-2 flex flex-col">
               <label>Laboratorio</label>
               <SelectInput
-              id="carrera"
-              name="carrera"
-              placeholder="Select an option"
-            >
-              <option value="">Selecciona tu carrera</option>
-              {labs.map((lab) => (
-                <option key={lab.id} value={lab.id}>
-                  {lab.nombre}
-                </option>
-              ))}
-            </SelectInput>
+                id="carrera"
+                name="carrera"
+                placeholder="Select an option"
+              >
+                <option value="">Selecciona tu carrera</option>
+                {labs.map((lab) => (
+                  <option key={lab.id} value={lab.id}>
+                    {lab.nombre}
+                  </option>
+                ))}
+              </SelectInput>
             </div>
             <div className="p-2 flex flex-col">
               <label>Inventario</label>
               <SelectInput
-              id="carrera"
-              name="carrera"
-              placeholder="Select an option"
+                id="carrera"
+                name="carrera"
+                placeholder="Select an option"
               >
                 <option value="">Selecciona el inventario</option>
               </SelectInput>
@@ -130,21 +130,14 @@ const AnadirForm = () => {
             </div>
           </div>
           <div className="flex flex-col content-between justify-between items-end p-2">
-            <SelectNums
-              id="quantity"
-              name="quantity"
-              placeholder="0"
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </SelectNums>
-              <Btn style="strong">
-                Registrar
-              </Btn>
-
+            <SelectNums id="quantity" name="quantity" placeholder="0">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </SelectNums>
+            <Btn style="strong">Registrar</Btn>
           </div>
         </div>
       </Form>
