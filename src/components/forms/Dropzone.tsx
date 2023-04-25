@@ -6,15 +6,22 @@ import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import Swal from "sweetalert2";
 
+// Documentación del uso de este componente (para futuros usos)
+// w = width
+// h = height
+// fileType = Tipo de archivo que permite, por ejemplo image/*.
+// En fileType se pone "image/*" para permitir imagenes y ".pdf, .docx" para permitir documentos
+// maxFiles = cantidad de files permitidos
+
 interface DropzoneProps {
   w: number | string;
   h: number | string;
   fileType: string;
+  maxFiles: number;
 }
 
-const Dropzone = ({ w, h, fileType }: DropzoneProps) => {
+const Dropzone = ({ w, h, fileType, maxFiles }: DropzoneProps) => {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
-  const [rejected, setRejected] = useState<FilesRejected[]>([]);
 
   interface FileWithPreview extends File {
     preview: string;
@@ -42,7 +49,6 @@ const Dropzone = ({ w, h, fileType }: DropzoneProps) => {
     }
 
     if (rejectedFiles?.length) {
-      const filenames = rejectedFiles.map((file: any) => file.name).join(", ");
       Swal.fire({
         icon: "error",
         title: "Error al subir archivo",
@@ -56,6 +62,7 @@ const Dropzone = ({ w, h, fileType }: DropzoneProps) => {
     accept: {
       [fileType]: [],
     },
+    maxFiles: maxFiles,
   });
 
   const removeFile = (name: string) => {

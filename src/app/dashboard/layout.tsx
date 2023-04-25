@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
+import rackdatLogo from "../../assets/img/bag-heart-love-svgrepo-com.svg";
 
 export const metadata = {
   title: "Create Next App",

@@ -16,7 +16,7 @@ const TextArea = (props: Props) => {
       name={props.name}
       placeholder={props.placeholder}
       rows="5"
-      className="px-4 py-2 rounded focus:outline-none border-[#B2C1D6] border w-11/12 h-full resize-none"
+      className="px-4 py-2 rounded focus:outline-none border-[#B2C1D6] border w-full h-full resize-none"
       type={props.type}
     />
   );

@@ -40,7 +40,7 @@ const AnadirForm = () => {
       <Form className="h-screen flex flex-col justify-center items-center">
         <div className="grid grid-cols-3 justify-items-between gap-3 w-8/12">
           <div className="p-2 flex flex-col justify-center items-center col-span-1 h-full w-full">
-            <Dropzone w={500} h={40} fileType="image/*" />
+            <Dropzone w={500} h={40} fileType="image/*" maxFiles={1} />
           </div>
           <div className="flex flex-col col-span-1">
             <div className="p-2 flex flex-col">
@@ -112,7 +112,7 @@ const AnadirForm = () => {
           <div className="col-span-2 flex items-center justify-center flex-col h-[350px]">
             <div className="p-2 flex flex-col w-full h-[50%]">
               <label>Adjunta manual o documentación aquí</label>
-              <Dropzone h="full" w="full" fileType="document/*" />
+              <Dropzone h="full" w="full" fileType="document/*" maxFiles={4} />
             </div>
             <div className="p-2 flex flex-col w-full h-[50%]">
               <label>Observaciones</label>
