@@ -37,10 +37,10 @@ const AnadirForm = () => {
         alert(JSON.stringify(values));
       }}
     >
-      <Form className="h-screen flex flex-col justify-center items-center">
+      <Form className="h-[90vh] flex flex-col justify-center items-center">
         <div className="grid grid-cols-3 justify-items-between gap-3 w-8/12">
-          <div className="p-2 flex flex-col justify-center items-center col-span-1 h-full w-full">
-            <Dropzone w={500} h={40} fileType="image/*" maxFiles={1} />
+          <div className="p-2 flex flex-col justify-center items-center h-full w-full border border-black">
+            <Dropzone w="full" h="full" fileType="image/*" maxFiles={1} />
           </div>
           <div className="flex flex-col col-span-1">
             <div className="p-2 flex flex-col">

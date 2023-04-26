@@ -71,21 +71,46 @@ const Dropzone = ({ w, h, fileType, maxFiles }: DropzoneProps) => {
 
   return (
     <form>
-      <div
-        {...getRootProps({})}
-        className={`flex flex-col items-center justify-center h-${h} w-${w} text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-8`}
-      >
-        <h1 className="title text-xl font-bold">Subir archivos</h1>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Arroja los archivos aquí</p>
-        ) : (
-          <p>
-            Arrastra y arroja los archivos aquí, o da click para seleccionar
-          </p>
-        )}
-      </div>
-      <h3 className="title text-md font-semibold text-neutral-600 mt-2 border-b pb-1">
+      {files.length == 0 ? (
+        <div
+          {...getRootProps({})}
+          className={`flex flex-col items-center justify-center h-${h} w-${w} text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-2`}
+        >
+          <h1 className="title text-xl font-bold">Subir archivos</h1>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Arroja los archivos aquí</p>
+          ) : (
+            <p>
+              Arrastra y arroja los archivos aquí, o da click para seleccionar
+            </p>
+          )}
+        </div>
+      ) : (
+        <div
+          className={`flex flex-col items-center justify-center h-${h} w-${w} text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-2`}
+        >
+          <ul className="mt-6 flex flex-col">
+            {files.map((file) => (
+              <li key={file.name} className="flex items-start justify-between">
+                <div>
+                  <p className="mt-2 text-neutral-500 text-sm font-medium">
+                    {file.name}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="mt-1 py-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-white transition-colors"
+                  onClick={() => removeFile(file.name)}
+                >
+                  remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {/* <h3 className="title text-md font-semibold text-neutral-600 mt-2 border-b pb-1">
         Accepted Files
       </h3>
       <ul className="mt-1 flex flex-col">
@@ -105,7 +130,7 @@ const Dropzone = ({ w, h, fileType, maxFiles }: DropzoneProps) => {
             </button>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </form>
   );
 };
