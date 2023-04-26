@@ -1,14 +1,9 @@
 import React, { ReactComponentElement } from "react";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import "./globals.css";
+import { AppProps } from "next/app";
 
-type props = {
-  Component: any;
-  pageProps: React.ComponentType;
-};
-
-// This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps }: props) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
       <Component {...pageProps} />
