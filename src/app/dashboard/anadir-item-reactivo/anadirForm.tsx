@@ -39,7 +39,7 @@ const AnadirForm = () => {
     >
       <Form className="h-[90vh] flex flex-col justify-center items-center">
         <div className="grid grid-cols-3 justify-items-between gap-3 w-8/12">
-          <div className="p-2 flex flex-col justify-center items-center h-full w-full border border-black">
+          <div className="p-2 flex flex-col justify-center items-center h-full w-full">
             <Dropzone w="full" h="full" fileType="image/*" maxFiles={1} />
           </div>
           <div className="flex flex-col col-span-1">
