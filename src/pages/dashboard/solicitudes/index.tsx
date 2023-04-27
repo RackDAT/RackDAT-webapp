@@ -2,19 +2,17 @@ import React from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import SolicitudDiv from "./SolicitudDiv";
 import { GoSettings } from "react-icons/go";
-import Layout from "../layout";
+import Layout from "../Layout";
+import LayoutHeader from "../LayoutHeader";
 
 type Props = {};
 
 const Solicitudes = (props: Props) => {
   return (
     <Layout>
+      <LayoutHeader title="solicitudes" />
       <div className="flex flex-col">
         {/* header */}
-        <div className="border-b-2 border-neutral-300 w-full py-4 px-4 flex items-center gap-2 sticky top-0 z-20 bg-[#F5F5F5]">
-          <AiOutlineUnorderedList className="w-6 h-6" />
-          <div className="text-xl">Solicitudes</div>
-        </div>
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between px-10 mt-7 items-center">
             <div className="flex gap-4 items-center">

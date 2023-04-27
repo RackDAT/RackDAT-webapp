@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
+import LayoutHeader from "./LayoutHeader";
 
 export const metadata = {
   title: "Create Next App",
