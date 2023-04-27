@@ -10,7 +10,7 @@ type Props = {};
 const Solicitudes = (props: Props) => {
   return (
     <Layout>
-      <LayoutHeader title="solicitudes" />
+      <LayoutHeader title="Solicitudes" />
       <div className="flex flex-col">
         {/* header */}
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
