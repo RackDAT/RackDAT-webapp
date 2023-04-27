@@ -1,3 +1,5 @@
+"use client";
+
 import { setFips } from "crypto";
 import React, { useState } from "react";
 import { useCallback } from "react";
@@ -70,11 +72,11 @@ const Dropzone = ({ w, h, fileType, maxFiles }: DropzoneProps) => {
   };
 
   return (
-    <form>
+    <form className="h-full w-full">
       {files.length == 0 ? (
         <div
           {...getRootProps({})}
-          className={`flex flex-col items-center justify-center h-${h} w-${w} text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-2`}
+          className={`flex flex-col items-center justify-center text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-2 h-full`}
         >
           <h1 className="title text-xl font-bold">Subir archivos</h1>
           <input {...getInputProps()} />
@@ -88,7 +90,7 @@ const Dropzone = ({ w, h, fileType, maxFiles }: DropzoneProps) => {
         </div>
       ) : (
         <div
-          className={`flex flex-col items-center justify-center h-${h} w-${w} text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-2`}
+          className={`flex flex-col items-center justify-center text-sm border text-zinc-500 border-[#B2C1D6] rounded bg-white p-2`}
         >
           <ul className="mt-6 flex flex-col">
             {files.map((file) => (

@@ -37,10 +37,10 @@ const AnadirForm = () => {
         alert(JSON.stringify(values));
       }}
     >
-      <Form className="h-[90vh] flex flex-col justify-center items-center">
-        <div className="grid grid-cols-3 justify-items-between gap-3 w-8/12">
-          <div className="p-2 flex flex-col justify-center items-center h-full w-full">
-            <Dropzone w="full" h="full" fileType="image/*" maxFiles={1} />
+      <Form className="h-[90vh] flex flex-col justify-center items-center ">
+        <div className="flex justify-between gap-3 w-8/12 min-h-[200px] ">
+          <div className="flex justify-center  h-full w-full">
+            <Dropzone w="20" h="20" fileType="image/*" maxFiles={1} />
           </div>
           <div className="flex flex-col col-span-1">
             <div className="p-2 flex flex-col">
@@ -125,7 +125,7 @@ const AnadirForm = () => {
             </div>
           </div>
           <div className="flex flex-col content-between justify-between items-end p-2">
-            <div className="flex flex-col w-full items-end">
+            <div className="flex  w-full items-center justify-center gap-2">
               <label>Cantidad</label>
               <SelectNums id="quantity" name="quantity" placeholder="0">
                 <option value="1">1</option>
