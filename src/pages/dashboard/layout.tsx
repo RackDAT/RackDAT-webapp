@@ -16,11 +16,7 @@ const Opciones = [
   "configuracion",
 ];
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex">
       <div className="w-[270px] h-screen flex flex-col align-center p-4 justify-between flex-shrink-0">
