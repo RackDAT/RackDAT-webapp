@@ -12,7 +12,7 @@ import SelectInput from "@/components/forms/SelectInput";
 type Props = {};
 
 const SignUpForm = (props: Props) => {
-  interface Career {
+  interface ICareer {
     id: number;
     nombre: string;
   }
@@ -25,8 +25,8 @@ const SignUpForm = (props: Props) => {
   return (
     <Formik
       initialValues={{
-        correo: "",
-        contrasena: "",
+        matricula: "",
+        carrera: "",
       }}
       onSubmit={(values) => {
         alert(JSON.stringify(values));
@@ -48,7 +48,7 @@ const SignUpForm = (props: Props) => {
           <div className="flex flex-col gap-2">
             <label htmlFor="carrera">Carrera</label>
             <SelectInput
-              id="carrera"
+              id={"carrera"}
               name="carrera"
               placeholder="Select an option"
             >
