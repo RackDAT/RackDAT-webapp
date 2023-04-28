@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
-export function uploadPhoto(file: File) {
+export function uploadPhoto(file: File, url: string) {
   const firebaseConfig = {
     apiKey: "AIzaSyBJyyRJj6qTE7YX8I8qxpxcwUcfAb_IjL0",
     authDomain: "rackdat-b06a8.firebaseapp.com",
@@ -14,7 +14,7 @@ export function uploadPhoto(file: File) {
 
   const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
-  const storageRef = ref(storage, "Laboratorios/");
+  const storageRef = ref(storage, url);
   uploadBytes(storageRef, file).then((snapshot) => {
     console.log("Uploaded a blob or file!");
   });
