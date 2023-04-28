@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import AnadirForm from "./AnadirForm";
+import AnadirForm from "./anadirForm";
 import { MdAddShoppingCart } from "react-icons/md";
 
 type Props = {};
