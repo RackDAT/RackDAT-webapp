@@ -3,7 +3,7 @@ import LayoutHeader from "../LayoutHeader";
 import Layout from "../Layout";
 import SearchBar from "./SearchBar";
 import Filter from "./Filter";
-import ItemsTable from "./ItemsTable";
+import ItemTable from "./ItemTable";
 
 type Props = {};
 
@@ -31,7 +31,9 @@ const items = (props: Props) => {
         </div>
 
         {/* table */}
-        <div className="my-2"></div>
+        <div className="my-2">
+          <ItemTable />
+        </div>
       </div>
     </Layout>
   );
