@@ -15,6 +15,7 @@ const Opciones = [
   { name: "inicio", url: "home" },
   { name: "laboratorios", url: "laboratorios" },
   { name: "solicitudes", url: "solicitudes" },
+  { name: "items", url: "items" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
