@@ -55,7 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </div>
-      <div className="w-full h-screen rounded-l-2xl  bg-[#F5F5F5]  overflow-y-auto">
+      <div className="w-full h-screen rounded-l-2xl  bg-slate-100  overflow-y-auto">
         {children}
       </div>
     </div>
