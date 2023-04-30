@@ -3,6 +3,7 @@ import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
 import LayoutHeader from "./LayoutHeader";
 import { useRouter } from "next/router";
+
 import rackdatLogo from "../../assets/img/bag-heart-love-svgrepo-com.svg";
 
 export const metadata = {
