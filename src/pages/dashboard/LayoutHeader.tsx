@@ -1,15 +1,16 @@
 import React from "react";
-import { AiOutlineUnorderedList } from "react-icons/ai";
+import { AiFillHome, AiOutlineUnorderedList } from "react-icons/ai";
 import { IconType } from "react-icons/lib";
 import { ImLab } from "react-icons/im";
 
 type Props = {
-  title: "Solicitudes" | "Laboratorios";
+  title: "Solicitudes" | "Laboratorios" | "Home";
 };
 
 const IconTitle = {
   Solicitudes: <AiOutlineUnorderedList className="w-6 h-6" />,
   Laboratorios: <ImLab className="w-6 h-6" />,
+  Home: <AiFillHome className="w-6 h-6" />,
 };
 
 const LayoutHeader = (props: Props) => {
