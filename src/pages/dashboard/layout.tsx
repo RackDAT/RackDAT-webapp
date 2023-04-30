@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
+import LayoutHeader from "./LayoutHeader";
+import { useRouter } from "next/router";
 import rackdatLogo from "../../assets/img/bag-heart-love-svgrepo-com.svg";
 
 export const metadata = {
@@ -9,19 +11,12 @@ export const metadata = {
 };
 
 const Opciones = [
-  "inicio",
-  "laboratorio",
-  "Contactanos",
-  "Inventario",
-  "Mis solicitudes",
-  "configuracion",
+  { name: "inicio", url: "home" },
+  { name: "laboratorios", url: "laboratorios" },
+  { name: "solicitudes", url: "solicitudes" },
 ];
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex">
       <div className="w-[270px] h-screen flex flex-col align-center p-4 justify-between flex-shrink-0">
@@ -34,7 +29,7 @@ export default function RootLayout({
           />
           <div className="flex flex-col gap-2 mt-10">
             {Opciones.map((opcion) => {
-              return <BarOptions />;
+              return <BarOptions name={opcion.name} url={opcion.url} />;
             })}
           </div>
         </div>
@@ -65,13 +60,23 @@ export default function RootLayout({
   );
 }
 
-type Props = {};
+type Props = {
+  name: string;
+  url: string;
+  icon?: any;
+};
 
 const BarOptions = (Props: Props) => {
+  const router = useRouter();
   return (
-    <div className="text-neutral-100 hover:text-white hover:bg-[#45444D] px-3 rounded-lg flex items-center gap-2 cursor-pointer duration-[200ms] flex-shrink-0 min-w-[34px] h-[34px]">
+    <div
+      className="text-neutral-100 hover:text-white hover:bg-[#45444D] px-3 rounded-lg flex items-center gap-2 cursor-pointer duration-[200ms] flex-shrink-0 min-w-[34px] h-[34px]"
+      onClick={() => {
+        router.push(Props.url);
+      }}
+    >
       <AiFillHome className="w-5 h-5" />
-      <label className="text-[14px] cursor-pointer">Laboratorio</label>
+      <label className="text-[14px] cursor-pointer">{Props.name}</label>
     </div>
   );
 };
