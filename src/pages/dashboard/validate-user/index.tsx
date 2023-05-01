@@ -1,13 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout";
 import Btn from "@/components/global/Btn";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import UserDiv from "./userdiv";
+import User from "@/components/interfaces/users";
+import axios, { AxiosResponse, AxiosError } from "axios";
 
 const ValidateUser = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get<User[]>(
+        "https://rackdat.onrender.com/api/RackDAT/usuarios"
+      );
+      setUsers(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
@@ -39,7 +57,11 @@ const ValidateUser = () => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            <UserDiv />
+            {users
+              .filter((user) => user.verificado === false)
+              .map((user) => (
+                <UserDiv user={user} />
+              ))}
           </div>
         </div>
       </div>

@@ -2,7 +2,9 @@ import React from "react";
 import Btn from "@/components/global/Btn";
 import User from "@/components/interfaces/users";
 
-type Props = {};
+type Props = {
+  user: User;
+};
 
 const UserDiv = (props: Props) => {
   return (

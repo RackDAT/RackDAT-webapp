@@ -12,6 +12,9 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 type Props = {};
 
 const Solicitudes = (props: Props) => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [search, setSearch] = useState("");
+
   const fetchUsers = async () => {
     try {
       const response = await axios.get<User[]>(
@@ -23,13 +26,9 @@ const Solicitudes = (props: Props) => {
     }
   };
 
-  const [users, setUsers] = useState<User[]>([]);
-
   useEffect(() => {
     fetchUsers();
   }, []);
-
-  const [search, setSearch] = useState("");
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
