@@ -1,35 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import UserDiv from "./userdiv";
-import { FaUserCircle } from "react-icons/fa";
-import { AiOutlineSearch } from "react-icons/ai";
+import React, { useState } from "react";
 import Layout from "../layout";
 import Btn from "@/components/global/Btn";
-import User from "@/components/interfaces/users";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
+import UserDiv from "./userdiv";
 
-type Props = {};
-
-const Solicitudes = (props: Props) => {
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get<User[]>(
-        "https://rackdat.onrender.com/api/RackDAT/usuarios"
-      );
-      console.log(response.data);
-      setUsers(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
+const ValidateUser = () => {
   const [search, setSearch] = useState("");
 
   const handleChange = (event: any) => {
@@ -42,16 +19,8 @@ const Solicitudes = (props: Props) => {
         {/* header */}
         <div className="border-b-2 border-neutral-300 w-full py-4 px-4 flex items-center gap-2 sticky top-0 z-20 bg-[#F5F5F5] justify-between">
           <div className="flex gap-2">
-            <FaUserCircle className="w-6 h-6" />
-            <div className="text-xl">Usuarios</div>
-          </div>
-          <div className="flex justify-end">
-            <div className="relative p-2">
-              <Btn style="dark">Nuevas solicitudes</Btn>
-            </div>
-            <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute">
-              2
-            </div>
+            <AiOutlineUserAdd className="w-6 h-6" />
+            <div className="text-xl">Validar usuarios</div>
           </div>
         </div>
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
@@ -70,16 +39,12 @@ const Solicitudes = (props: Props) => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users.map((user) => (
-              <UserDiv user={user} />
-            ))}
+            <UserDiv />
           </div>
-
-          <div></div>
         </div>
       </div>
     </Layout>
   );
 };
 
-export default Solicitudes;
+export default ValidateUser;
