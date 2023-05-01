@@ -17,7 +17,6 @@ const Solicitudes = (props: Props) => {
       const response = await axios.get<User[]>(
         "https://rackdat.onrender.com/api/RackDAT/usuarios"
       );
-      console.log(response.data);
       setUsers(response.data);
     } catch (error) {
       console.error(error);
