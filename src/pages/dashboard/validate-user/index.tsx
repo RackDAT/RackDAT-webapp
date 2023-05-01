@@ -5,7 +5,7 @@ import Layout from "../layout";
 import Btn from "@/components/global/Btn";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import UserDiv from "./userdiv";
-import User from "@/components/interfaces/users";
+import User from "@/assets/interfaces/users";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 const ValidateUser = () => {

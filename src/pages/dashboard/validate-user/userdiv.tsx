@@ -1,6 +1,6 @@
 import React from "react";
 import Btn from "@/components/global/Btn";
-import User from "@/components/interfaces/users";
+import User from "@/assets/interfaces/users";
 
 type Props = {
   user: User;
