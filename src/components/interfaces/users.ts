@@ -5,6 +5,7 @@ export default interface User {
   apellido_mat: string;
   correo: string;
   clave: string;
+  verificado: boolean;
   tipo_usuario: {
     id: number;
     tipo_usuario: string;

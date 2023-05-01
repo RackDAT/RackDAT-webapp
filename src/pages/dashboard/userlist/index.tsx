@@ -69,9 +69,11 @@ const Solicitudes = (props: Props) => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users.map((user) => (
-              <UserDiv user={user} />
-            ))}
+            {users
+              .filter((user) => user.verificado)
+              .map((user) => (
+                <UserDiv user={user} />
+              ))}
           </div>
 
           <div></div>
