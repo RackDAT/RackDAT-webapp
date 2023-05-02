@@ -67,12 +67,9 @@ const Solicitudes = (props: Props) => {
             </div>
             <div className="flex justify-end">
               <div className="relative p-2">
-                <div
-                  className="p-2 rounded-md bg-black text-white border hover:bg-white hover:text-black hover:border hover:border-black hover:cursor-pointer duration-100"
-                  onClick={handleButtonClick}
-                >
+                <Btn style="dark" onClick={handleButtonClick}>
                   Nuevas solicitudes
-                </div>
+                </Btn>
               </div>
               <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute">
                 {pendingUsers}

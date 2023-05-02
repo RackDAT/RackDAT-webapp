@@ -7,6 +7,7 @@ import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import UserDiv from "./userdiv";
 import User from "@/assets/interfaces/users";
 import axios, { AxiosResponse, AxiosError } from "axios";
+import LayoutHeader from "../LayoutHeader";
 
 const ValidateUser = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -17,7 +18,10 @@ const ValidateUser = () => {
       const response = await axios.get<User[]>(
         "https://rackdat.onrender.com/api/RackDAT/usuarios"
       );
-      setUsers(response.data);
+      const filteredUsers = response.data.filter(
+        (user) => user.verificado === false
+      );
+      setUsers(filteredUsers);
     } catch (error) {
       console.error(error);
     }
@@ -35,12 +39,7 @@ const ValidateUser = () => {
     <Layout>
       <div className="flex flex-col">
         {/* header */}
-        <div className="border-b-2 border-neutral-300 w-full py-4 px-4 flex items-center gap-2 sticky top-0 z-20 bg-[#F5F5F5] justify-between">
-          <div className="flex gap-2">
-            <AiOutlineUserAdd className="w-6 h-6" />
-            <div className="text-xl">Validar usuarios</div>
-          </div>
-        </div>
+        <LayoutHeader title="Validar Usuarios" />
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between px-10 mt-7 items-center">
             <div className="flex items-center justify-start bg-gray-200 text-gray-600 h-7 w-1/4 rounded-lg p-3 gap-2 hover:bg-gray-300 hover:scale-[100.5%] duration-200 hover:shadow-md">
@@ -57,11 +56,9 @@ const ValidateUser = () => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users
-              .filter((user) => user.verificado === false)
-              .map((user) => (
-                <UserDiv user={user} />
-              ))}
+            {users.map((user) => (
+              <UserDiv user={user} />
+            ))}
           </div>
         </div>
       </div>
