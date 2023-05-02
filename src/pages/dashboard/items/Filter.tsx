@@ -6,7 +6,7 @@ type Props = {
 
 const Filter = (props: Props) => {
   return (
-    <select className="px-2 py-[.5em] rounded-lg min-w-[100px] shadow-lg bg-[#EDEDED] border-2 border-[#00000020] text-xs">
+    <select className="px-2 py-[.5em] rounded-lg min-w-[100px] shadow-lg bg-[#EDEDED] border-2 border-[#00000020] text-xs h-fit">
       {props.children}
     </select>
   );
