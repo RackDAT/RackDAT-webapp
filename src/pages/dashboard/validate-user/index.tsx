@@ -35,6 +35,28 @@ const ValidateUser = () => {
     setSearch(event.target.value);
   };
 
+  const aproveUser = (userId: number, value: boolean) => {
+    try {
+      axios.put<User>(
+        `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}&verificacion=${value}`
+      );
+      setUsers(users.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteUser = (userId: number) => {
+    try {
+      axios.delete<User>(
+        `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
+      );
+      setUsers(users.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Layout>
       <div className="flex flex-col">
@@ -57,7 +79,12 @@ const ValidateUser = () => {
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
             {users.map((user) => (
-              <UserDiv user={user} />
+              <UserDiv
+                user={user}
+                key={user.id}
+                onAproveUser={aproveUser}
+                onDeleteUser={deleteUser}
+              />
             ))}
           </div>
         </div>
