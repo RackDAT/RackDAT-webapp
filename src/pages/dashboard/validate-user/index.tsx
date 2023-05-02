@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Layout from "../layout";
+import Layout from "../Layout";
 import Btn from "@/components/global/Btn";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import UserDiv from "./userdiv";
