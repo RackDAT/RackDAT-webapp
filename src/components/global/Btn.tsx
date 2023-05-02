@@ -7,8 +7,8 @@ type Props = {
 
 const Btn = (props: Props) => {
   const styles = {
-    strong: "bg-orange-400 text-white hover:bg-orange-300",
-    light: "bg-orange-100 text-orange-400 hover:bg-orange-200",
+    strong: "bg-orange-400 text-white hover:bg-orange-300 h-fit",
+    light: "bg-orange-100 text-orange-400 hover:bg-orange-200 h-fit",
   };
   return (
     <button className={"px-7 py-2  rounded-md " + styles[props.style]}>
