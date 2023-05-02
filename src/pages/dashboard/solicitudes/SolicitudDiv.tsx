@@ -1,4 +1,5 @@
 import Btn from "@/components/global/Btn";
+import User from "@/assets/interfaces/users";
 import React from "react";
 
 type Props = {};

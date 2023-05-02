@@ -1,11 +1,23 @@
 import React from "react";
-import { AiFillHome, AiOutlineUnorderedList } from "react-icons/ai";
+import {
+  AiFillHome,
+  AiOutlineUnorderedList,
+  AiOutlineUserAdd,
+} from "react-icons/ai";
 import { IconType } from "react-icons/lib";
 import { ImLab } from "react-icons/im";
 import { MdAddShoppingCart, MdInventory } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
 
 type Props = {
-  title: "Solicitudes" | "Laboratorios" | "Home" | "Items" | "Añadir Item";
+  title:
+    | "Solicitudes"
+    | "Laboratorios"
+    | "Home"
+    | "Items"
+    | "Añadir Item"
+    | "Usuarios"
+    | "Validar Usuarios";
 };
 
 const IconTitle = {
@@ -14,6 +26,8 @@ const IconTitle = {
   Home: <AiFillHome className="w-6 h-6" />,
   Items: <MdInventory className="w-6 h-6" />,
   "Añadir Item": <MdAddShoppingCart className="w-6 h-6" />,
+  Usuarios: <FaUserCircle className="w-6 h-6" />,
+  "Validar Usuarios": <AiOutlineUserAdd className="w-6 h-6" />,
 };
 
 const LayoutHeader = (props: Props) => {
