@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Layout from "../Layout";
+import Layout from "../../../components/dashboard/Layout";
 import Btn from "@/components/global/Btn";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
-import UserDiv from "./userdiv";
+import UserDiv from "../../../components/dashboard/validate-user/userdiv";
 import User from "@/assets/interfaces/users";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import LayoutHeader from "../LayoutHeader";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 
 const ValidateUser = () => {
   const [users, setUsers] = useState<User[]>([]);

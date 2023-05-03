@@ -30,8 +30,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             }
           />
           <div className="flex flex-col gap-2 mt-10">
-            {Opciones.map((opcion) => {
-              return <BarOptions name={opcion.name} url={opcion.url} />;
+            {Opciones.map((opcion, index) => {
+              return (
+                <BarOptions name={opcion.name} url={opcion.url} key={index} />
+              );
             })}
           </div>
         </div>

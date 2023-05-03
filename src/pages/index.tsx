@@ -11,7 +11,7 @@ export default function Home() {
   console.log(user);
   return (
     <div className="w-full h-screen">
-      <div className="m-auto w-fit">
+      {/* <div className="m-auto w-fit">
         <Btn style="strong">
           <a href="/api/auth/login">LogIn</a>
         </Btn>
@@ -23,7 +23,7 @@ export default function Home() {
             logout
           </a>
         </>
-      )}
+      )} */}
     </div>
   );
 }

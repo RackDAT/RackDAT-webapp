@@ -2,8 +2,8 @@ import React from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import SolicitudDiv from "./SolicitudDiv";
 import { GoSettings } from "react-icons/go";
-import Layout from "../layout";
-import LayoutHeader from "../LayoutHeader";
+import Layout from "../../../components/dashboard/Layout";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 
 type Props = {};
 

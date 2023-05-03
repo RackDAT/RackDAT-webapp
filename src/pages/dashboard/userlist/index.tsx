@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import UserDiv from "./userdiv";
+import UserDiv from "../../../components/dashboard/userlist/userdiv";
 import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
-import Layout from "../Layout";
+import Layout from "../../../components/dashboard/Layout";
 import Btn from "@/components/global/Btn";
 import User from "@/assets/interfaces/users";
 import { useRouter } from "next/router";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import LayoutHeader from "../LayoutHeader";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 
 type Props = {};
 
@@ -78,8 +78,8 @@ const Solicitudes = (props: Props) => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users.map((user) => (
-              <UserDiv user={user} />
+            {users.map((user, index) => (
+              <UserDiv user={user} key={index} />
             ))}
           </div>
 
