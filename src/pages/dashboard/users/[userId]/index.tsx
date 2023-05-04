@@ -7,18 +7,19 @@ import { useEffect } from "react";
 import User from "@/assets/interfaces/users";
 import Image from "next/image";
 import UserProfileSolicitud from "@/components/dashboard/user/userid/UserProfileSolicitud";
+import { GetServerSideProps } from "next";
 
 type Props = {
   user: User;
 };
 
-// @ts-ignore
-export const getServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (!context.params) return { props: {} };
   const userId = context.params.userId;
   let response: any = null;
   response = await axios
     .get<User>(
-      `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${1}`
+      `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
     )
     .then((res) => {
       return res.data;
@@ -28,7 +29,7 @@ export const getServerSideProps = async (context) => {
     props: {
       user: response,
     },
-  }; // will be passed to the page component as props
+  };
 };
 
 const index = ({ user }: Props) => {
