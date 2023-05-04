@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import UserDiv from "../../../components/dashboard/userlist/userdiv";
+import UserDiv from "../../../components/dashboard/userlist/Userdiv";
 import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import Layout from "../../../components/dashboard/Layout";

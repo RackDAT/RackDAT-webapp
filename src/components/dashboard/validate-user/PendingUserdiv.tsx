@@ -8,7 +8,7 @@ type Props = {
   onDeleteUser: (userId: number) => void;
 };
 
-const UserDiv = ({ user, onAproveUser, onDeleteUser }: Props) => {
+const PendingUserDiv = ({ user, onAproveUser, onDeleteUser }: Props) => {
   const handleAproveUser = () => {
     onAproveUser(user.id, true);
   };
@@ -56,4 +56,4 @@ const UserDiv = ({ user, onAproveUser, onDeleteUser }: Props) => {
   );
 };
 
-export default UserDiv;
+export default PendingUserDiv;

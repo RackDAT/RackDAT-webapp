@@ -4,10 +4,12 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../components/dashboard/Layout";
 import Btn from "@/components/global/Btn";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
-import UserDiv from "../../../components/dashboard/validate-user/userdiv";
+import UserDiv from "../../../components/dashboard/validate-user/PendingUserdiv";
 import User from "@/assets/interfaces/users";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ValidateUser = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -41,8 +43,10 @@ const ValidateUser = () => {
         `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}&verificacion=${value}`
       );
       setUsers(users.filter((user) => user.id !== userId));
+      notifySuccessAprove();
     } catch (error) {
       console.error(error);
+      notifyError();
     }
   };
 
@@ -52,9 +56,29 @@ const ValidateUser = () => {
         `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
       );
       setUsers(users.filter((user) => user.id !== userId));
+      notifySuccessDelete();
     } catch (error) {
       console.error(error);
+      notifyError();
     }
+  };
+
+  const notifySuccessAprove = () => {
+    toast.success("Usuario aprobado", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const notifySuccessDelete = () => {
+    toast.info("Usuario rechazado", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const notifyError = () => {
+    toast.error("Hubo un error, inténtalo de nuevo", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   return (
@@ -86,6 +110,7 @@ const ValidateUser = () => {
                 onDeleteUser={deleteUser}
               />
             ))}
+            <ToastContainer />
           </div>
         </div>
       </div>
