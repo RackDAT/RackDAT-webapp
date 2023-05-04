@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import AnadirForm from "./AnadirForm";
+import AnadirForm from "@/components/dashboard/anadir-item-reactivo/AnadirForm";
 import { MdAddShoppingCart } from "react-icons/md";
-import Layout from "../Layout";
-import LayoutHeader from "../LayoutHeader";
+import Layout from "../../../components/dashboard/Layout";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 
 type Props = {};
 

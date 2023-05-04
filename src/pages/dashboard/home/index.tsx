@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../Layout";
-import LayoutHeader from "../LayoutHeader";
+import Layout from "../../../components/dashboard/Layout";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { CgProfile } from "react-icons/cg";
 import { MdLocationPin } from "react-icons/md";
 import { BsFillBoxSeamFill } from "react-icons/bs";
@@ -54,9 +54,12 @@ const index = (props: Props) => {
 
         {/* icons */}
         <div className="flex justify-around w-full">
-          {features.map((feature) => {
+          {features.map((feature, index) => {
             return (
-              <div className="flex flex-col items-center gap-4 text-center max-w-[150px]">
+              <div
+                className="flex flex-col items-center gap-4 text-center max-w-[150px]"
+                key={index}
+              >
                 {feature.icon}
                 <label className="text-sm"> {feature.name}</label>
               </div>

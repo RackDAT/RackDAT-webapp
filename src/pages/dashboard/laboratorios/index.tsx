@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../Layout";
-import LayoutHeader from "../LayoutHeader";
-import LabCard from "./LabCard";
+import Layout from "../../../components/dashboard/Layout";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
+import LabCard from "@/components/dashboard/laboratorios/LabCard";
 
 type Props = {};
 

@@ -1,9 +1,9 @@
 import React from "react";
-import LayoutHeader from "../LayoutHeader";
-import Layout from "../Layout";
-import SearchBar from "./SearchBar";
-import Filter from "./Filter";
-import ItemTable from "./ItemTable";
+import LayoutHeader from "../../../components/dashboard/LayoutHeader";
+import Layout from "../../../components/dashboard/Layout";
+import SearchBar from "@/components/dashboard/items/SearchBar";
+import Filter from "../../../components/dashboard/items/Filter";
+import ItemTable from "../../../components/dashboard/items/ItemTable";
 import Btn from "@/components/global/Btn";
 import { BiBook } from "react-icons/bi";
 

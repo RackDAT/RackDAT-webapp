@@ -16,11 +16,11 @@ const SignUpForm = (props: Props) => {
     id: number;
     nombre: string;
   }
-  
-  const careers: Career[] = [
-    { id: 1, nombre: 'Ingeniería de Software' },
-    { id: 2, nombre: 'Ingeniería Mecánica' },
-    { id: 3, nombre: 'Ingeniería Industrial' },
+
+  const careers: ICareer[] = [
+    { id: 1, nombre: "Ingeniería de Software" },
+    { id: 2, nombre: "Ingeniería Mecánica" },
+    { id: 3, nombre: "Ingeniería Industrial" },
   ];
   return (
     <Formik
@@ -33,7 +33,7 @@ const SignUpForm = (props: Props) => {
       }}
     >
       <Form className="h-full">
-      <div className="w-1/2 h-full ml-20 flex flex-col gap-5 justify-center">
+        <div className="w-1/2 h-full ml-20 flex flex-col gap-5 justify-center">
           {/* imagen */}
           <span className="text-xl font-bold">Solicita una cuenta RackDAT</span>
           <div className="flex flex-col gap-2">
@@ -70,7 +70,7 @@ const SignUpForm = (props: Props) => {
           <Btn style="strong">Registrarse</Btn>
         </div>
       </Form>
-    </ Formik>
+    </Formik>
   );
 };
 
