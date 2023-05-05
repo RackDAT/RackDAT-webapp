@@ -5,6 +5,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import Laboratory from "@/assets/interfaces/laboratory";
+import ColumnaLaboratorios from "@/components/dashboard/laboratorios/solicitud/ColumnaLaboratorios";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
@@ -27,8 +28,8 @@ const index = ({ laboratories }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
-      <div className="w-[90%] m-auto">
-        <div></div>
+      <div className="w-[90%] m-auto flex mt-10">
+        <ColumnaLaboratorios laboratories={laboratories} />
       </div>
     </Layout>
   );

@@ -28,8 +28,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const redirectLaboratorySolicitud = () => {};
-
 type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
