@@ -19,16 +19,14 @@ const ColumnaLaboratorios = ({ laboratories }: Props) => {
   };
 
   return (
-    <div className="mt-6 w-full">
+    <div className="mt-6 w-1/5">
       <h1 className="font-semibold text-xl">Laboratorio</h1>
-
-      <div className="rounded-lg overflow-hidden w-1/5 max-h-screen my-4">
+      <div className="rounded-lg overflow-hidden w-full max-h-screen my-4">
         <Image
           src={img}
           alt="laboratorio"
           className="w-full h-24 object-cover"
         />
-
         <div className="flex flex-col overflow-hidden">
           {laboratories.map((laboratory, index) => {
             return (

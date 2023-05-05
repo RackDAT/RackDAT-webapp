@@ -6,6 +6,7 @@ import { GetServerSideProps } from "next";
 import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import Laboratory from "@/assets/interfaces/laboratory";
 import ColumnaLaboratorios from "@/components/dashboard/laboratorios/solicitud/ColumnaLaboratorios";
+import ColumnaDateTimePicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDateTimePicker";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
@@ -28,8 +29,10 @@ const index = ({ laboratories }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
-      <div className="w-[90%] m-auto flex mt-10">
+      <div className="w-[90%] m-auto flex mt-10 justify-between">
         <ColumnaLaboratorios laboratories={laboratories} />
+        <input type="date" />
+        <ColumnaDateTimePicker />
       </div>
     </Layout>
   );
