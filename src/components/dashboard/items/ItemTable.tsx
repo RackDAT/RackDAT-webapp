@@ -124,7 +124,6 @@ const ItemTable = () => {
       highlightOnHover
       pointerOnHover
       selectableRows
-      onRowClicked={(row) => router.push(`/dashborad/items/${row.id}`)}
     />
   );
 };

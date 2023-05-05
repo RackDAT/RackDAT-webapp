@@ -6,10 +6,12 @@ import Filter from "../../../components/dashboard/items/Filter";
 import ItemTable from "../../../components/dashboard/items/ItemTable";
 import Btn from "@/components/global/Btn";
 import { BiBook } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 const items = (props: Props) => {
+  const router = useRouter();
   return (
     <Layout>
       <LayoutHeader title="Items" />
@@ -32,7 +34,12 @@ const items = (props: Props) => {
               <option>Lic</option>
             </Filter>
           </div>
-          <Btn style="strong">
+          <Btn
+            style="strong"
+            onClick={() => {
+              router.push("/dashboard/items/solicitudItem");
+            }}
+          >
             <div className="flex gap-2 items-center text-sm">
               <BiBook className="w-4 h-4" />
               Solicitar
