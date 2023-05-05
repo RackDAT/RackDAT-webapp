@@ -26,7 +26,7 @@ const ColumnaDateTimePicker = (props: Props) => {
       <div className="flex flex-col">
         <label>Justificacion</label>
         <textarea
-          className="p-2 rounded-lg border-2"
+          className="p-2 rounded-lg border-2 resize-none min-h-[160px] text-sm"
           placeholder="Escribe tu justificacion aqui"
         ></textarea>
       </div>

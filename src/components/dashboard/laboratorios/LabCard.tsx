@@ -15,7 +15,7 @@ const LabCard = ({ laboratory }: Props) => {
 
   return (
     <div
-      className="flex rounded-lg bg-white shadow-lg flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer"
+      className="flex rounded-lg bg-white shadow-lg flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer z-10"
       onClick={() => {
         redirectSingleLabView(laboratory.id);
       }}

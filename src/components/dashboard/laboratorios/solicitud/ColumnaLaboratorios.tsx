@@ -19,7 +19,7 @@ const ColumnaLaboratorios = ({ laboratories }: Props) => {
   };
 
   return (
-    <div className="mt-6 w-1/5">
+    <div className="mt-6 w-1/4">
       <h1 className="font-semibold text-xl">Laboratorio</h1>
       <div className="rounded-lg overflow-hidden w-full max-h-screen my-4">
         <Image
@@ -65,8 +65,8 @@ const LabCard = ({
     <div
       className={
         isSelected
-          ? "bg-orange-400 text-white p-2 flex justify-between items-center cursor-pointer font-normal tracking-wider border-b-2 min-h-[90px] duration-300"
-          : "bg-white text-slate-400 p-2 flex justify-between border-b-2 items-center cursor-pointer min-h4 duration-300 min-h-[60px]"
+          ? "bg-orange-400 text-white p-2 flex justify-between items-center cursor-pointer font-normal tracking-wider border-b-2 min-h-[60px] duration-300"
+          : "bg-white text-slate-400 p-2 flex justify-between border-b-2 items-center cursor-pointer min-h4 duration-300 min-h-[40px]"
       }
       onClick={() => {
         changeSelectedLaboratory(laboratory.id);

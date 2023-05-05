@@ -41,11 +41,6 @@ const index = ({ laboratories }: Props) => {
           {laboratories.map((laboratory, index) => {
             return <LabCard key={index} laboratory={laboratory} />;
           })}
-          {/* <LabCard />
-          <LabCard />
-          <LabCard />
-          <LabCard />
-          <LabCard /> */}
         </div>
       </div>
     </Layout>

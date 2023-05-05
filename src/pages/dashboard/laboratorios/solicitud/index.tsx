@@ -7,6 +7,7 @@ import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import Laboratory from "@/assets/interfaces/laboratory";
 import ColumnaLaboratorios from "@/components/dashboard/laboratorios/solicitud/ColumnaLaboratorios";
 import ColumnaDateTimePicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDateTimePicker";
+import { Eventcalendar } from "@mobiscroll/react";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
@@ -31,7 +32,19 @@ const index = ({ laboratories }: Props) => {
       <LayoutHeader title="Laboratorios" />
       <div className="w-[90%] m-auto flex mt-10 justify-between">
         <ColumnaLaboratorios laboratories={laboratories} />
-        <input type="date" />
+        <Eventcalendar
+          data={[
+            {
+              start: new Date(),
+              title: "Today's event",
+            },
+            {
+              start: new Date(2020, 11, 18, 9, 0),
+              end: new Date(2020, 11, 20, 13, 0),
+              title: "Multi day event",
+            },
+          ]}
+        />
         <ColumnaDateTimePicker />
       </div>
     </Layout>
