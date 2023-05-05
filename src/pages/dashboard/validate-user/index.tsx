@@ -14,7 +14,6 @@ import { GetServerSideProps } from "next";
 
 type Props = {
   users: User[];
-  qtyPendingUsers: number;
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -31,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const ValidateUser = ({ users }: Props) => {
   const [search, setSearch] = useState("");
-  const [pendingUsers, setUsers] = useState(users);
+  const [pendingUsers, setUsers] = useState<User[]>(users);
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
@@ -42,7 +41,7 @@ const ValidateUser = ({ users }: Props) => {
       axios.put<User>(
         `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}&verificacion=${value}`
       );
-      setUsers(users.filter((user) => user.id !== userId));
+      setUsers(pendingUsers.filter((user) => user.id !== userId));
       notifySuccessAprove();
     } catch (error) {
       console.error(error);
@@ -55,7 +54,7 @@ const ValidateUser = ({ users }: Props) => {
       axios.delete<User>(
         `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
       );
-      setUsers(users.filter((user) => user.id !== userId));
+      setUsers(pendingUsers.filter((user) => user.id !== userId));
       notifySuccessDelete();
     } catch (error) {
       console.error(error);
