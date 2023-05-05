@@ -7,6 +7,7 @@ import Btn from "@/components/global/Btn";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import laboratory from "@/assets/interfaces/laboratory";
+import { useRouter } from "next/navigation";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) {
@@ -27,10 +28,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+const redirectLaboratorySolicitud = () => {};
+
 type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
   console.log(laboratory);
+
+  const router = useRouter();
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
@@ -71,7 +76,14 @@ const Laboratory = ({ laboratory }: Props) => {
             </div>
 
             <div className="">
-              <Btn style="strong">Reservar Ahora</Btn>
+              <Btn
+                style="strong"
+                onClick={() => {
+                  router.push("/dashboard/laboratorios/solicitud");
+                }}
+              >
+                Reservar Ahora
+              </Btn>
             </div>
           </div>
         </div>
