@@ -5,6 +5,7 @@ import { AppProps } from "next/app";
 import "nprogress/nprogress.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
+import "react-day-picker/dist/style.css";
 
 export default function MyApp({ Component, pageProps, router }: AppProps) {
   React.useEffect(() => {

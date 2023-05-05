@@ -7,6 +7,7 @@ import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import Laboratory from "@/assets/interfaces/laboratory";
 import ColumnaLaboratorios from "@/components/dashboard/laboratorios/solicitud/ColumnaLaboratorios";
 import ColumnaDateTimePicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDateTimePicker";
+import { DayPicker } from "react-day-picker";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
@@ -31,6 +32,7 @@ const index = ({ laboratories }: Props) => {
       <LayoutHeader title="Laboratorios" />
       <div className="w-[90%] m-auto flex mt-10 justify-between h-[75vh]">
         <ColumnaLaboratorios laboratories={laboratories} />
+        <DayPicker mode="single" />
         <ColumnaDateTimePicker />
       </div>
     </Layout>
