@@ -1,9 +1,14 @@
 import React from "react";
 import Btn from "@/components/global/Btn";
 import User from "@/assets/interfaces/users";
+import Router from "next/router";
 
 type Props = {
   user: User;
+};
+
+const redirectToSingleUserView = (id: number) => {
+  Router.push(`/dashboard/users/${id}`);
 };
 
 const UserDiv = (props: Props) => {
@@ -33,8 +38,13 @@ const UserDiv = (props: Props) => {
         </div>
         {/* buttons */}
         <div className="flex flex-col gap-2 mr-10">
-          <Btn style="strong">
-            <p className="text-lg">Ver solicitudes</p>
+          <Btn
+            style="strong"
+            onClick={() => {
+              redirectToSingleUserView(props.user.id);
+            }}
+          >
+            <p className="text-lg">Ver Detalles</p>
           </Btn>
           <Btn style="light">
             <p className="text-lg">Eliminar usuario</p>
