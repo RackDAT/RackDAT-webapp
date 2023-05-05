@@ -10,34 +10,34 @@ import User from "@/assets/interfaces/users";
 import { useRouter } from "next/router";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
+import { GetServerSideProps } from "next";
 
-type Props = {};
+type Props = {
+  users: User[];
+  qtyPendingUsers: number;
+};
 
-const Solicitudes = (props: Props) => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [pendingUsers, setPendingUsers] = useState(0);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await axios.get<User[]>(
+    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+  );
+  const users = response.data.filter((user) => user.verificado);
+  const pendingUsers = response.data.filter(
+    (user) => user.verificado === false
+  );
+  const qtyPendingUsers = pendingUsers.length;
+  return {
+    props: {
+      users: users,
+      qtyPendingUsers: qtyPendingUsers,
+    },
+  };
+};
+
+const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
+  const [currUsers, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState("");
   const router = useRouter();
-
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get<User[]>(
-        "https://rackdat.onrender.com/api/RackDAT/usuarios"
-      );
-      const filteredUsers = response.data.filter((user) => user.verificado);
-      const qtyPendingUsers = response.data.filter(
-        (user) => user.verificado === false
-      );
-      setUsers(filteredUsers);
-      setPendingUsers(qtyPendingUsers.length);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
@@ -72,13 +72,13 @@ const Solicitudes = (props: Props) => {
                 </Btn>
               </div>
               <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute">
-                {pendingUsers}
+                {qtyPendingUsers}
               </div>
             </div>
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users.map((user, index) => (
+            {currUsers.map((user, index) => (
               <UserDiv user={user} key={index} />
             ))}
           </div>
