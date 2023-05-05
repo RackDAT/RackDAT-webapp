@@ -41,8 +41,10 @@ const Laboratory = ({ laboratory }: Props) => {
         <div className="flex w-full justify-center gap-6 mt-6">
           <div className="w-1/2">
             <Image
-              src={img}
+              src={laboratory.imagen}
               alt="laboratorio"
+              width={1000}
+              height={1000}
               className=" w-full h-[300px] object-cover m-auto rounded-xl"
             />
           </div>

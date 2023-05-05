@@ -30,21 +30,22 @@ const index = ({ laboratories }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
-      <div className="w-[90%] m-auto flex mt-10 justify-between">
+      <div className="w-[90%] m-auto flex mt-10 justify-between h-[75vh]">
         <ColumnaLaboratorios laboratories={laboratories} />
-        <Eventcalendar
+        <input
+          type="date"
+          className="p-2 rounded-lg border-2 w-5 h-2"
+          autoFocus
+        />
+        {/* <Eventcalendar
           data={[
             {
               start: new Date(),
               title: "Today's event",
             },
-            {
-              start: new Date(2020, 11, 18, 9, 0),
-              end: new Date(2020, 11, 20, 13, 0),
-              title: "Multi day event",
-            },
           ]}
-        />
+          className="h-1/2"
+        /> */}
         <ColumnaDateTimePicker />
       </div>
     </Layout>

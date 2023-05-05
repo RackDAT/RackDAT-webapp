@@ -9,32 +9,36 @@ import { BsFastForwardFill } from "react-icons/bs";
 type Props = { laboratories: Laboratory[] };
 
 const ColumnaLaboratorios = ({ laboratories }: Props) => {
-  const [selectedLaboratory, setSelectedLaboratory] = useState<number>();
+  const [selectedLaboratory, setSelectedLaboratory] = useState<Laboratory>();
   useEffect(() => {
-    setSelectedLaboratory(laboratories[0].id);
+    setSelectedLaboratory(laboratories[0]);
   }, []);
 
-  const changeSelectedLaboratory = (id: number) => {
-    setSelectedLaboratory(id);
+  const changeSelectedLaboratory = (laboratory: Laboratory) => {
+    setSelectedLaboratory(laboratory);
   };
 
   return (
-    <div className="mt-6 w-1/4">
-      <h1 className="font-semibold text-xl">Laboratorio</h1>
-      <div className="rounded-lg overflow-hidden w-full max-h-screen my-4">
+    <div className=" w-1/4 h-full border-2 rounded-lg bg-slate-50 shadow-lg overflow-hidden">
+      <div className=" overflow-hidden w-full max-h-screen">
         <Image
-          src={img}
+          src={selectedLaboratory?.imagen || img}
+          width={1000}
+          height={1000}
           alt="laboratorio"
           className="w-full h-24 object-cover"
         />
         <div className="flex flex-col overflow-hidden">
           {laboratories.map((laboratory, index) => {
+            if (selectedLaboratory === undefined) {
+              return <div key={index}></div>;
+            }
             return (
               <LabCard
                 laboratory={laboratory}
                 key={index}
                 changeSelectedLaboratory={changeSelectedLaboratory}
-                selected={selectedLaboratory === laboratory.id}
+                selected={selectedLaboratory.id === laboratory.id}
               />
             );
           })}
@@ -47,7 +51,7 @@ const ColumnaLaboratorios = ({ laboratories }: Props) => {
 type LabCardProps = {
   laboratory: Laboratory;
   key: number;
-  changeSelectedLaboratory: (id: number) => void;
+  changeSelectedLaboratory: (laboratory: Laboratory) => void;
   selected: boolean;
 };
 const LabCard = ({
@@ -69,7 +73,7 @@ const LabCard = ({
           : "bg-white text-slate-400 p-2 flex justify-between border-b-2 items-center cursor-pointer min-h4 duration-300 min-h-[40px]"
       }
       onClick={() => {
-        changeSelectedLaboratory(laboratory.id);
+        changeSelectedLaboratory(laboratory);
       }}
     >
       <h1>{laboratory.lab}</h1>
