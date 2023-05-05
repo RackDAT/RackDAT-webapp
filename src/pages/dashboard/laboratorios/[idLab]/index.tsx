@@ -4,9 +4,33 @@ import LayoutHeader from "../../../../components/dashboard/LayoutHeader";
 import Image from "next/image";
 import img from "@/assets/img/lab.jpg";
 import Btn from "@/components/global/Btn";
-type Props = {};
+import axios from "axios";
+import { GetServerSideProps } from "next";
+import laboratory from "@/assets/interfaces/laboratory";
 
-const Laboratory = (props: Props) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (!context.params) {
+    return { props: { laboratory: null } };
+  }
+  const laboratory = await axios
+    .get(
+      `https://rackdat.onrender.com/api/RackDAT/lab/id:int?id=${context.params.idLab}`
+    )
+    .then((res) => {
+      return res.data;
+    });
+
+  return {
+    props: {
+      laboratory: laboratory,
+    }, // will be passed to the page component as props
+  };
+};
+
+type Props = { laboratory: laboratory };
+
+const Laboratory = ({ laboratory }: Props) => {
+  console.log(laboratory);
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
@@ -26,7 +50,9 @@ const Laboratory = (props: Props) => {
               </h3>
               <h1 className="text-xl uppercase">
                 Laboratorio{" "}
-                <span className="font-bold text-orange-400">Industrial</span>
+                <span className="font-bold text-orange-400">
+                  {laboratory.lab}
+                </span>
               </h1>
             </div>
             <div className="flex flex-col gap-2">
