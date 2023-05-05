@@ -5,8 +5,6 @@ import { AppProps } from "next/app";
 import "nprogress/nprogress.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
-import { Eventcalendar } from "@mobiscroll/react";
-import "@mobiscroll/react/dist/css/mobiscroll.min.css";
 
 export default function MyApp({ Component, pageProps, router }: AppProps) {
   React.useEffect(() => {

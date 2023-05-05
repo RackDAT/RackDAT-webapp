@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.5.0",
-    "@mobiscroll/react": "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.24.0.tgz",
     "@types/node": "18.15.10",
     "@types/react": "18.0.29",
     "@types/react-dom": "18.0.11",
