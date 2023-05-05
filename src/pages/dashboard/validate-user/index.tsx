@@ -4,32 +4,33 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../components/dashboard/Layout";
 import Btn from "@/components/global/Btn";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
-import UserDiv from "../../../components/dashboard/validate-user/userdiv";
+import UserDiv from "../../../components/dashboard/validate-user/PendingUserdiv";
 import User from "@/assets/interfaces/users";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { GetServerSideProps } from "next";
 
-const ValidateUser = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [search, setSearch] = useState("");
+type Props = {
+  users: User[];
+};
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get<User[]>(
-        "https://rackdat.onrender.com/api/RackDAT/usuarios"
-      );
-      const filteredUsers = response.data.filter(
-        (user) => user.verificado === false
-      );
-      setUsers(filteredUsers);
-    } catch (error) {
-      console.error(error);
-    }
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await axios.get<User[]>(
+    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+  );
+  const users = response.data.filter((user) => user.verificado === false);
+  return {
+    props: {
+      users: users,
+    },
   };
+};
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+const ValidateUser = ({ users }: Props) => {
+  const [search, setSearch] = useState("");
+  const [pendingUsers, setUsers] = useState<User[]>(users);
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
@@ -40,9 +41,11 @@ const ValidateUser = () => {
       axios.put<User>(
         `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}&verificacion=${value}`
       );
-      setUsers(users.filter((user) => user.id !== userId));
+      setUsers(pendingUsers.filter((user) => user.id !== userId));
+      notifySuccessAprove();
     } catch (error) {
       console.error(error);
+      notifyError();
     }
   };
 
@@ -51,10 +54,30 @@ const ValidateUser = () => {
       axios.delete<User>(
         `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
       );
-      setUsers(users.filter((user) => user.id !== userId));
+      setUsers(pendingUsers.filter((user) => user.id !== userId));
+      notifySuccessDelete();
     } catch (error) {
       console.error(error);
+      notifyError();
     }
+  };
+
+  const notifySuccessAprove = () => {
+    toast.success("Usuario aprobado", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const notifySuccessDelete = () => {
+    toast.info("Usuario rechazado", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const notifyError = () => {
+    toast.error("Hubo un error, inténtalo de nuevo", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   return (
@@ -78,7 +101,7 @@ const ValidateUser = () => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users.map((user) => (
+            {pendingUsers.map((user) => (
               <UserDiv
                 user={user}
                 key={user.id}
@@ -86,6 +109,7 @@ const ValidateUser = () => {
                 onDeleteUser={deleteUser}
               />
             ))}
+            <ToastContainer />
           </div>
         </div>
       </div>
