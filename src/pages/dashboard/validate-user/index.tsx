@@ -10,28 +10,28 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GetServerSideProps } from "next";
 
-const ValidateUser = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [search, setSearch] = useState("");
+type Props = {
+  users: User[];
+  qtyPendingUsers: number;
+};
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get<User[]>(
-        "https://rackdat.onrender.com/api/RackDAT/usuarios"
-      );
-      const filteredUsers = response.data.filter(
-        (user) => user.verificado === false
-      );
-      setUsers(filteredUsers);
-    } catch (error) {
-      console.error(error);
-    }
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await axios.get<User[]>(
+    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+  );
+  const users = response.data.filter((user) => user.verificado === false);
+  return {
+    props: {
+      users: users,
+    },
   };
+};
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+const ValidateUser = ({ users }: Props) => {
+  const [search, setSearch] = useState("");
+  const [pendingUsers, setUsers] = useState(users);
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
@@ -102,7 +102,7 @@ const ValidateUser = () => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {users.map((user) => (
+            {pendingUsers.map((user) => (
               <UserDiv
                 user={user}
                 key={user.id}
