@@ -1,10 +1,17 @@
 import Btn from "@/components/global/Btn";
 import User from "@/assets/interfaces/users";
 import React from "react";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 const SolicitudDiv = (props: Props) => {
+  const router = useRouter();
+
+  const redirectSingleSolicitudView = (id: number) => {
+    router.push(`/dashboard/solicitudes/${id}`);
+  };
+
   return (
     <div className=" w-full flex bg-white rounded-md flex-col hover:scale-[100.5%] duration-200 shadow-md text-sm">
       {/* header */}
@@ -41,7 +48,14 @@ const SolicitudDiv = (props: Props) => {
         </div>
         {/* buttons */}
         <div className="flex flex-col gap-2 text-xs">
-          <Btn style="strong">Ver solicitud</Btn>
+          <Btn
+            style="strong"
+            onClick={() => {
+              redirectSingleSolicitudView(props.id);
+            }}
+          >
+            Ver solicitud
+          </Btn>
           <Btn style="light">Volver a solicitar</Btn>
         </div>
       </div>
