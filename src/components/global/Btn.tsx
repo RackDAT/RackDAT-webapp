@@ -8,8 +8,9 @@ type Props = {
 
 const Btn = (props: Props) => {
   const styles = {
-    strong: "bg-orange-400 text-white hover:bg-orange-300",
-    light: "bg-orange-100 text-orange-400 hover:bg-orange-200",
+    strong: "bg-primary text-white hover:bg-yellow-300 duration-100",
+    light:
+      "bg-white border-2 text-black hover:bg-yellow-30 hover:shadow duration-100",
     dark: "bg-black text-white border hover:bg-white hover:text-black hover:border hover:border-black duration-100",
   };
   return (

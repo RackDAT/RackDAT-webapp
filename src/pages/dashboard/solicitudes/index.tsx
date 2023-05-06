@@ -16,7 +16,7 @@ const Solicitudes = (props: Props) => {
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between px-10 mt-7 items-center">
             <div className="flex gap-2">
-              <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3">
+              <div className="rounded-full bg-primary w-5 h-5 flex items-center justify-center text-white p-3">
                 <div>2</div>
               </div>
               <label>solicitudes</label>
