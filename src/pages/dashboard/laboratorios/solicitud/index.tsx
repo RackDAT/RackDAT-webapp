@@ -7,7 +7,9 @@ import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import Laboratory from "@/assets/interfaces/laboratory";
 import ColumnaLaboratorios from "@/components/dashboard/laboratorios/solicitud/ColumnaLaboratorios";
 import ColumnaDateTimePicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDateTimePicker";
-import { DayPicker } from "react-day-picker";
+import ColumnaDayPicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDayPicker";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
@@ -26,15 +28,23 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = { laboratories: Laboratory[] };
 
 const index = ({ laboratories }: Props) => {
-  console.log(laboratories);
+  const [date, setDate] = useState<Date>(new Date());
+
+  const handleSolicitar = () => {
+    toast.success("Deafault Notification", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
-      <div className="w-[90%] m-auto flex mt-10 justify-between h-[75vh]">
+      <div className="w-[90%] m-auto flex mt-10 justify-between h-[75vh] items-center">
         <ColumnaLaboratorios laboratories={laboratories} />
-        <DayPicker mode="single" />
-        <ColumnaDateTimePicker />
+        <ColumnaDayPicker daySelected={date} setDatSelected={setDate} />
+        <ColumnaDateTimePicker handleSolicitar={handleSolicitar} />
       </div>
+      <ToastContainer />
     </Layout>
   );
 };

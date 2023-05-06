@@ -19,7 +19,7 @@ const ColumnaLaboratorios = ({ laboratories }: Props) => {
   };
 
   return (
-    <div className=" w-1/4 h-full border-2 rounded-lg bg-slate-50 shadow-lg overflow-hidden">
+    <div className=" w-[28%] h-full border-2 rounded-lg bg-slate-50 shadow-lg overflow-hidden">
       <div className=" overflow-hidden w-full max-h-screen">
         <Image
           src={selectedLaboratory?.imagen || img}
@@ -64,21 +64,26 @@ const LabCard = ({
   }, [selected]);
 
   const [isSelected, setIsSelected] = useState<boolean>(false);
-
+  const defaultStyles =
+    "p-2 flex justify-between items-center cursor-pointer border-b-2 flex-no-wrap gap-2" +
+    " ";
   return (
     <div
       className={
         isSelected
-          ? "bg-orange-400 text-white p-2 flex justify-between items-center cursor-pointer font-normal tracking-wider border-b-2 min-h-[60px] duration-300"
-          : "bg-white text-slate-400 p-2 flex justify-between border-b-2 items-center cursor-pointer min-h4 duration-300 min-h-[40px]"
+          ? defaultStyles +
+            "bg-yellow-400 text-white font-normal tracking-wider border-b-2 min-h-[60px] duration-300"
+          : defaultStyles +
+            "bg-slate-100 text-slate-400 min-h4 duration-300 min-h-[40px]"
       }
       onClick={() => {
         changeSelectedLaboratory(laboratory);
       }}
     >
-      <h1>{laboratory.lab}</h1>
+      <div>
+        <h1>{laboratory.lab}</h1>
+      </div>
       <BsFastForwardFill />
-      {/* <h3>{laboratory.}</h3> */}
     </div>
   );
 };

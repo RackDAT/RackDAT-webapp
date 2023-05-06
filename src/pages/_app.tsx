@@ -7,6 +7,8 @@ import NProgress from "nprogress";
 import { useEffect } from "react";
 import "react-day-picker/dist/style.css";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export default function MyApp({ Component, pageProps, router }: AppProps) {
   React.useEffect(() => {
     const handleRouteStart = () => NProgress.start();

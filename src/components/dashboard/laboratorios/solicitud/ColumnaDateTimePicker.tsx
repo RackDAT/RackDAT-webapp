@@ -1,9 +1,9 @@
 import Btn from "@/components/global/Btn";
 import React from "react";
 
-type Props = {};
+type Props = { handleSolicitar: () => void };
 
-const ColumnaDateTimePicker = (props: Props) => {
+const ColumnaDateTimePicker = ({ handleSolicitar }: Props) => {
   return (
     <div className="p3 rounded-lg shadow-lg bg-slate-50 w-1/3 p-2 justify-center flex flex-col  gap-3">
       <div>
@@ -31,7 +31,9 @@ const ColumnaDateTimePicker = (props: Props) => {
         ></textarea>
       </div>
 
-      <Btn style="strong">Solicitar</Btn>
+      <Btn style="strong" onClick={handleSolicitar}>
+        Solicitar
+      </Btn>
     </div>
   );
 };

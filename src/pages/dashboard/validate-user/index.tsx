@@ -9,7 +9,6 @@ import User from "@/assets/interfaces/users";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { GetServerSideProps } from "next";
 
 type Props = {
@@ -109,7 +108,7 @@ const ValidateUser = ({ users }: Props) => {
                 onDeleteUser={deleteUser}
               />
             ))}
-            <ToastContainer />
+            <ToastContainer autoClose={1000} />
           </div>
         </div>
       </div>
