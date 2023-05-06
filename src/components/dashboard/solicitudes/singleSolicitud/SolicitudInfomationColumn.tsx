@@ -32,7 +32,7 @@ const SolicitudInfomationColumn = ({}: Props) => {
       </div>
       <div className=" flex flex-col gap-2">
         <label className="uppercase text-slate-300">Justificacion</label>
-        <p>
+        <p className="text-sm">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore
           quisquam laudantium cum, libero vitae voluptatem cumque blanditiis
           voluptas, itaque mollitia quibusdam amet non? Est similique deserunt

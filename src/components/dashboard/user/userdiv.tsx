@@ -2,6 +2,7 @@ import React from "react";
 import Btn from "@/components/global/Btn";
 import User from "@/assets/interfaces/users";
 import Router from "next/router";
+import Image from "next/image";
 
 type Props = {
   user: User;
@@ -16,22 +17,24 @@ const UserDiv = (props: Props) => {
     <div className=" w-full flex bg-white rounded-xl flex-col hover:scale-[100.5%] duration-200 shadow-md">
       {/* header */}
       <div className="border-b-2 w-full border-neutral-300 px-4 py-1 flex justify-between">
-        <span className="text-neutral-400 font-">{props.user.correo}</span>
+        <span className="text-neutral-400 text-sm">{props.user.correo}</span>
       </div>
 
       {/* content? */}
-      <div className="p-4 flex gap-2 items-center justify-between">
+      <div className="p-2 flex gap-2 items-center justify-between">
         <div className="flex items-center space-x-3.5">
-          <img
-            src="https://picsum.photos/200/300"
-            alt=""
-            className="w-28 h-28 ml-10 mr-5 rounded-full"
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/rackdat-b06a8.appspot.com/o/Laboratorios%2Fperson.jpg?alt=media&token=97bc9991-b0b8-4009-9a0a-04e6816122d6"
+            alt="usuario"
+            className="w-16 h-16 ml-10 mr-5 rounded-full object-cover"
+            height={100}
+            width={100}
           />
-          <div className="flex flex-col justify-between h-5/6">
-            <h1 className="text-2xl">
+          <div className="flex flex-col justify-between">
+            <h1 className="text-lg font-semibold">
               {props.user.nombre} {props.user.apellido_pat}
             </h1>
-            <label className="text-neutral-500 text-md">
+            <label className="text-neutral-500 text-base">
               {props.user.carrera.carrera}
             </label>
           </div>
@@ -44,10 +47,10 @@ const UserDiv = (props: Props) => {
               redirectToSingleUserView(props.user.id);
             }}
           >
-            <p className="text-lg">Ver Detalles</p>
+            <p className="text-xs">Ver Detalles</p>
           </Btn>
           <Btn style="light">
-            <p className="text-lg">Eliminar usuario</p>
+            <p className="text-xs">Eliminar usuario</p>
           </Btn>
         </div>
       </div>

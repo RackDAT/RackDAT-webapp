@@ -68,7 +68,7 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
             <div className="flex justify-end">
               <div className="relative p-2">
                 <Btn style="dark" onClick={handleButtonClick}>
-                  Nuevas solicitudes
+                  <label className="text-sm">Nuevas solicitudes</label>
                 </Btn>
               </div>
               <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute">
@@ -82,8 +82,6 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
               <UserDiv user={user} key={index} />
             ))}
           </div>
-
-          <div></div>
         </div>
       </div>
     </Layout>
