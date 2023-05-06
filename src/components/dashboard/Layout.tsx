@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiOutlineUnorderedList } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
 import LayoutHeader from "./LayoutHeader";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 import rackdatLogo from "../../assets/img/bag-heart-love-svgrepo-com.svg";
+import { ImLab } from "react-icons/im";
+import { MdInventory } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,11 +16,23 @@ export const metadata = {
 };
 
 const Opciones = [
-  { name: "inicio", url: "home" },
-  { name: "laboratorios", url: "laboratorios" },
-  { name: "solicitudes", url: "solicitudes" },
-  { name: "items", url: "items" },
-  { name: "userlist", url: "userlist" },
+  { name: "Inicio", url: "home", icon: <AiFillHome className="w-5 h-5" /> },
+  {
+    name: "Laboratorios",
+    url: "laboratorios",
+    icon: <ImLab className="w-5 h-5" />,
+  },
+  {
+    name: "Solicitudes",
+    url: "solicitudes",
+    icon: <AiOutlineUnorderedList className="w-5 h-5" />,
+  },
+  { name: "Items", url: "items", icon: <MdInventory className="w-5 h-5" /> },
+  {
+    name: "User",
+    url: "users",
+    icon: <FaUserCircle className="w-5 h-5" />,
+  },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -34,7 +49,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col gap-2 mt-10">
             {Opciones.map((opcion, index) => {
               return (
-                <BarOptions name={opcion.name} url={opcion.url} key={index} />
+                <BarOptions
+                  name={opcion.name}
+                  url={opcion.url}
+                  key={index}
+                  icon={opcion.icon}
+                />
               );
             })}
           </div>
@@ -69,7 +89,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 type Props = {
   name: string;
   url: string;
-  icon?: any;
+  icon: any;
 };
 
 const BarOptions = (Props: Props) => {
@@ -78,10 +98,10 @@ const BarOptions = (Props: Props) => {
     <Link
       href={`/dashboard/${Props.url}`}
       replace
-      className="text-neutral-100 hover:text-white hover:bg-[#45444D] px-3 rounded-lg flex items-center gap-2 cursor-pointer duration-[200ms] flex-shrink-0 min-w-[34px] h-[34px]"
+      className="text-neutral-100 hover:text-white hover:bg-[#45444D] px-3 rounded-lg flex items-center gap-2 cursor-pointer duration-[200ms] flex-shrink-0 min-w-[34px] h-[34px] uppercase tracking-wider"
     >
-      <AiFillHome className="w-5 h-5" />
-      <label className="text-[14px] cursor-pointer">{Props.name}</label>
+      {Props.icon}
+      <label className="text-[14px] cursor-pointer mt-1">{Props.name}</label>
     </Link>
   );
 };
