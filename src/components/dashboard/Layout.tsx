@@ -3,6 +3,7 @@ import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
 import LayoutHeader from "./LayoutHeader";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import rackdatLogo from "../../assets/img/bag-heart-love-svgrepo-com.svg";
 
@@ -16,6 +17,7 @@ const Opciones = [
   { name: "laboratorios", url: "laboratorios" },
   { name: "solicitudes", url: "solicitudes" },
   { name: "items", url: "items" },
+  { name: "userlist", url: "userlist" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -73,14 +75,13 @@ type Props = {
 const BarOptions = (Props: Props) => {
   const router = useRouter();
   return (
-    <div
+    <Link
+      href={`/dashboard/${Props.url}`}
+      replace
       className="text-neutral-100 hover:text-white hover:bg-[#45444D] px-3 rounded-lg flex items-center gap-2 cursor-pointer duration-[200ms] flex-shrink-0 min-w-[34px] h-[34px]"
-      onClick={() => {
-        router.push(Props.url);
-      }}
     >
       <AiFillHome className="w-5 h-5" />
       <label className="text-[14px] cursor-pointer">{Props.name}</label>
-    </div>
+    </Link>
   );
 };
