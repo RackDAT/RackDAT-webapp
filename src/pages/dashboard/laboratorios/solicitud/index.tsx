@@ -39,7 +39,7 @@ const index = ({ laboratories }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
-      <div className="w-[90%] m-auto flex mt-10 justify-between h-[75vh] items-center">
+      <div className="w-[90%] m-auto flex mt-10 justify-between h-[75vh] items-center max-h-[600px]">
         <ColumnaLaboratorios laboratories={laboratories} />
         <ColumnaDayPicker daySelected={date} setDatSelected={setDate} />
         <ColumnaDateTimePicker handleSolicitar={handleSolicitar} />
