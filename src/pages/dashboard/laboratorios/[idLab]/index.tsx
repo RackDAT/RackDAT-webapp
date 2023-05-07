@@ -79,7 +79,12 @@ const Laboratory = ({ laboratory }: Props) => {
               <Btn
                 style="strong"
                 onClick={() => {
-                  router.push("/dashboard/laboratorios/solicitud");
+                  const urlParams = new URLSearchParams(window.location.search);
+                  urlParams.set("selectedLab", laboratory.id.toString());
+                  urlParams.toString();
+                  router.push(
+                    "/dashboard/laboratorios/solicitud?" + urlParams.toString()
+                  );
                 }}
               >
                 Reservar Ahora

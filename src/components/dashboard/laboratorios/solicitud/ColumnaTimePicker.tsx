@@ -11,7 +11,7 @@ const ColumnaDateTimePicker = ({ handleSolicitar }: Props) => {
         <input
           placeholder="hello"
           type="time"
-          className="p-2 rounded-lg border-2"
+          className="p-1 rounded-lg border-2"
         />
       </div>
       <div>
@@ -19,14 +19,21 @@ const ColumnaDateTimePicker = ({ handleSolicitar }: Props) => {
         <input
           placeholder="hello"
           type="time"
-          className="p-2 rounded-lg border-2"
+          className="p-1 rounded-lg border-2"
         />
       </div>
-
+      <div>
+        <h1>Cantidad de Personas</h1>
+        <input
+          placeholder="hello"
+          type="time"
+          className="p-1 rounded-lg border-2"
+        />
+      </div>
       <div className="flex flex-col">
         <label>Justificacion</label>
         <textarea
-          className="p-2 rounded-lg border-2 resize-none min-h-[160px] text-sm"
+          className="p-2 rounded-lg border-2 resize-none min-h-[80px] text-sm"
           placeholder="Escribe tu justificacion aqui"
         ></textarea>
       </div>

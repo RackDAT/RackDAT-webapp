@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Laboratory from "@/assets/interfaces/laboratory";
 import Image from "next/image";
 import { useState } from "react";
@@ -6,17 +6,26 @@ import { useState } from "react";
 import img from "@/assets/img/lab.jpg";
 import { BsFastForwardFill } from "react-icons/bs";
 
-type Props = { laboratories: Laboratory[] };
+type Props = {
+  laboratories: Laboratory[];
+  idSelectedLaboratory: number;
+  setSelectedIdLaboratory: (laboratoryId: number) => void;
+};
 
-const ColumnaLaboratorios = ({ laboratories }: Props) => {
-  const [selectedLaboratory, setSelectedLaboratory] = useState<Laboratory>();
-  useEffect(() => {
-    setSelectedLaboratory(laboratories[0]);
-  }, []);
-
-  const changeSelectedLaboratory = (laboratory: Laboratory) => {
-    setSelectedLaboratory(laboratory);
+const ColumnaLaboratorios = ({
+  laboratories,
+  idSelectedLaboratory,
+  setSelectedIdLaboratory,
+}: Props) => {
+  const changeSelectedLaboratory = (laboratoryId: number) => {
+    setSelectedIdLaboratory(laboratoryId);
   };
+
+  const selectedLaboratory: Laboratory | undefined = useMemo(
+    () =>
+      laboratories.find((laboratory) => laboratory.id === idSelectedLaboratory),
+    [idSelectedLaboratory, laboratories]
+  );
 
   return (
     <div className=" w-[28%] h-full border-2 rounded-lg bg-slate-50 shadow-lg overflow-hidden">
@@ -37,8 +46,10 @@ const ColumnaLaboratorios = ({ laboratories }: Props) => {
               <LabCard
                 laboratory={laboratory}
                 key={index}
-                changeSelectedLaboratory={changeSelectedLaboratory}
-                selected={selectedLaboratory.id === laboratory.id}
+                changeSelectedLaboratory={() =>
+                  changeSelectedLaboratory(laboratory.id)
+                }
+                selected={idSelectedLaboratory === laboratory.id}
               />
             );
           })}

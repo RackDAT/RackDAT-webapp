@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-type Props = { date: Date };
+type Props = {};
 
 const SolicitudInfomationColumn = ({}: Props) => {
   const [date, setDate] = useState<Date | null>(null);

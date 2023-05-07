@@ -16,7 +16,9 @@ const index = (props: Props) => {
     toast.success("Deafault Notification", {
       position: toast.POSITION.TOP_RIGHT,
     });
-    router.push("/dashboard/solicitudes");
+    setTimeout(() => {
+      router.push("/dashboard/solicitudes?status=${fssdf}");
+    }, 1000);
   };
 
   const handleRechazar = () => {
@@ -24,6 +26,7 @@ const index = (props: Props) => {
       position: toast.POSITION.TOP_RIGHT,
     });
 
+    setTimeout(() => {}, 1000);
     router.push("/dashboard/solicitudes");
   };
 

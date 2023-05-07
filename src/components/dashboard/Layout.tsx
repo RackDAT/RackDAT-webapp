@@ -4,11 +4,10 @@ import { HiOutlineLogout } from "react-icons/hi";
 import LayoutHeader from "./LayoutHeader";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
-import rackdatLogo from "../../assets/img/bag-heart-love-svgrepo-com.svg";
 import { ImLab } from "react-icons/im";
 import { MdInventory } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
+import logo from "@/assets/img/rackdat_logo_blanco.png";
 
 export const metadata = {
   title: "Create Next App",
@@ -40,12 +39,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex">
       <div className="w-[270px] h-screen flex flex-col align-center p-4 justify-between flex-shrink-0">
         {/* sidebar */}
-        <div>
-          <img
-            src={
-              "https://th.bing.com/th/id/R.0e4d95a788b68565e74fc9b2e65efa0a?rik=a7CYTmm6j6%2f7pA&pid=ImgRaw&r=0"
-            }
-          />
+        <div className="flex flex-col">
+          <div className="self-center">
+            <Image alt={"logo"} height={130} width={130} src={logo} />
+          </div>
           <div className="flex flex-col gap-2 mt-10">
             {Opciones.map((opcion, index) => {
               return (
