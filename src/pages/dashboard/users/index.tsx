@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
+import SearchBar from "@/components/dashboard/items/SearchBar";
 
 type Props = {
   users: User[];
@@ -35,9 +36,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
-  const [currUsers, setUsers] = useState<User[]>(users);
-  const [search, setSearch] = useState("");
+  const [usersClient, setUsers] = useState<User[]>(users);
+  const [search, setSearch] = useState<string>("");
   const router = useRouter();
+
+  const handleSearchChange = (user: User) => {
+    if (search === "") {
+      setUsers(users);
+    }
+    setUsers(usersClient.filter((user) => user.nombre.includes(search)));
+  };
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);
@@ -52,21 +60,13 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
       <div className="flex flex-col">
         {/* header */}
         <LayoutHeader title="Usuarios" />
-        <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
-          <div className="flex justify-between px-10 mt-5 items-center">
-            <div className="flex items-center justify-start bg-gray-200 text-gray-600 h-7 w-1/4 rounded-lg p-3 gap-2 hover:bg-gray-300 hover:scale-[100.5%] duration-200 hover:shadow-md">
-              <AiOutlineSearch className="w-5 h-5"></AiOutlineSearch>
-              <form>
-                <input
-                  type="text"
-                  value={search}
-                  placeholder="Buscar"
-                  className="bg-transparent w-fit"
-                />
-              </form>
+        <div className=" overflow-y-auto w-[90%] m-auto flex flex-col gap-2  px-2 h-full">
+          <div className="flex justify-between mt-5 items-center">
+            <div className="w-[400px]">
+              <SearchBar />
             </div>
             <div className="flex justify-end">
-              <div className="relative p-2">
+              <div className="relative p-2 min-w-fit">
                 <Btn style="dark" onClick={handleButtonClick}>
                   <label className="text-sm">Nuevas solicitudes</label>
                 </Btn>
@@ -77,8 +77,8 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
             </div>
           </div>
           {/* assets */}
-          <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {currUsers.map((user, index) => (
+          <div className=" m-auto h-full w-full py-4 gap-2 flex flex-col">
+            {users.map((user, index) => (
               <UserDiv user={user} key={index} />
             ))}
           </div>
