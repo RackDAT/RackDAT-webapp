@@ -4,10 +4,14 @@ import Layout from "../../../components/dashboard/Layout";
 import SearchBar from "@/components/dashboard/items/SearchBar";
 import Filter from "../../../components/dashboard/items/Filter";
 import ItemTable from "../../../components/dashboard/items/ItemTable";
+import Btn from "@/components/global/Btn";
+import { BiBook } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 const items = (props: Props) => {
+  const router = useRouter();
   return (
     <Layout>
       <LayoutHeader title="Items" />
@@ -15,19 +19,32 @@ const items = (props: Props) => {
         <SearchBar />
 
         {/* filters */}
-        <div className="flex gap-2">
-          <Filter>
-            <option>Tipo de Item</option>
-          </Filter>
-          <Filter>
-            <option>Disponible</option>
-            <option>No disponible</option>
-          </Filter>
-          <Filter>
-            <option>Carrera</option>
-            <option>Isw</option>
-            <option>Lic</option>
-          </Filter>
+        <div className="flex justify-between w-full">
+          <div className="flex gap-2">
+            <Filter>
+              <option>Tipo de Item</option>
+            </Filter>
+            <Filter>
+              <option>Disponible</option>
+              <option>No disponible</option>
+            </Filter>
+            <Filter>
+              <option>Carrera</option>
+              <option>Isw</option>
+              <option>Lic</option>
+            </Filter>
+          </div>
+          <Btn
+            style="strong"
+            onClick={() => {
+              router.push("/dashboard/items/solicitudItem");
+            }}
+          >
+            <div className="flex gap-2 items-center text-sm">
+              <BiBook className="w-4 h-4" />
+              Solicitar
+            </div>
+          </Btn>
         </div>
 
         {/* table */}
