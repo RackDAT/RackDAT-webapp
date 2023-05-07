@@ -39,6 +39,7 @@ const index = ({ laboratories }: Props) => {
     toast.success("Deafault Notification", {
       position: toast.POSITION.TOP_RIGHT,
     });
+    router.push("/dashboard/solicitudes");
   };
 
   return (
