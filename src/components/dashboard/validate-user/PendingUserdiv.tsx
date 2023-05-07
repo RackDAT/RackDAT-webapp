@@ -4,14 +4,25 @@ import User from "@/assets/interfaces/users";
 
 type Props = {
   user: User;
+  onAproveUser: (userId: number, value: boolean) => void;
+  onDeleteUser: (userId: number) => void;
 };
 
-const UserDiv = (props: Props) => {
+const PendingUserDiv = ({ user, onAproveUser, onDeleteUser }: Props) => {
+  const handleAproveUser = () => {
+    onAproveUser(user.id, true);
+  };
+
+  const handleDeleteUser = () => {
+    onDeleteUser(user.id);
+  };
+
   return (
     <div className=" w-full flex bg-white rounded-xl flex-col hover:scale-[100.5%] duration-200 shadow-md">
       {/* header */}
       <div className="border-b-2 w-full border-neutral-300 px-4 py-1 flex justify-between">
-        <span className="text-neutral-400 font-">{props.user.correo}</span>
+        <span className="text-neutral-400">{user.correo}</span>
+        <span className="text-neutral-400">{user.clave}</span>
       </div>
 
       {/* content? */}
@@ -24,20 +35,20 @@ const UserDiv = (props: Props) => {
           />
           <div className="flex flex-col justify-between h-5/6">
             <h1 className="text-2xl">
-              {props.user.nombre} {props.user.apellido_pat}
+              {user.nombre} {user.apellido_pat}
             </h1>
             <label className="text-neutral-500 text-md">
-              {props.user.carrera.carrera}
+              {user.carrera.carrera}
             </label>
           </div>
         </div>
         {/* buttons */}
         <div className="flex flex-col gap-2 mr-10">
-          <Btn style="strong">
-            <p className="text-lg">Ver solicitudes</p>
+          <Btn style="strong" onClick={handleAproveUser}>
+            <p className="text-lg">Aprobar</p>
           </Btn>
-          <Btn style="light">
-            <p className="text-lg">Eliminar usuario</p>
+          <Btn style="light" onClick={handleDeleteUser}>
+            <p className="text-lg">Rechazar</p>
           </Btn>
         </div>
       </div>
@@ -45,4 +56,4 @@ const UserDiv = (props: Props) => {
   );
 };
 
-export default UserDiv;
+export default PendingUserDiv;

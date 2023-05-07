@@ -4,9 +4,36 @@ import LayoutHeader from "../../../../components/dashboard/LayoutHeader";
 import Image from "next/image";
 import img from "@/assets/img/lab.jpg";
 import Btn from "@/components/global/Btn";
-type Props = {};
+import axios from "axios";
+import { GetServerSideProps } from "next";
+import laboratory from "@/assets/interfaces/laboratory";
+import { useRouter } from "next/navigation";
 
-const Laboratory = (props: Props) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (!context.params) {
+    return { props: { laboratory: null } };
+  }
+  const laboratory = await axios
+    .get(
+      `https://rackdat.onrender.com/api/RackDAT/lab/id:int?id=${context.params.idLab}`
+    )
+    .then((res) => {
+      return res.data;
+    });
+
+  return {
+    props: {
+      laboratory: laboratory,
+    }, // will be passed to the page component as props
+  };
+};
+
+type Props = { laboratory: laboratory };
+
+const Laboratory = ({ laboratory }: Props) => {
+  console.log(laboratory);
+
+  const router = useRouter();
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
@@ -14,8 +41,10 @@ const Laboratory = (props: Props) => {
         <div className="flex w-full justify-center gap-6 mt-6">
           <div className="w-1/2">
             <Image
-              src={img}
+              src={laboratory.imagen}
               alt="laboratorio"
+              width={1000}
+              height={1000}
               className=" w-full h-[300px] object-cover m-auto rounded-xl"
             />
           </div>
@@ -26,7 +55,9 @@ const Laboratory = (props: Props) => {
               </h3>
               <h1 className="text-xl uppercase">
                 Laboratorio{" "}
-                <span className="font-bold text-orange-400">Industrial</span>
+                <span className="font-bold text-orange-400">
+                  {laboratory.lab}
+                </span>
               </h1>
             </div>
             <div className="flex flex-col gap-2">
@@ -45,7 +76,19 @@ const Laboratory = (props: Props) => {
             </div>
 
             <div className="">
-              <Btn style="strong">Reservar Ahora</Btn>
+              <Btn
+                style="strong"
+                onClick={() => {
+                  const urlParams = new URLSearchParams(window.location.search);
+                  urlParams.set("selectedLab", laboratory.id.toString());
+                  urlParams.toString();
+                  router.push(
+                    "/dashboard/laboratorios/solicitud?" + urlParams.toString()
+                  );
+                }}
+              >
+                Reservar Ahora
+              </Btn>
             </div>
           </div>
         </div>

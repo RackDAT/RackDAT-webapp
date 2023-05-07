@@ -32,7 +32,8 @@ const index = (props: Props) => {
           {/* text */}
           <div className="w-1/2 flex flex-col gap-3">
             <h1 className="text-2xl">
-              Bienvenido a <label className="text-orange-300">RackDAT</label>
+              Bienvenido a{" "}
+              <label className="text-primary font-bold">RackDAT</label>
             </h1>
             <p>
               El administrador para los items y espacios localizados en el DAT
