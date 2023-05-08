@@ -1,7 +1,8 @@
 import DataTable from "react-data-table-component";
-import imagen from "./app.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { set } from "nprogress";
 
 const columns = [
   {
@@ -10,76 +11,15 @@ const columns = [
   },
   {
     name: "Nombre",
-    selector: (row: any) => row.nombre,
+    selector: (row: any) => row.descripcion,
   },
   {
     name: "Modelo",
-    selector: (row: any) => row.modelo,
+    selector: (row: any) => row.modelo.modelo,
   },
   {
-    name: "Carrera",
-    selector: (row: any) => row.carrera,
-  },
-  {
-    name: "Año",
-    selector: (row: any) => row.año,
-  },
-];
-
-const data = [
-  {
-    id: 1,
-    carrera: "ISW",
-    imagen: (
-      <Image
-        src={
-          "https://firebasestorage.googleapis.com/v0/b/rackdat-b06a8.appspot.com/o/ultimaPrueba?alt=media&token=d6abcc37-7135-4687-b2f5-8b8a848f5ca1"
-        }
-        className="w-16 h-16 object-cover rounded-lg"
-        alt="hello"
-        width={100}
-        height={100}
-      />
-    ),
-    nombre: "Catan",
-    año: "1988",
-    modelo: "Barocio",
-  },
-  {
-    id: 2,
-    imagen: (
-      <Image
-        src={
-          "https://firebasestorage.googleapis.com/v0/b/rackdat-b06a8.appspot.com/o/ultimaPrueba?alt=media&token=d6abcc37-7135-4687-b2f5-8b8a848f5ca1"
-        }
-        className="w-16 h-16 object-cover rounded-lg"
-        alt="hello"
-        width={100}
-        height={100}
-      />
-    ),
-    carrera: "ISW",
-    nombre: "Catan",
-    año: "1988",
-    modelo: "Barocio",
-  },
-  {
-    id: 3,
-    imagen: (
-      <Image
-        src={
-          "https://firebasestorage.googleapis.com/v0/b/rackdat-b06a8.appspot.com/o/ultimaPrueba?alt=media&token=d6abcc37-7135-4687-b2f5-8b8a848f5ca1"
-        }
-        className="w-16 h-16 object-cover rounded-lg"
-        alt="hello"
-        width={100}
-        height={100}
-      />
-    ),
-    nombre: "Catan",
-    año: "1988",
-    carrera: "ISW",
-    modelo: "Barocio",
+    name: "Fecha de adquisición",
+    selector: (row: any) => row.fecha_compra,
   },
 ];
 
@@ -111,16 +51,42 @@ const customStyles = {
     },
   },
 };
-const ItemTable = () => {
+
+type Props = { equipos: any; setSelectedRows: (ids: number[]) => void };
+
+const ItemTable = ({ equipos, setSelectedRows }: Props) => {
   const router = useRouter();
+  const [equiposRows, setEquiposRows] = useState([]);
+
+  useEffect(() => {
+    const rows = equipos.map((equipo: any) => {
+      return {
+        ...equipo,
+        imagen: (
+          <Image
+            src={equipo.imagen}
+            alt={equipo.descripcion}
+            width={50}
+            height={50}
+          />
+        ),
+      };
+    });
+    setEquiposRows(rows);
+  }, [equipos]);
+
+  const handleChange = (state: any) => {
+    setSelectedRows(state.selectedRows.map((row: any) => row.id));
+  };
 
   return (
     <DataTable
       columns={columns}
-      data={data}
+      data={equiposRows}
       fixedHeader
       fixedHeaderScrollHeight="400px"
       customStyles={customStyles}
+      onSelectedRowsChange={handleChange}
       highlightOnHover
       pointerOnHover
       selectableRows

@@ -4,6 +4,7 @@ type Props = {
   style: "strong" | "light" | "dark";
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 const Btn = (props: Props) => {

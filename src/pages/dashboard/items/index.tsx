@@ -7,15 +7,35 @@ import ItemTable from "../../../components/dashboard/items/ItemTable";
 import Btn from "@/components/global/Btn";
 import { BiBook } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import { useState } from "react";
 
-type Props = {};
+type Props = {
+  equipos: any;
+};
 
-const items = (props: Props) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const equipos = await axios
+    .get("https://rackdat.onrender.com/api/RackDAT/equipos")
+    .then((res) => res.data);
+
+  return {
+    props: {
+      equipos: equipos,
+    },
+  };
+};
+
+const items = ({ equipos }: Props) => {
   const router = useRouter();
+
+  const [selectedRows, setSelectedRows] = useState<Number[]>([]);
+
   return (
     <Layout>
       <LayoutHeader title="Items" />
-      <div className="m-auto w-[90%]">
+      <div className="m-auto w-[90%] flex flex-col">
         <SearchBar />
 
         {/* filters */}
@@ -34,10 +54,24 @@ const items = (props: Props) => {
               <option>Lic</option>
             </Filter>
           </div>
+        </div>
+
+        {/* table */}
+        <div className="my-2">
+          <ItemTable
+            equipos={equipos}
+            setSelectedRows={(ids: number[]) => setSelectedRows(ids)}
+          />
+        </div>
+        <div className="self-end">
           <Btn
             style="strong"
             onClick={() => {
-              router.push("/dashboard/items/solicitudItem");
+              const urlParams = new URLSearchParams(window.location.search);
+              urlParams.set("selectedItems", selectedRows.toString());
+              router.push(
+                "/dashboard/items/solicitudItem?" + urlParams.toString()
+              );
             }}
           >
             <div className="flex gap-2 items-center text-sm">
@@ -45,11 +79,6 @@ const items = (props: Props) => {
               Solicitar
             </div>
           </Btn>
-        </div>
-
-        {/* table */}
-        <div className="my-2">
-          <ItemTable />
         </div>
       </div>
     </Layout>
