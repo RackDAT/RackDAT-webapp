@@ -34,7 +34,6 @@ const Index = ({ allEquipos }: Props) => {
   const [equipos, setEquipos] = useState<Item[]>(allEquipos);
 
   const filterItems = (searchBarString: string) => {
-    console.log(searchBarString);
     if (searchBarString === "") {
       setEquipos(allEquipos);
     }
