@@ -24,7 +24,7 @@ type Props = {
   laboratories: Laboratory[];
 };
 
-const index = ({ laboratories }: Props) => {
+const Index = ({ laboratories }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
@@ -47,4 +47,4 @@ const index = ({ laboratories }: Props) => {
   );
 };
 
-export default index;
+export default Index;

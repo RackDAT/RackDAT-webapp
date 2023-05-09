@@ -40,7 +40,7 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
   const [search, setSearch] = useState<string>("");
   const router = useRouter();
 
-  const handleSearchChange = (user: User) => {
+  const handleSearchChange = (user: string) => {
     if (search === "") {
       setUsers(users);
     }
@@ -63,7 +63,7 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
         <div className=" overflow-y-auto w-[90%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between mt-5 items-center">
             <div className="w-[400px]">
-              <SearchBar />
+              <SearchBar filterItems={handleSearchChange} />
             </div>
             <div className="flex justify-end">
               <div className="relative p-2 min-w-fit">

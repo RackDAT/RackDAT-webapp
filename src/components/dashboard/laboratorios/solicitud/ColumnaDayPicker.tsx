@@ -1,8 +1,6 @@
 import React from "react";
 import { DayPicker } from "react-day-picker";
 
-type Props = { daySelected: Date; setDatSelected: (day: Date) => void };
-
 //se tiene que definir los estilos de esta manera ya que es una libreria y no se pueden modificar los estilos con tailwind
 const css = `
   .my-selected:not([disabled]) { 
@@ -25,13 +23,21 @@ const css = `
   }
 `;
 
-const ColumnaDayPicker = ({ daySelected, setDatSelected }: Props) => {
+// type Props = { daySelected: Date; setDatSelected: (day: Date) => void` };
+
+type Props = { daySelected: Date; setDaySelected: (day: Date) => void };
+
+const ColumnaDayPicker = ({ daySelected, setDaySelected }: Props) => {
   return (
     <div className=" w-1/3 h-full border-2 rounded-lg bg-slate-50 shadow-lg overflow-hidden flex justify-center items-center flex-col">
       <style>{css}</style>
       <DayPicker
         mode="single"
-        onSelect={setDatSelected}
+        onSelect={(e) => {
+          if (e) {
+            setDaySelected(e);
+          }
+        }}
         selected={daySelected}
         captionLayout="dropdown-buttons"
         footer

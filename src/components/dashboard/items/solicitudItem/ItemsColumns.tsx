@@ -13,8 +13,8 @@ const ItemsColumns = ({ items }: Props) => {
         <h1>Equipos Seleccionados</h1>
       </div>
       <div className="p-4 flex flex-col gap-2">
-        {items.map((item) => {
-          return <EquipoDiv item={item} />;
+        {items.map((item, index) => {
+          return <EquipoDiv item={item} key={index} />;
         })}
       </div>
     </div>

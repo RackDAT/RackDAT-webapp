@@ -47,11 +47,13 @@ const SolicitudDiv = ({ solicitud }: Props) => {
             <h1>
               {solicitud.tipo_solicitud.id === 1
                 ? ""
-                : "Laboratorio " + solicitud.nombre_lab}
+                : //@ts-ignore
+                  "Laboratorio " + solicitud.nombre_lab}
             </h1>
             <label className="text-neutral-500 text-xs">
               {solicitud.tipo_solicitud.id === 1
-                ? solicitud.cantidad_equipos + " unidades"
+                ? //@ts-ignore
+                  solicitud.cantidad_equipos + " unidades"
                 : ""}
             </label>
           </div>

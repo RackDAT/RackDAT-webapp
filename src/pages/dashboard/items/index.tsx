@@ -8,12 +8,9 @@ import Btn from "@/components/global/Btn";
 import { BiBook } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import axios from "axios";
+import axios, { all } from "axios";
 import { useState } from "react";
-
-type Props = {
-  equipos: any;
-};
+import Item from "@/assets/interfaces/item";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const equipos = await axios
@@ -22,21 +19,40 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      equipos: equipos,
+      allEquipos: equipos,
     },
   };
 };
 
-const items = ({ equipos }: Props) => {
-  const router = useRouter();
+type Props = {
+  allEquipos: Item[];
+};
 
+const Index = ({ allEquipos }: Props) => {
+  const router = useRouter();
   const [selectedRows, setSelectedRows] = useState<Number[]>([]);
+  const [equipos, setEquipos] = useState<Item[]>(allEquipos);
+
+  const filterItems = (searchBarString: string) => {
+    console.log(searchBarString);
+    if (searchBarString === "") {
+      setEquipos(allEquipos);
+    }
+    const filteredItems = allEquipos.filter((item: Item) => {
+      return item.descripcion
+        .toLowerCase()
+        .includes(searchBarString.toLowerCase());
+    });
+    setEquipos(filteredItems);
+  };
+  // console.log(equipos);
+  // console.log(allEquipos);
 
   return (
     <Layout>
       <LayoutHeader title="Items" />
       <div className="m-auto w-[90%] flex flex-col">
-        <SearchBar />
+        <SearchBar filterItems={filterItems} />
 
         {/* filters */}
         <div className="flex justify-between w-full">
@@ -85,4 +101,4 @@ const items = ({ equipos }: Props) => {
   );
 };
 
-export default items;
+export default Index;
