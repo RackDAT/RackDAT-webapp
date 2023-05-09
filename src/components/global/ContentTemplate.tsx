@@ -20,7 +20,7 @@ const ContentTemplate = (props: Props) => {
           <Btn style="strong">Entar como visitante</Btn>
           <label className="text-xs">
             <label className="font-bold"> Nota: </label>reservaciones y
-            prestamos solo estan disponibles para usuarios onc cuenta
+            prestamos solo estan disponibles para usuarios con cuenta
           </label>
         </div>
       </div>
