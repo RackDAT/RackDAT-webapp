@@ -26,7 +26,7 @@ const Opciones = [
     url: "solicitudes",
     icon: <AiOutlineUnorderedList className="w-5 h-5" />,
   },
-  { name: "Items", url: "items", icon: <MdInventory className="w-5 h-5" /> },
+  { name: "Equipos", url: "items", icon: <MdInventory className="w-5 h-5" /> },
   {
     name: "User",
     url: "users",

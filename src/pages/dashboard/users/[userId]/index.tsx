@@ -1,23 +1,18 @@
 import React from "react";
 import Layout from "@/components/dashboard/Layout";
 import LayoutHeader from "@/components/dashboard/LayoutHeader";
-import { useRouter } from "next/router";
 import axios from "axios";
-import { useEffect } from "react";
 import User from "@/assets/interfaces/users";
 import Image from "next/image";
 import UserProfileSolicitud from "@/components/dashboard/user/userid/UserProfileSolicitud";
 import { GetServerSideProps } from "next";
-
-type Props = {
-  user: User;
-};
+import Solitud from "@/assets/interfaces/solicitud";
+import profileImg from "@/assets/img/person.jpg";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} };
   const userId = context.params.userId;
-  let response: any = null;
-  response = await axios
+  let user = await axios
     .get<User>(
       `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
     )
@@ -25,23 +20,40 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return res.data;
     });
 
+  let solicitudes = await axios
+    .get(
+      `https://rackdat.onrender.com/api/RackDAT/usuario/id:int/solicitudes?id=${userId}`
+    )
+    .then((res) => {
+      return res.data;
+    });
+
   return {
     props: {
-      user: response,
+      user: user,
+      solicitudes: solicitudes,
     },
   };
 };
 
-const index = ({ user }: Props) => {
+type Props = {
+  user: User;
+  solicitudes: Solitud[];
+};
+
+const index = ({ user, solicitudes }: Props) => {
+  console.log(solicitudes);
   return (
     <Layout>
       <LayoutHeader title="Usuarios" />
       <div className="w-[90%] m-auto">
         <div className="my-10 flex">
-          <img
-            src="https://picsum.photos/200/300"
+          <Image
+            src={profileImg}
             alt=""
-            className="w-28 h-28 ml-10 mr-5 rounded-full"
+            width={100}
+            height={100}
+            className="w-28 h-28 ml-10 mr-5 rounded-full object-cover"
           />
           <div className="flex flex-col h-28 justify-around text-lg">
             <h3 className="uppercase font-semibold ">
@@ -54,8 +66,9 @@ const index = ({ user }: Props) => {
           </div>
         </div>
         <div className="flex flex-col my-10 gap-4">
-          <UserProfileSolicitud />
-          <UserProfileSolicitud />
+          {solicitudes.map((solicitud) => {
+            return <UserProfileSolicitud solicitud={solicitud} />;
+          })}
         </div>
       </div>
     </Layout>

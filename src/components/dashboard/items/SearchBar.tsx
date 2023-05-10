@@ -34,7 +34,6 @@ const SearchBar = (props: Props) => {
         onChange={(e) => {
           setFilterString(e.target.value);
           props.filterItems(e.target.value);
-          console.log(e.target.value);
         }}
       />
     </div>

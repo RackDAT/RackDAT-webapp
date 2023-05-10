@@ -44,12 +44,10 @@ const Index = ({ allEquipos }: Props) => {
     });
     setEquipos(filteredItems);
   };
-  // console.log(equipos);
-  // console.log(allEquipos);
 
   return (
     <Layout>
-      <LayoutHeader title="Items" />
+      <LayoutHeader title="Equipos" />
       <div className="m-auto w-[90%] flex flex-col">
         <SearchBar filterItems={filterItems} />
 
@@ -88,10 +86,21 @@ const Index = ({ allEquipos }: Props) => {
                 "/dashboard/items/solicitudItem?" + urlParams.toString()
               );
             }}
+            disabled={selectedRows.length === 0}
           >
             <div className="flex gap-2 items-center text-sm">
-              <BiBook className="w-4 h-4" />
-              Solicitar
+              {selectedRows.length === 0 ? (
+                "Selecciona un Item"
+              ) : (
+                <>
+                  <BiBook className="w-4 h-4" />
+                  Solicitar
+                  <label className="font-bold">
+                    {selectedRows.length ? selectedRows.length : ""}
+                  </label>
+                  {selectedRows.length === 1 ? " item" : " items"}
+                </>
+              )}
             </div>
           </Btn>
         </div>

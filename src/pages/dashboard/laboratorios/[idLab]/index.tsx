@@ -31,8 +31,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
-  console.log(laboratory);
-
   const router = useRouter();
   return (
     <Layout>

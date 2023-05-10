@@ -48,7 +48,6 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
         user.apellido_pat.toLowerCase().includes(filterUserString.toLowerCase())
       );
     });
-    console.log(newUsers);
     setUsers(newUsers);
   };
 

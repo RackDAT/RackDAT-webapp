@@ -5,18 +5,21 @@ import Image from "next/dist/client/image";
 
 type Props = {
   laboratory: Laboratory;
+  index: number;
 };
 
-const LabCard = ({ laboratory }: Props) => {
+const LabCard = ({ laboratory, index }: Props) => {
   const router = useRouter();
 
   const redirectSingleLabView = (id: number) => {
     router.push(`/dashboard/laboratorios/${id}`);
   };
-
+  const secondsOfAnimation = 1 + index * 0.1;
+  const secondsOfAnimationString = secondsOfAnimation.toString();
+  console.log(secondsOfAnimation);
   return (
     <div
-      className="flex rounded-lg bg-white shadow-lg flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer"
+      className={`flex rounded-lg bg-white shadow-lg flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer animate-[spawnKeyFrames_${1}s_ease-in-out_infinite] delay-1000`}
       onClick={() => {
         redirectSingleLabView(laboratory.id);
       }}
@@ -36,6 +39,8 @@ const LabCard = ({ laboratory }: Props) => {
       <div className="py-[5px] px-2 flex flex-col min-h-[60px] justify-between z-0">
         <label className="text-sm">{laboratory.lab}</label>
         <label className="text-slate-400 text-xs">Capacidad: 20 personas</label>
+
+        {"{" + secondsOfAnimationString + "}"}
       </div>
     </div>
   );

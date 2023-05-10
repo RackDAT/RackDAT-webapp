@@ -39,7 +39,9 @@ const Index = ({ laboratories }: Props) => {
         </div>
         <div className="flex py-6 gap-4 justify-left flex-wrap">
           {laboratories.map((laboratory, index) => {
-            return <LabCard key={index} laboratory={laboratory} />;
+            return (
+              <LabCard key={index} laboratory={laboratory} index={index} />
+            );
           })}
         </div>
       </div>

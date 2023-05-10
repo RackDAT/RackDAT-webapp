@@ -49,7 +49,6 @@ const Index = ({ items }: Props) => {
     });
     router.push("/dashboard/solicitudes");
   };
-  console.log(items);
   return (
     <Layout>
       <LayoutHeader title="Items" />

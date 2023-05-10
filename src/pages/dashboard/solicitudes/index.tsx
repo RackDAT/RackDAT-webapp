@@ -23,7 +23,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = { solicitudes: Solicitud[] };
 
 const Solicitudes = ({ solicitudes }: Props) => {
-  console.log(solicitudes);
   return (
     <Layout>
       <LayoutHeader title="Solicitudes" />
@@ -41,7 +40,7 @@ const Solicitudes = ({ solicitudes }: Props) => {
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
             {solicitudes.map((solicitud, index) => (
-              <SolicitudDiv solicitud={solicitud} key={index} />
+              <SolicitudDiv solicitud={solicitud} key={index} index={index} />
             ))}
           </div>
         </div>
