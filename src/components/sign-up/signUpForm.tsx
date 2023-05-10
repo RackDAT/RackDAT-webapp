@@ -1,35 +1,56 @@
 "use client";
 
-import React from "react";
-import Background from "@/components/global/Background";
-import ContentTemplate from "@/components/global/ContentTemplate";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import TextInput from "@/components/forms/TextInput";
 import Link from "next/link";
 import Btn from "@/components/global/Btn";
 import SelectInput from "@/components/forms/SelectInput";
+import INewProfile from "@/assets/interfaces/newProfile";
+import ICareer from "@/assets/interfaces/career";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-type Props = {};
+type Props = {
+  profile: INewProfile;
+  careers: ICareer[];
+};
 
-const SignUpForm = (props: Props) => {
-  interface ICareer {
-    id: number;
-    nombre: string;
-  }
+const SignUpForm = ({ profile, careers }: Props) => {
+  const router = useRouter();
 
-  const careers: ICareer[] = [
-    { id: 1, nombre: "Ingeniería de Software" },
-    { id: 2, nombre: "Ingeniería Mecánica" },
-    { id: 3, nombre: "Ingeniería Industrial" },
-  ];
+  const postUser = (data: any) => {
+    console.log(data);
+    axios
+      .post("https://rackdat.onrender.com/api/RackDAT/usuario", data)
+      .catch((error) => {
+        console.error(error);
+        throw new Error("Error en la solicitud POST");
+      });
+  };
+
+  const redirect = () => {
+    router.push({
+      pathname: "/wait",
+    });
+  };
+
   return (
     <Formik
       initialValues={{
-        matricula: "",
-        carrera: "",
+        nombre: profile.nombre,
+        apellido_pat: profile.apellido,
+        apellido_mat: "",
+        correo: profile.correo,
+        tipo_usuario: 7,
+        imagen: profile.imagen,
+        clave: "",
+        carrera: 0,
       }}
       onSubmit={(values) => {
-        alert(JSON.stringify(values));
+        postUser(values);
+        redirect();
       }}
     >
       <Form className="h-full">
@@ -40,8 +61,8 @@ const SignUpForm = (props: Props) => {
             <label>Matrícula</label>
             <TextInput
               type="text"
-              id={"matricula"}
-              name="matricula"
+              id={"clave"}
+              name="clave"
               placeholder="e012345"
             />
           </div>
@@ -52,22 +73,22 @@ const SignUpForm = (props: Props) => {
               name="carrera"
               placeholder="Select an option"
             >
-              <option value="">Selecciona tu carrera</option>
+              <option value="" key="">
+                Selecciona tu carrera
+              </option>
               {careers.map((career) => (
                 <option key={career.id} value={career.id}>
-                  {career.nombre}
+                  {career.carrera}
                 </option>
               ))}
             </SelectInput>
           </div>
-          <label className="text-center">
-            ¿Ya tienes cuenta? Ingresa{" "}
-            <Link href="/hello" className="text-yellow-500">
-              {" "}
-              aqui
-            </Link>
-          </label>
-          <Btn style="strong">Registrarse</Btn>
+          <button
+            className="bg-primary text-white tracking-wider hover:bg-yellow-300 duration-100 rounded-md p-1"
+            type="submit"
+          >
+            Registrarse
+          </button>
         </div>
       </Form>
     </Formik>

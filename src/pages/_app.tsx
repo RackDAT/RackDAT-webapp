@@ -28,9 +28,10 @@ export default function MyApp({ Component, pageProps, router }: AppProps) {
   }, []);
   return (
     <UserProvider>
-      <GoogleOAuthProvider clientId="725135857969-a89noc2hr9fjfhmdrnk10vpg977e9i15.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="725135857969-k2kksoa5g59mpik0gkbm1me9tvrin8vu.apps.googleusercontent.com">
         <Component {...pageProps} />
       </GoogleOAuthProvider>
+      document.getElementById('root')
     </UserProvider>
   );
 }
