@@ -3,6 +3,7 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import IProfile from "@/assets/interfaces/googleProfile";
 import { useRouter } from "next/router";
+import Btn from "../global/Btn";
 
 const LoginButton = () => {
   const [user, setUser] = useState<any | null>(null);
@@ -114,7 +115,9 @@ const LoginButton = () => {
           <h2>Loading...</h2>
         </div>
       ) : (
-        <button onClick={() => login()}>Sign in with Google 🚀 </button>
+        <Btn style="strong" onClick={() => login()}>
+          Sign in with Google 🚀{" "}
+        </Btn>
       )}
     </div>
   );
