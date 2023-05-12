@@ -1,24 +1,132 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Background from "@/components/global/Background";
 import ContentTemplate from "@/components/global/ContentTemplate";
 import SignUpForm from "@/components/sign-up/signUpForm";
-import LoginButton from "@/components/google-buttons/LoginButton";
+import IProfile from "@/assets/interfaces/googleProfile";
+import { useRouter } from "next/router";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import Btn from "@/components/global/Btn";
 
 type Props = {};
 
 const page = (props: Props) => {
-  return (
-    <div className="h-screen w-screen flex">
-      <ContentTemplate>
-        <div className="w-full h-full ml-20 flex flex-col gap-5 justify-center items-center">
-          <div className="w-full h-full">
-            <span className="text-xl font-bold">Bienvenido a RackDAT</span>
-            <LoginButton />
+  const LoginButton = () => {
+    const [user, setUser] = useState<any | null>(null);
+    const [profile, setProfile] = useState<IProfile | null>(null);
+    const router = useRouter();
+
+    const login = useGoogleLogin({
+      onSuccess: (codeResponse) => setUser(codeResponse),
+      onError: (error) => console.log("Login Failed:", error),
+    });
+
+    const getUserInfo = async (email: string): Promise<any> => {
+      try {
+        const response = await axios.post(
+          "https://rackdat.onrender.com/api/RackDAT/usuario/correo",
+          {
+            correo: email,
+          }
+        );
+        if (response) {
+          const data = response.data;
+          try {
+            const responseForId = await axios.get(
+              `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${data.id}`
+            );
+            return responseForId.data;
+          } catch (error) {
+            console.error(error);
+            return null;
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    };
+
+    const handleVerified = (response: any) => {
+      if (response) {
+        if (response.verificado === true) {
+          router.push({
+            pathname: "/dashboard/home",
+          });
+        } else {
+          router.push({
+            pathname: "/wait",
+          });
+        }
+      } else {
+        handleNewUser();
+      }
+    };
+
+    const handleNewUser = () => {
+      const props = {
+        nombre: profile?.given_name,
+        apellido_pat: profile?.family_name,
+        correo: profile?.email,
+        imagen: profile?.picture,
+      };
+
+      router.push({
+        pathname: "/sign-up",
+        query: props,
+      });
+    };
+
+    useEffect(() => {
+      if (user) {
+        axios
+          .get(
+            `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.access_token}`,
+                Accept: "application/json",
+              },
+            }
+          )
+          .then(async (res) => {
+            await setProfile(res.data);
+          })
+          .catch((err) => console.log(err));
+      }
+    }, [user]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        if (profile) {
+          const userIsVerified = await getUserInfo(profile.email);
+          handleVerified(userIsVerified);
+        }
+      };
+
+      fetchData();
+    }, [profile]);
+
+    const logOut = () => {
+      googleLogout();
+      setProfile(null);
+    };
+
+    return (
+      <div className="h-screen w-screen flex">
+        <ContentTemplate>
+          <div className="w-full h-full ml-20 flex flex-col gap-5 justify-center items-center">
+            <div className="w-full h-full">
+              <span className="text-xl font-bold">Bienvenido a RackDAT</span>
+              <Btn style="strong" onClick={() => login()}>
+                Sign in with Google 🚀{" "}
+              </Btn>
+            </div>
           </div>
-        </div>
-      </ContentTemplate>
-    </div>
-  );
+        </ContentTemplate>
+      </div>
+    );
+  };
 };
 
 export default page;
