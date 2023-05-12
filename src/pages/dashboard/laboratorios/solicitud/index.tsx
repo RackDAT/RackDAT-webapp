@@ -28,18 +28,24 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 type Props = { laboratories: Laboratory[] };
 
-const index = ({ laboratories }: Props) => {
+const Index = ({ laboratories }: Props) => {
   const [date, setDate] = useState<Date>(new Date());
   const router = useRouter();
   const [idLaboratory, setIDLaboratory] = useState<number>(
     Number(router.query.selectedLab)
   ); // [0
 
-  const handleSolicitar = () => {
+  const handleSolicitar = (
+    horaInicio: string,
+    horaEntrega: string,
+    cantidadPersonas: string,
+    justificacion: string
+  ) => {
+    console.log(horaInicio, horaEntrega, cantidadPersonas, justificacion);
     toast.success("Deafault Notification", {
       position: toast.POSITION.TOP_RIGHT,
     });
-    router.push("/dashboard/solicitudes");
+    // router.push("/dashboard/solicitudes");
   };
 
   return (
@@ -51,7 +57,7 @@ const index = ({ laboratories }: Props) => {
           idSelectedLaboratory={idLaboratory}
           setSelectedIdLaboratory={(id) => setIDLaboratory(id)}
         />
-        <ColumnaDayPicker daySelected={date} setDatSelected={setDate} />
+        <ColumnaDayPicker daySelected={date} setDaySelected={setDate} />
         <ColumnaTimePicker handleSolicitar={handleSolicitar} />
       </div>
       <ToastContainer />
@@ -59,4 +65,4 @@ const index = ({ laboratories }: Props) => {
   );
 };
 
-export default index;
+export default Index;

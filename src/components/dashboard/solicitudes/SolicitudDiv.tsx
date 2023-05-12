@@ -9,9 +9,10 @@ import Image from "next/image";
 
 type Props = {
   solicitud: Solicitud;
+  index: number;
 };
 
-const SolicitudDiv = ({ solicitud }: Props) => {
+const SolicitudDiv = ({ solicitud, index }: Props) => {
   const router = useRouter();
 
   const redirectSingleSolicitudView = (id: number) => {
@@ -19,7 +20,10 @@ const SolicitudDiv = ({ solicitud }: Props) => {
   };
 
   return (
-    <div className=" w-full flex bg-white rounded-md flex-col hover:scale-[100.5%] duration-200 shadow-md text-sm">
+    <div
+      className={`w-full flex bg-white rounded-md flex-col hover:scale-[100.5%] duration-200 shadow-md text-sm animate-[spawnKeyFrames_${index}s_ease-in-out]
+      `}
+    >
       {/* header */}
       <div className="border-b-[1px] w-full border-neutral-300 px-4 py-2 flex justify-between">
         <div className="flex gap-4">
@@ -47,11 +51,13 @@ const SolicitudDiv = ({ solicitud }: Props) => {
             <h1>
               {solicitud.tipo_solicitud.id === 1
                 ? ""
-                : "Laboratorio " + solicitud.nombre_lab}
+                : //@ts-ignore
+                  "Laboratorio " + solicitud.nombre_lab}
             </h1>
             <label className="text-neutral-500 text-xs">
               {solicitud.tipo_solicitud.id === 1
-                ? solicitud.cantidad_equipos + " unidades"
+                ? //@ts-ignore
+                  solicitud.cantidad_equipos + " unidades"
                 : ""}
             </label>
           </div>

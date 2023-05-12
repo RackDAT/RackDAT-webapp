@@ -1,4 +1,4 @@
 export default interface TipoSolicitud {
   id: number;
-  tipo_solicitud: string;
+  tipo_solicitud: "Equipo" | "Laboratorio";
 }

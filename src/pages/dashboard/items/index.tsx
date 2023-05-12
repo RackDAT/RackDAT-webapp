@@ -8,12 +8,9 @@ import Btn from "@/components/global/Btn";
 import { BiBook } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import axios from "axios";
+import axios, { all } from "axios";
 import { useState } from "react";
-
-type Props = {
-  equipos: any;
-};
+import Item from "@/assets/interfaces/item";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const equipos = await axios
@@ -22,21 +19,37 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      equipos: equipos,
+      allEquipos: equipos,
     },
   };
 };
 
-const items = ({ equipos }: Props) => {
-  const router = useRouter();
+type Props = {
+  allEquipos: Item[];
+};
 
+const Index = ({ allEquipos }: Props) => {
+  const router = useRouter();
   const [selectedRows, setSelectedRows] = useState<Number[]>([]);
+  const [equipos, setEquipos] = useState<Item[]>(allEquipos);
+
+  const filterItems = (searchBarString: string) => {
+    if (searchBarString === "") {
+      setEquipos(allEquipos);
+    }
+    const filteredItems = allEquipos.filter((item: Item) => {
+      return item.descripcion
+        .toLowerCase()
+        .includes(searchBarString.toLowerCase());
+    });
+    setEquipos(filteredItems);
+  };
 
   return (
     <Layout>
-      <LayoutHeader title="Items" />
+      <LayoutHeader title="Equipos" />
       <div className="m-auto w-[90%] flex flex-col">
-        <SearchBar />
+        <SearchBar filterItems={filterItems} />
 
         {/* filters */}
         <div className="flex justify-between w-full">
@@ -73,10 +86,21 @@ const items = ({ equipos }: Props) => {
                 "/dashboard/items/solicitudItem?" + urlParams.toString()
               );
             }}
+            disabled={selectedRows.length === 0}
           >
             <div className="flex gap-2 items-center text-sm">
-              <BiBook className="w-4 h-4" />
-              Solicitar
+              {selectedRows.length === 0 ? (
+                "Selecciona un Item"
+              ) : (
+                <>
+                  <BiBook className="w-4 h-4" />
+                  Solicitar
+                  <label className="font-bold">
+                    {selectedRows.length ? selectedRows.length : ""}
+                  </label>
+                  {selectedRows.length === 1 ? " item" : " items"}
+                </>
+              )}
             </div>
           </Btn>
         </div>
@@ -85,4 +109,4 @@ const items = ({ equipos }: Props) => {
   );
 };
 
-export default items;
+export default Index;

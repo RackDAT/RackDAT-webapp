@@ -7,5 +7,22 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  return <div className="w-full h-screen"></div>;
+  const { user, error, isLoading } = useUser();
+  return (
+    <div className="w-full h-screen">
+      {/* <div className="m-auto w-fit">
+        <Btn style="strong">
+          <a href="/api/auth/login">LogIn</a>
+        </Btn>
+      </div>
+      {user && (
+        <>
+          <h1>hay usuario senores</h1>
+          <a href="/api/auth/logout" className="text-white">
+            logout
+          </a>
+        </>
+      )} */}
+    </div>
+  );
 }

@@ -24,7 +24,7 @@ type Props = {
   laboratories: Laboratory[];
 };
 
-const index = ({ laboratories }: Props) => {
+const Index = ({ laboratories }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />
@@ -39,7 +39,9 @@ const index = ({ laboratories }: Props) => {
         </div>
         <div className="flex py-6 gap-4 justify-left flex-wrap">
           {laboratories.map((laboratory, index) => {
-            return <LabCard key={index} laboratory={laboratory} />;
+            return (
+              <LabCard key={index} laboratory={laboratory} index={index} />
+            );
           })}
         </div>
       </div>
@@ -47,4 +49,4 @@ const index = ({ laboratories }: Props) => {
   );
 };
 
-export default index;
+export default Index;

@@ -1,13 +1,22 @@
 import React from "react";
+import Solicitud from "@/assets/interfaces/solicitud";
+import getIconFromString from "@/utils/icons";
 
-type Props = {};
+type Props = { solicitud: Solicitud };
 
-const UserSolicitud = (props: Props) => {
+const UserSolicitud = ({ solicitud }: Props) => {
   return (
-    <div className="rounded-lx flex p-4 shadow-lg bg-slate-50 gap-4 items-center hover:scale-[1.005] duration-75">
+    <div className="rounded-lx flex p-4 shadow-lg bg-slate-50 gap-4 items-center hover:scale-[1.005] duration-75 animation-spawn">
       <div className="flex flex-col gap-3">
-        <h1>Solicitud de material</h1>
-        <h3>4 unidades</h3>
+        <div className="flex items-center gap-2">
+          {getIconFromString(solicitud.tipo_solicitud.tipo_solicitud)}
+          {solicitud.tipo_solicitud.tipo_solicitud}
+        </div>
+        <h3>
+          {solicitud.tipo_solicitud.tipo_solicitud === "Equipo"
+            ? solicitud.cantidad_equipos + " unidades"
+            : solicitud.nombre_lab}
+        </h3>
       </div>
       <div className="flex flex-col text-center">
         <h1>Fecha Inicio</h1>

@@ -10,6 +10,7 @@ import Item from "@/assets/interfaces/item";
 import ColumnaDayPicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDayPicker";
 import JustificationColumn from "@/components/dashboard/items/solicitudItem/JustificationColumn";
 import { toast, ToastContainer } from "react-toastify";
+import { createContext } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const itemIds = ctx.query.selectedItems
@@ -38,7 +39,7 @@ type Props = {
   items: Item[];
 };
 
-const index = ({ items }: Props) => {
+const Index = ({ items }: Props) => {
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const router = useRouter();
 
@@ -48,7 +49,6 @@ const index = ({ items }: Props) => {
     });
     router.push("/dashboard/solicitudes");
   };
-  console.log(items);
   return (
     <Layout>
       <LayoutHeader title="Items" />
@@ -56,12 +56,16 @@ const index = ({ items }: Props) => {
         <ItemsColumns items={items} />
         <ColumnaDayPicker
           daySelected={selectedDay}
-          setDatSelected={setSelectedDay}
+          setDaySelected={setSelectedDay}
         />
-        <JustificationColumn handleSolicitar={handleSolicitar} />
+
+        <JustificationColumn
+          handleSolicitar={handleSolicitar}
+          day={selectedDay}
+        />
       </div>
     </Layout>
   );
 };
 
-export default index;
+export default Index;

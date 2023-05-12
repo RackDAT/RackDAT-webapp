@@ -14,7 +14,7 @@ type Props = {
     | "Solicitudes"
     | "Laboratorios"
     | "Home"
-    | "Items"
+    | "Equipos"
     | "Añadir Item"
     | "Usuarios"
     | "Validar Usuarios";
@@ -24,7 +24,7 @@ const IconTitle = {
   Solicitudes: <AiOutlineUnorderedList className="w-6 h-6" />,
   Laboratorios: <ImLab className="w-6 h-6" />,
   Home: <AiFillHome className="w-6 h-6" />,
-  Items: <MdInventory className="w-6 h-6" />,
+  Equipos: <MdInventory className="w-6 h-6" />,
   "Añadir Item": <MdAddShoppingCart className="w-6 h-6" />,
   Usuarios: <FaUserCircle className="w-6 h-6" />,
   "Validar Usuarios": <AiOutlineUserAdd className="w-6 h-6" />,

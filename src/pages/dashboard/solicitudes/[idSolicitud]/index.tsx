@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 type Props = {};
 
-const index = (props: Props) => {
+const Index = (props: Props) => {
   const router = useRouter();
 
   const handleAceptar = () => {
@@ -52,4 +52,4 @@ const index = (props: Props) => {
   );
 };
 
-export default index;
+export default Index;
