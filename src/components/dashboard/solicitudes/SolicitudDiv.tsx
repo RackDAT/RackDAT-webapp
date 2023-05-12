@@ -40,13 +40,15 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
       {/* content? */}
       <div className="px-2 py-2 flex gap-2 items-center justify-between text-sm">
         <div className="flex items-center space-x-3.5">
-          <Image
-            src={solicitud.imagen_muestra}
-            alt=""
-            className="w-20 h-20 rounded"
-            height={100}
-            width={100}
-          />
+          {solicitud.imagen_muestra != "null" && (
+            <Image
+              src={solicitud.imagen_muestra}
+              alt=""
+              className="w-20 h-20 rounded"
+              height={100}
+              width={100}
+            />
+          )}
           <div className="flex flex-col justify-between border- h-20 py-2">
             <h1>
               {solicitud.tipo_solicitud.id === 1

@@ -14,9 +14,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-type Props = {};
+type Props = {
+  id_tipo_solicitud: number;
+};
 
-const SolicitudInfomationColumn = ({}: Props) => {
+const SolicitudInfomationColumn = ({ id_tipo_solicitud }: Props) => {
   const [date, setDate] = useState<Date | null>(null);
   useEffect(() => {
     const date = new Date();
@@ -28,7 +30,11 @@ const SolicitudInfomationColumn = ({}: Props) => {
     <div className="flex flex-col rounded-xl bg-white shadow py-6 px-4 gap-4">
       <div className="flex items-center gap-2">
         <ImLab className="w-6 h-6" />
-        <h1 className="text-lg font-semibold">Solicitud de Laboratorio</h1>
+        {id_tipo_solicitud === 3 ? (
+          <h1 className="text-lg font-semibold">Solicitud de Laboratorio</h1>
+        ) : (
+          <h1 className="text-lg font-semibold">Solicitud de Equipos</h1>
+        )}
       </div>
       <div className=" flex flex-col gap-2">
         <label className="uppercase text-slate-300">Justificacion</label>

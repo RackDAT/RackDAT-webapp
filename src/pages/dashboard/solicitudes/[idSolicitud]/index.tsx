@@ -7,9 +7,11 @@ import Btn from "@/components/global/Btn";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 
-type Props = {};
+type Props = {
+  id_tipo_solicitud: number;
+};
 
-const Index = (props: Props) => {
+const Index = ({ id_tipo_solicitud }: Props) => {
   const router = useRouter();
 
   const handleAceptar = () => {
@@ -36,7 +38,7 @@ const Index = (props: Props) => {
       <div className="w-[90%] flex flex-col m-auto">
         <div className=" m-auto mt-10 flex gap-2">
           <SolicitudUserColumn />
-          <SolicitudInfomationColumn />
+          <SolicitudInfomationColumn id_tipo_solicitud={id_tipo_solicitud} />
         </div>
         <div className="mt-3 flex gap-2 self-end">
           <Btn style="strong" onClick={handleAceptar}>
