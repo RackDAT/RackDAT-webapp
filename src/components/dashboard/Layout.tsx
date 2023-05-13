@@ -35,6 +35,14 @@ const Opciones = [
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("tipo_usuario");
+    router.push("/login");
+  };
+
   return (
     <div className="flex">
       <div className="w-[270px] h-screen flex flex-col align-center p-4 justify-between flex-shrink-0">
@@ -71,7 +79,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="text-white flex justify-center items-center ">
             <div className="hover:bg-white p-[2px] hover:text-black duration-75 rounded cursor-pointer">
-              <HiOutlineLogout className="w-6 h-6" />
+              <HiOutlineLogout className="w-6 h-6" onClick={handleLogout} />
             </div>
           </div>
         </div>

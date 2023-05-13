@@ -99,7 +99,12 @@ const page = (props: Props) => {
     const fetchData = async () => {
       if (profile) {
         const userIsVerified = await getUserInfo(profile.email);
-        localStorage.setItem("user", JSON.stringify(profile));
+        localStorage.setItem("user", JSON.stringify(userIsVerified));
+        console.log(userIsVerified);
+        localStorage.setItem(
+          "tipo_usuario",
+          JSON.stringify(userIsVerified.tipo_usuario.id)
+        );
         handleVerified(userIsVerified);
       }
     };
