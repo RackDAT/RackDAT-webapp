@@ -11,6 +11,8 @@ type Props = {
   id_tipo_solicitud: number;
 };
 
+// usar contexto para sacar el id, hacer get para sacar el tipo_de_solicitud_id y con eso manejar los divs
+
 const Index = ({ id_tipo_solicitud }: Props) => {
   const router = useRouter();
 
