@@ -8,6 +8,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import laboratory from "@/assets/interfaces/laboratory";
 import { useRouter } from "next/navigation";
+import https from "https";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) {
@@ -15,7 +16,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const laboratory = await axios
     .get(
-      `https://rackdat.onrender.com/api/RackDAT/lab/id:int?id=${context.params.idLab}`
+      `https://localhost:7188/Laboratorios/GetLaboratorioById/${context.params.idLab}`,
+      {
+        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+      }
     )
     .then((res) => {
       return res.data;
@@ -31,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
+  console.log(laboratory);
   const router = useRouter();
   return (
     <Layout>
@@ -54,7 +59,7 @@ const Laboratory = ({ laboratory }: Props) => {
               <h1 className="text-xl uppercase">
                 Laboratorio{" "}
                 <span className="font-bold text-orange-400">
-                  {laboratory.lab}
+                  {laboratory.laboratorio}
                 </span>
               </h1>
             </div>

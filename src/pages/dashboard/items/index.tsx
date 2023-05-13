@@ -11,10 +11,13 @@ import { GetServerSideProps } from "next";
 import axios, { all } from "axios";
 import { useState } from "react";
 import Item from "@/assets/interfaces/item";
+import https from "https";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const equipos = await axios
-    .get("https://rackdat.onrender.com/api/RackDAT/equipos")
+    .get("https://localhost:7188/Equipos/GetEquipos", {
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+    })
     .then((res) => res.data);
 
   return {

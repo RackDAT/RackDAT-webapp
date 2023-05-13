@@ -5,10 +5,13 @@ import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import { GetServerSideProps } from "next";
 import Laboratory from "@/assets/interfaces/laboratory";
 import axios from "axios";
+import https from "https";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
-    .get("https://rackdat.onrender.com/api/RackDAT/labs")
+    .get("https://localhost:7188/Laboratorios/GetLaboratorios", {
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+    })
     .then((res) => {
       return res.data;
     });
@@ -25,6 +28,7 @@ type Props = {
 };
 
 const Index = ({ laboratories }: Props) => {
+  console.log(laboratories);
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />

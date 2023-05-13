@@ -24,7 +24,7 @@ const UserDiv = (props: Props) => {
       <div className="p-2 flex gap-2 items-center justify-between">
         <div className="flex items-center space-x-3.5">
           <Image
-            src="https://firebasestorage.googleapis.com/v0/b/rackdat-b06a8.appspot.com/o/Laboratorios%2Fperson.jpg?alt=media&token=97bc9991-b0b8-4009-9a0a-04e6816122d6"
+            src={props.user.imagen}
             alt="usuario"
             className="w-16 h-16 ml-10 mr-5 rounded-full object-cover"
             height={100}

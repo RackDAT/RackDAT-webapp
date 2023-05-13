@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import SolicitudDiv from "../../../components/dashboard/solicitudes/SolicitudDiv";
 import { GoSettings } from "react-icons/go";
@@ -7,22 +7,35 @@ import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import Solicitud from "@/assets/interfaces/solicitud";
+import https from "https";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const solicitudes = await axios
-    .get("https://rackdat.onrender.com/api/RackDAT/solicitudes-pendientes")
+  const { laboratorios, equipos } = await axios
+    .get("https://localhost:7188/Solicitudes/GetSolicitudesPendientes", {
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+    })
     .then((res) => res.data);
 
   return {
     props: {
-      solicitudes: solicitudes,
+      laboratorios: laboratorios,
+      equipos: equipos,
     },
   };
 };
 
 type Props = { solicitudes: Solicitud[] };
 
-const Solicitudes = ({ solicitudes }: Props) => {
+const Solicitudes = ({ laboratorios, equipos }: any) => {
+  const [solicitudes, setSolicitudes] = useState<any>([]);
+  useEffect(() => {
+    // equipos.sort((a: any, b: any) => {
+    //   return a.soli - b.folio;
+    //   // b.solicitud.fecha_pedido - a.solicitud.fecha_pedido;
+    // });
+    setSolicitudes(equipos.concat(laboratorios));
+  }, []);
+  console.log(solicitudes);
   return (
     <Layout>
       <LayoutHeader title="Solicitudes" />
@@ -39,7 +52,7 @@ const Solicitudes = ({ solicitudes }: Props) => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {solicitudes.map((solicitud, index) => (
+            {solicitudes.map((solicitud: any, index: any) => (
               <SolicitudDiv solicitud={solicitud} key={index} index={index} />
             ))}
           </div>

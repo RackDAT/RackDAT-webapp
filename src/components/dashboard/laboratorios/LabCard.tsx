@@ -16,7 +16,6 @@ const LabCard = ({ laboratory, index }: Props) => {
   };
   const secondsOfAnimation = 1 + index * 0.1;
   const secondsOfAnimationString = secondsOfAnimation.toString();
-  console.log(secondsOfAnimation);
   return (
     <div
       className={`flex rounded-lg bg-white shadow-lg flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer animate-[spawnKeyFrames_${1}s_ease-in-out_infinite] delay-1000`}
@@ -37,10 +36,8 @@ const LabCard = ({ laboratory, index }: Props) => {
         </div>
       </div>
       <div className="py-[5px] px-2 flex flex-col min-h-[60px] justify-between z-0">
-        <label className="text-sm">{laboratory.lab}</label>
+        <label className="text-sm">{laboratory.laboratorio}</label>
         <label className="text-slate-400 text-xs">Capacidad: 20 personas</label>
-
-        {"{" + secondsOfAnimationString + "}"}
       </div>
     </div>
   );

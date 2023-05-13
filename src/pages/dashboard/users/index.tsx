@@ -10,6 +10,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import SearchBar from "@/components/dashboard/items/SearchBar";
+import https from "https";
 
 type Props = {
   users: User[];
@@ -18,7 +19,10 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+    "https://localhost:7188/Usuarios/GetUsuariosVerificados",
+    {
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+    }
   );
   const users = response.data.filter((user) => user.verificado);
   const pendingUsers = response.data.filter(
@@ -34,6 +38,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
+  console.log(users);
   const [usersClient, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState<string>("");
   const router = useRouter();
