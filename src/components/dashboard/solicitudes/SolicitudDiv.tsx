@@ -14,9 +14,13 @@ type Props = {
 
 const SolicitudDiv = ({ solicitud, index }: Props) => {
   const router = useRouter();
+  const tipoSolicitudId = solicitud.tipo_solicitud.id;
 
-  const redirectSingleSolicitudView = (id: number) => {
-    router.push(`/dashboard/solicitudes/${id}`);
+  const redirectSingleSolicitudView = (id: number, tipoSolicitudId: number) => {
+    router.push({
+      pathname: `/dashboard/solicitudes/${id}`,
+      query: { tipoSolicitudId },
+    });
   };
 
   return (
@@ -73,7 +77,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
           <Btn
             style="strong"
             onClick={() => {
-              redirectSingleSolicitudView(solicitud.id);
+              redirectSingleSolicitudView(solicitud.id, tipoSolicitudId);
             }}
           >
             Ver solicitud

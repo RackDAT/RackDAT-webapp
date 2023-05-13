@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 type Props = {
-  id_tipo_solicitud: number;
+  id_tipo_solicitud: any;
 };
 
 const SolicitudInfomationColumn = ({ id_tipo_solicitud }: Props) => {
@@ -29,7 +29,7 @@ const SolicitudInfomationColumn = ({ id_tipo_solicitud }: Props) => {
   if (date === null) return <div></div>;
   return (
     <div className="flex flex-col rounded-xl bg-white shadow py-6 px-4 gap-4">
-      {id_tipo_solicitud === 3 ? (
+      {id_tipo_solicitud === "3" ? (
         <div className="flex items-center gap-2">
           <ImLab className="w-6 h-6" />
           <h1 className="text-lg font-semibold">Solicitud de Laboratorio</h1>
@@ -40,7 +40,7 @@ const SolicitudInfomationColumn = ({ id_tipo_solicitud }: Props) => {
           <h1 className="text-lg font-semibold">Solicitud de Equipos</h1>
         </div>
       )}
-      {id_tipo_solicitud === 3 ? (
+      {id_tipo_solicitud === "3" ? (
         <div className=" flex flex-col gap-2">
           <label className="uppercase text-slate-300">Justificacion</label>
           <p className="text-sm">
@@ -89,7 +89,7 @@ const SolicitudInfomationColumn = ({ id_tipo_solicitud }: Props) => {
 
           <div className="flex flex-col items-center text-sm">
             <label className="font-semibold text-base">
-              {id_tipo_solicitud === 3 ? (
+              {id_tipo_solicitud === "3" ? (
                 <label>Ingreso</label>
               ) : (
                 <label>Préstamo</label>
@@ -108,7 +108,7 @@ const SolicitudInfomationColumn = ({ id_tipo_solicitud }: Props) => {
 
           <div className="flex flex-col items-center text-sm">
             <label className="font-semibold text-base">
-              {id_tipo_solicitud === 3 ? (
+              {id_tipo_solicitud === "3" ? (
                 <label>Egreso</label>
               ) : (
                 <label>Devolución</label>
