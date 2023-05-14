@@ -18,7 +18,7 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+    "https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados"
   );
   const users = response.data.filter((user) => user.verificado);
   const pendingUsers = response.data.filter(
@@ -36,9 +36,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
   const router = useRouter();
   const validateUserRole = () => {
-    const userRole = localStorage.getItem("tipo_usuario");
-    if (userRole === null || parseInt(userRole) === 7) {
-      router.push("/403");
+    if (typeof window !== "undefined") {
+      const userRole = localStorage.getItem("id_tipo_usuario");
+      if (userRole === null || parseInt(userRole) === 7) {
+        router.push("/403");
+      }
     }
   };
 

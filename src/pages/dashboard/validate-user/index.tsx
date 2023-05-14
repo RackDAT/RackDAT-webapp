@@ -18,7 +18,7 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+    "https://rackdat.onrender.com/Usuarios/usuarios"
   );
   const users = response.data.filter((user) => user.verificado === false);
   return {
@@ -31,9 +31,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const ValidateUser = ({ users }: Props) => {
   const router = useRouter();
   const validateUserRole = () => {
-    const userRole = localStorage.getItem("tipo_usuario");
-    if (userRole === null || parseInt(userRole) === 7) {
-      router.push("/403");
+    if (typeof window !== "undefined") {
+      const userRole = localStorage.getItem("id_tipo_usuario");
+      if (userRole === null || parseInt(userRole) === 7) {
+        router.push("/403");
+      }
     }
   };
 
@@ -62,7 +64,7 @@ const ValidateUser = ({ users }: Props) => {
   const deleteUser = (userId: number) => {
     try {
       axios.delete<User>(
-        `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
+        `https://rackdat.onrender.com/Usuarios/usuario/${userId}`
       );
       setUsers(pendingUsers.filter((user) => user.id !== userId));
       notifySuccessDelete();

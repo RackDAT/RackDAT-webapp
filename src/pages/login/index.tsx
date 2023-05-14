@@ -23,7 +23,7 @@ const page = (props: Props) => {
   const getUserInfo = async (email: string): Promise<any> => {
     try {
       const response = await axios.post(
-        "https://rackdat.onrender.com/api/RackDAT/usuario/correo",
+        "https://rackdat.onrender.com/Usuarios/usuario/correo",
         {
           correo: email,
         }
@@ -32,7 +32,7 @@ const page = (props: Props) => {
         const data = response.data;
         try {
           const responseForId = await axios.get(
-            `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${data.id}`
+            `https://rackdat.onrender.com/Usuarios/usuario/${data.id}`
           );
           return responseForId.data;
         } catch (error) {
@@ -99,11 +99,12 @@ const page = (props: Props) => {
     const fetchData = async () => {
       if (profile) {
         const userIsVerified = await getUserInfo(profile.email);
+        console.log(userIsVerified);
         localStorage.setItem("user", JSON.stringify(userIsVerified));
         console.log(userIsVerified);
         localStorage.setItem(
-          "tipo_usuario",
-          JSON.stringify(userIsVerified.tipo_usuario.id)
+          "id_tipo_usuario",
+          JSON.stringify(userIsVerified.id_tipo_usuario)
         );
         handleVerified(userIsVerified);
       }

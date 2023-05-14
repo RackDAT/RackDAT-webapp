@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const laboratory = await axios
     .get(
-      `https://rackdat.onrender.com/api/RackDAT/lab/id:int?id=${context.params.idLab}`
+      `https://rackdat.onrender.com/Laboratorios/lab/${context.params.idLab}`
     )
     .then((res) => {
       return res.data;
@@ -54,7 +54,7 @@ const Laboratory = ({ laboratory }: Props) => {
               <h1 className="text-xl uppercase">
                 Laboratorio{" "}
                 <span className="font-bold text-orange-400">
-                  {laboratory.lab}
+                  {laboratory.laboratorio}
                 </span>
               </h1>
             </div>

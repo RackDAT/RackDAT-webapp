@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import SolicitudDiv from "../../../components/dashboard/solicitudes/SolicitudDiv";
 import { GoSettings } from "react-icons/go";
@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const solicitudes = await axios
-    .get("https://rackdat.onrender.com/api/RackDAT/solicitudes-pendientes")
+    .get("https://rackdat.onrender.com/Solicitudes/solicitudes-pendientes")
     .then((res) => res.data);
 
   return {
@@ -25,14 +25,19 @@ type Props = { solicitudes: Solicitud[] };
 
 const Solicitudes = ({ solicitudes }: Props) => {
   const router = useRouter();
-  const validateUserRole = () => {
-    const userRole = localStorage.getItem("tipo_usuario");
-    if (userRole === null || parseInt(userRole) === 7) {
-      router.push("/403");
-    }
-  };
+  useEffect(() => {
+    const validateUserRole = () => {
+      const userRole = localStorage.getItem("tipo_usuario");
+      if (userRole === null || parseInt(userRole) === 7) {
+        router.push("/403");
+      }
+    };
 
-  validateUserRole();
+    // Ejecuta la lógica en el lado del cliente después de la renderización inicial
+    if (typeof window !== "undefined") {
+      validateUserRole();
+    }
+  }, [router]);
 
   return (
     <Layout>

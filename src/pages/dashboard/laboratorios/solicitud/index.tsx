@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
-    .get("https://rackdat.onrender.com/api/RackDAT/labs")
+    .get("https://rackdat.onrender.com/Laboratorios/labs")
     .then((res) => {
       return res.data;
     });

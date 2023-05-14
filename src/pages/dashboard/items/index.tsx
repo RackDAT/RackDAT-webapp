@@ -14,7 +14,7 @@ import Item from "@/assets/interfaces/item";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const equipos = await axios
-    .get("https://rackdat.onrender.com/api/RackDAT/equipos")
+    .get("https://rackdat.onrender.com/Equipos/equipos")
     .then((res) => res.data);
 
   return {
