@@ -7,6 +7,7 @@ import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import Solicitud from "@/assets/interfaces/solicitud";
+import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const solicitudes = await axios
@@ -23,7 +24,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = { solicitudes: Solicitud[] };
 
 const Solicitudes = ({ solicitudes }: Props) => {
-  console.log(solicitudes);
+  const router = useRouter();
+  const validateUserRole = () => {
+    const userRole = localStorage.getItem("tipo_usuario");
+    if (userRole === null || parseInt(userRole) === 7) {
+      router.push("/403");
+    }
+  };
+
+  validateUserRole();
+
   return (
     <Layout>
       <LayoutHeader title="Solicitudes" />

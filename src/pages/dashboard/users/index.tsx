@@ -34,9 +34,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
+  const router = useRouter();
+  const validateUserRole = () => {
+    const userRole = localStorage.getItem("tipo_usuario");
+    if (userRole === null || parseInt(userRole) === 7) {
+      router.push("/403");
+    }
+  };
+
+  validateUserRole();
+
   const [usersClient, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState<string>("");
-  const router = useRouter();
 
   const filterUsers = (filterUserString: string) => {
     if (filterUserString === "") {

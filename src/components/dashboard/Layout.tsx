@@ -8,6 +8,7 @@ import { ImLab } from "react-icons/im";
 import { MdInventory } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import logo from "@/assets/img/rackdat_logo_blanco.png";
+import { googleLogout } from "@react-oauth/google";
 
 export const metadata = {
   title: "Create Next App",
@@ -41,6 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("user");
     localStorage.removeItem("tipo_usuario");
     router.push("/login");
+    googleLogout();
   };
 
   return (

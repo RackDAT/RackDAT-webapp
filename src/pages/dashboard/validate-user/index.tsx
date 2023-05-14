@@ -10,6 +10,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { toast, ToastContainer } from "react-toastify";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 
 type Props = {
   users: User[];
@@ -28,6 +29,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ValidateUser = ({ users }: Props) => {
+  const router = useRouter();
+  const validateUserRole = () => {
+    const userRole = localStorage.getItem("tipo_usuario");
+    if (userRole === null || parseInt(userRole) === 7) {
+      router.push("/403");
+    }
+  };
+
+  validateUserRole();
+
   const [search, setSearch] = useState("");
   const [pendingUsers, setUsers] = useState<User[]>(users);
 
