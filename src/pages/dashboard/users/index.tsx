@@ -11,6 +11,7 @@ import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import SearchBar from "@/components/dashboard/items/SearchBar";
 import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
+import https from "https";
 
 type Props = {
   users: User[];

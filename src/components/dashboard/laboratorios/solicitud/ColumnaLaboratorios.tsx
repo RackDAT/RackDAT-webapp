@@ -28,8 +28,8 @@ const ColumnaLaboratorios = ({
   );
 
   return (
-    <div className=" w-[28%] h-full border-2 rounded-lg bg-slate-50 shadow-lg overflow-hidden">
-      <div className=" overflow-hidden w-full max-h-screen">
+    <div className=" w-[28%] h-full rounded-lg bg-slate-50 shadow-lg overflow-">
+      <div className=" w-full h-full">
         <Image
           src={selectedLaboratory?.imagen || img}
           width={1000}
@@ -37,7 +37,7 @@ const ColumnaLaboratorios = ({
           alt="laboratorio"
           className="w-full h-24 object-cover"
         />
-        <div className="flex flex-col overflow-hidden">
+        <div className="flex flex-col overflow-scroll h-full w-full">
           {laboratories.map((laboratory, index) => {
             if (selectedLaboratory === undefined) {
               return <div key={index}></div>;

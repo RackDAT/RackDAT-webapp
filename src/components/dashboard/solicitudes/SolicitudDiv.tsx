@@ -32,13 +32,13 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
       <div className="border-b-[1px] w-full border-neutral-300 px-4 py-2 flex justify-between">
         <div className="flex gap-4">
           <span className="font-bold">
-            {solicitud.tipo_solicitud.tipo_solicitud}
+            {solicitud.solicitud.tipo_solicitud}
           </span>
           <span className="text-neutral-400 font-">
             {getDateString(solicitud.fecha_pedido)}
           </span>
         </div>
-        <EstadoSolicitud estatus={solicitud.estatus} />
+        {/* <EstadoSolicitud estatus={solicitud.estatus} /> */}
       </div>
 
       {/* content? */}
@@ -55,13 +55,13 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
           )}
           <div className="flex flex-col justify-between border- h-20 py-2">
             <h1>
-              {solicitud.tipo_solicitud.id === 1
+              {solicitud.solicitud.id_tipo_solicitud === 1
                 ? ""
                 : //@ts-ignore
                   "Laboratorio " + solicitud.nombre_lab}
             </h1>
             <label className="text-neutral-500 text-xs">
-              {solicitud.tipo_solicitud.id === 1
+              {solicitud.solicitud.id_tipo_solicitud === 1
                 ? //@ts-ignore
                   solicitud.cantidad_equipos + " unidades"
                 : ""}

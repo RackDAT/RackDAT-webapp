@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import laboratory from "@/assets/interfaces/laboratory";
 import { useRouter } from "next/navigation";
 import { userIsLogged } from "@/assets/middlewares/authUser";
+import https from "https";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) {
@@ -32,6 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
+  console.log(laboratory);
   const router = useRouter();
   userIsLogged();
   return (

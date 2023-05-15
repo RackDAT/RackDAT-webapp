@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import SolicitudDiv from "../../../components/dashboard/solicitudes/SolicitudDiv";
 import { GoSettings } from "react-icons/go";
@@ -18,7 +18,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      solicitudes: solicitudes,
+      laboratorios: laboratorios,
+      equipos: equipos,
     },
   };
 };
@@ -29,6 +30,16 @@ const Solicitudes = ({ solicitudes }: Props) => {
   const router = useRouter();
   validateUserRole();
 
+const Solicitudes = ({ laboratorios, equipos }: any) => {
+  const [solicitudes, setSolicitudes] = useState<any>([]);
+  useEffect(() => {
+    // equipos.sort((a: any, b: any) => {
+    //   return a.soli - b.folio;
+    //   // b.solicitud.fecha_pedido - a.solicitud.fecha_pedido;
+    // });
+    setSolicitudes(equipos.concat(laboratorios));
+  }, []);
+  console.log(solicitudes);
   return (
     <Layout>
       <LayoutHeader title="Solicitudes" />
@@ -45,7 +56,7 @@ const Solicitudes = ({ solicitudes }: Props) => {
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {solicitudes.map((solicitud, index) => (
+            {solicitudes.map((solicitud: any, index: any) => (
               <SolicitudDiv solicitud={solicitud} key={index} index={index} />
             ))}
           </div>

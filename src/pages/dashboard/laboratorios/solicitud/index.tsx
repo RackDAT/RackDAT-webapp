@@ -28,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 type Props = { laboratories: Laboratory[] };
-
 const Index = ({ laboratories }: Props) => {
   const router = useRouter();
   userIsLogged();
