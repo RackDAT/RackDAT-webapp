@@ -14,7 +14,7 @@ import RackDATLogo from "../../assets/img/rackdat_logo.png";
 type Props = {};
 
 const page = (props: Props) => {
-  userLogged();
+  // userLogged();
   const [user, setUser] = useState<any | null>(null);
   const [profile, setProfile] = useState<IProfile | null>(null);
   const router = useRouter();
@@ -103,14 +103,14 @@ const page = (props: Props) => {
     const fetchData = async () => {
       if (profile) {
         const userIsVerified = await getUserInfo(profile.email);
-        console.log(userIsVerified);
-        localStorage.setItem("user", JSON.stringify(userIsVerified));
-        console.log(userIsVerified);
-        localStorage.setItem(
-          "id_tipo_usuario",
-          JSON.stringify(userIsVerified.id_tipo_usuario)
-        );
         handleVerified(userIsVerified);
+        if (userIsVerified) {
+          localStorage.setItem("user", JSON.stringify(userIsVerified));
+          localStorage.setItem(
+            "id_tipo_usuario",
+            JSON.stringify(userIsVerified.id_tipo_usuario)
+          );
+        }
       }
     };
 

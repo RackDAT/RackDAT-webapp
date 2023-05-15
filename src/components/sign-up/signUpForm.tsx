@@ -23,7 +23,7 @@ const SignUpForm = ({ profile, careers }: Props) => {
   const postUser = (data: any) => {
     console.log(data);
     axios
-      .post("https://rackdat.onrender.com/api/RackDAT/usuario", data)
+      .post("https://rackdat.onrender.com/Usuarios/usuario", data)
       .catch((error) => {
         console.error(error);
         throw new Error("Error en la solicitud POST");

@@ -15,7 +15,7 @@ type Props = {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const response = await axios.get<ICareer[]>(
-      "https://rackdat.onrender.com/api/RackDAT/carreras"
+      "https://rackdat.onrender.com/Carreras/carreras"
     );
     const careers = response.data;
 
@@ -36,14 +36,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const page = ({ careers }: Props) => {
   const router = useRouter();
-  userLogged();
+  // userLogged();
   const props = router.query;
-
-  const hola = () => {
-    console.log(props);
-  };
-
-  hola();
 
   const userProfile: INewProfile = {
     nombre: props.nombre,
