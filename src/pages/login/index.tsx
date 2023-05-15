@@ -7,10 +7,12 @@ import { useRouter } from "next/router";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Btn from "@/components/global/Btn";
+import { userLogged } from "@/assets/middlewares/authUser";
 
 type Props = {};
 
 const page = (props: Props) => {
+  userLogged();
   const [user, setUser] = useState<any | null>(null);
   const [profile, setProfile] = useState<IProfile | null>(null);
   const router = useRouter();

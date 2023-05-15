@@ -9,3 +9,13 @@ export const userIsLogged = () => {
     }
   }
 };
+
+export const userLogged = () => {
+  const router = useRouter();
+  if (typeof window !== "undefined") {
+    const userInfo = localStorage.getItem("user");
+    if (userInfo != null) {
+      router.push("/dashboard/home");
+    }
+  }
+};

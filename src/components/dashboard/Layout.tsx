@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("tipo_usuario");
+    localStorage.removeItem("id_tipo_usuario");
     router.push("/login");
     googleLogout();
   };
