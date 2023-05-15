@@ -26,7 +26,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = { solicitudes: Solicitud[] };
 
 const Solicitudes = ({ solicitudes }: Props) => {
-  console.log(solicitudes);
   const router = useRouter();
   validateUserRole();
 
@@ -38,17 +37,16 @@ const Solicitudes = ({ solicitudes }: Props) => {
   //   // });
   //   setSolicitudes(equipos.concat(laboratorios));
   // }, []);
-  // console.log(solicitudes);
   return (
     <Layout>
       <LayoutHeader title="Solicitudes" />
       <div className="flex flex-col">
         {/* header */}
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
-          <div className="flex justify-between px-10 mt-7 items-center">
+          <div className="flex  px-2 mt-7 items-center justify-end">
             <div className="flex gap-2">
-              <div className="rounded-full bg-primary w-5 h-5 flex items-center justify-center text-white p-3">
-                <div>2</div>
+              <div className="rounded-full bg-primary w-5 h-5 flex items-center justify-center text-white p-3 ">
+                <div>{solicitudes.length}</div>
               </div>
               <label>solicitudes</label>
             </div>

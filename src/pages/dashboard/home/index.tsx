@@ -6,6 +6,7 @@ import { MdLocationPin } from "react-icons/md";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import Btn from "@/components/global/Btn";
 import { userIsLogged } from "@/assets/middlewares/authUser";
+import Link from 'next/link'
 
 type Props = {};
 
@@ -69,9 +70,9 @@ const index = (props: Props) => {
             );
           })}
         </div>
-        <div className="m-auto">
-          <Btn style="strong">Ve los items disonibles</Btn>
-        </div>
+        <Link className="m-auto" href={"items"}>
+          <Btn style="strong">Ve los items disponibles</Btn>
+        </Link>
       </div>
     </Layout>
   );
