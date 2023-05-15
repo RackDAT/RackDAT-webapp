@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import axios, { all } from "axios";
 import { useState } from "react";
 import Item from "@/assets/interfaces/item";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const equipos = await axios
@@ -30,6 +31,7 @@ type Props = {
 
 const Index = ({ allEquipos }: Props) => {
   const router = useRouter();
+  userIsLogged();
   const [selectedRows, setSelectedRows] = useState<Number[]>([]);
   const [equipos, setEquipos] = useState<Item[]>(allEquipos);
 

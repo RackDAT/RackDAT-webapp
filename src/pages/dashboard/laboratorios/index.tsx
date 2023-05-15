@@ -5,6 +5,7 @@ import LabCard from "@/components/dashboard/laboratorios/LabCard";
 import { GetServerSideProps } from "next";
 import Laboratory from "@/assets/interfaces/laboratory";
 import axios from "axios";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
@@ -25,6 +26,7 @@ type Props = {
 };
 
 const Index = ({ laboratories }: Props) => {
+  userIsLogged();
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />

@@ -10,6 +10,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import SearchBar from "@/components/dashboard/items/SearchBar";
+import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
 
 type Props = {
   users: User[];
@@ -35,14 +36,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
   const router = useRouter();
-  const validateUserRole = () => {
-    if (typeof window !== "undefined") {
-      const userRole = localStorage.getItem("id_tipo_usuario");
-      if (userRole === null || parseInt(userRole) === 7) {
-        router.push("/403");
-      }
-    }
-  };
 
   validateUserRole();
 

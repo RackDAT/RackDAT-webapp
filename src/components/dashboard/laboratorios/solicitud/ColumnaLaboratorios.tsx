@@ -92,7 +92,7 @@ const LabCard = ({
       }}
     >
       <div>
-        <h1>{laboratory.lab}</h1>
+        <h1>{laboratory.laboratorio}</h1>
       </div>
       <BsFastForwardFill />
     </div>

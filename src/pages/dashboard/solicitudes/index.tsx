@@ -8,6 +8,8 @@ import { GetServerSideProps } from "next";
 import axios from "axios";
 import Solicitud from "@/assets/interfaces/solicitud";
 import { useRouter } from "next/router";
+import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const solicitudes = await axios
@@ -25,19 +27,7 @@ type Props = { solicitudes: Solicitud[] };
 
 const Solicitudes = ({ solicitudes }: Props) => {
   const router = useRouter();
-  useEffect(() => {
-    const validateUserRole = () => {
-      const userRole = localStorage.getItem("tipo_usuario");
-      if (userRole === null || parseInt(userRole) === 7) {
-        router.push("/403");
-      }
-    };
-
-    // Ejecuta la lógica en el lado del cliente después de la renderización inicial
-    if (typeof window !== "undefined") {
-      validateUserRole();
-    }
-  }, [router]);
+  validateUserRole();
 
   return (
     <Layout>

@@ -11,6 +11,7 @@ import ColumnaDayPicker from "@/components/dashboard/laboratorios/solicitud/Colu
 import JustificationColumn from "@/components/dashboard/items/solicitudItem/JustificationColumn";
 import { toast, ToastContainer } from "react-toastify";
 import { createContext } from "react";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const itemIds = ctx.query.selectedItems
@@ -40,6 +41,7 @@ type Props = {
 };
 
 const Index = ({ items }: Props) => {
+  userIsLogged();
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
   const router = useRouter();
 
@@ -51,7 +53,7 @@ const Index = ({ items }: Props) => {
   };
   return (
     <Layout>
-      <LayoutHeader title="Items" />
+      <LayoutHeader title="Equipos" />
       <div className="w-[90%] m-auto mt-10 h-[75vh] max-h-[600px] flex gap-2">
         <ItemsColumns items={items} />
         <ColumnaDayPicker

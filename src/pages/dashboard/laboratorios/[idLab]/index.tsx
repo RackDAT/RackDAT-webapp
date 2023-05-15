@@ -8,6 +8,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import laboratory from "@/assets/interfaces/laboratory";
 import { useRouter } from "next/navigation";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) {
@@ -32,6 +33,7 @@ type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
   const router = useRouter();
+  userIsLogged();
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />

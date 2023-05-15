@@ -6,6 +6,7 @@ import SolicitudInfomationColumn from "@/components/dashboard/solicitudes/single
 import Btn from "@/components/global/Btn";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 type Props = {};
 
@@ -13,6 +14,7 @@ type Props = {};
 
 const Index = (props: Props) => {
   const router = useRouter();
+  userIsLogged();
   const tipoSolicitudId = router.query.tipoSolicitudId;
 
   const handleAceptar = () => {
