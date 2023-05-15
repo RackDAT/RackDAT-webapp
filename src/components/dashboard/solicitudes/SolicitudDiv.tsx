@@ -14,7 +14,7 @@ type Props = {
 
 const SolicitudDiv = ({ solicitud, index }: Props) => {
   const router = useRouter();
-  const tipoSolicitudId = solicitud.tipo_solicitud.id;
+  const tipoSolicitudId = solicitud.id_tipo_solicitud;
 
   const redirectSingleSolicitudView = (id: number, tipoSolicitudId: number) => {
     router.push({
@@ -32,7 +32,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
       <div className="border-b-[1px] w-full border-neutral-300 px-4 py-2 flex justify-between">
         <div className="flex gap-4">
           <span className="font-bold">
-            {solicitud.solicitud.tipo_solicitud}
+            {solicitud.tipo_solicitud.tipo_solicitud}
           </span>
           <span className="text-neutral-400 font-">
             {getDateString(solicitud.fecha_pedido)}
@@ -44,9 +44,9 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
       {/* content? */}
       <div className="px-2 py-2 flex gap-2 items-center justify-between text-sm">
         <div className="flex items-center space-x-3.5">
-          {solicitud.imagen_muestra != "null" && (
+          {solicitud.imagen === "null" && (
             <Image
-              src={solicitud.imagen_muestra}
+              src={solicitud.imagen}
               alt=""
               className="w-20 h-20 rounded"
               height={100}
@@ -55,13 +55,13 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
           )}
           <div className="flex flex-col justify-between border- h-20 py-2">
             <h1>
-              {solicitud.solicitud.id_tipo_solicitud === 1
+              {solicitud.id_tipo_solicitud === 1
                 ? ""
                 : //@ts-ignore
                   "Laboratorio " + solicitud.nombre_lab}
             </h1>
             <label className="text-neutral-500 text-xs">
-              {solicitud.solicitud.id_tipo_solicitud === 1
+              {solicitud.id_tipo_solicitud === 1
                 ? //@ts-ignore
                   solicitud.cantidad_equipos + " unidades"
                 : ""}
