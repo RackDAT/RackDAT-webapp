@@ -6,7 +6,8 @@ export default interface ISolicitud {
   comentario: string;
   fecha_actualizacion: string;
   fecha_pedido: string;
-  imagen_muestra: string;
+  imagen: string;
+  id_tipo_solicitud: number;
   tipo_solicitud: TipoSolicitud;
   estatus: Estatus;
 }
