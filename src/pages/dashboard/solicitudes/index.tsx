@@ -7,13 +7,13 @@ import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import Solicitud from "@/assets/interfaces/solicitud";
-import https from "https";
+import { useRouter } from "next/router";
+import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { laboratorios, equipos } = await axios
-    .get("https://localhost:7188/Solicitudes/GetSolicitudesPendientes", {
-      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-    })
+  const solicitudes = await axios
+    .get("https://rackdat.onrender.com/Solicitudes/solicitudes-pendientes")
     .then((res) => res.data);
 
   return {
@@ -26,40 +26,45 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 type Props = { solicitudes: Solicitud[] };
 
-const Solicitudes = ({ laboratorios, equipos }: any) => {
-  const [solicitudes, setSolicitudes] = useState<any>([]);
-  useEffect(() => {
-    // equipos.sort((a: any, b: any) => {
-    //   return a.soli - b.folio;
-    //   // b.solicitud.fecha_pedido - a.solicitud.fecha_pedido;
-    // });
-    setSolicitudes(equipos.concat(laboratorios));
-  }, []);
-  console.log(solicitudes);
-  return (
-    <Layout>
-      <LayoutHeader title="Solicitudes" />
-      <div className="flex flex-col">
-        {/* header */}
-        <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
-          <div className="flex justify-between px-10 mt-7 items-center">
-            <div className="flex gap-2">
-              <div className="rounded-full bg-primary w-5 h-5 flex items-center justify-center text-white p-3">
-                <div>2</div>
+const Solicitudes = ({ solicitudes }: Props) => {
+  const router = useRouter();
+  validateUserRole();
+
+  const Solicitudes = ({ laboratorios, equipos }: any) => {
+    const [solicitudes, setSolicitudes] = useState<any>([]);
+    useEffect(() => {
+      // equipos.sort((a: any, b: any) => {
+      //   return a.soli - b.folio;
+      //   // b.solicitud.fecha_pedido - a.solicitud.fecha_pedido;
+      // });
+      setSolicitudes(equipos.concat(laboratorios));
+    }, []);
+    console.log(solicitudes);
+    return (
+      <Layout>
+        <LayoutHeader title="Solicitudes" />
+        <div className="flex flex-col">
+          {/* header */}
+          <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
+            <div className="flex justify-between px-10 mt-7 items-center">
+              <div className="flex gap-2">
+                <div className="rounded-full bg-primary w-5 h-5 flex items-center justify-center text-white p-3">
+                  <div>2</div>
+                </div>
+                <label>solicitudes</label>
               </div>
-              <label>solicitudes</label>
+            </div>
+            {/* assets */}
+            <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
+              {solicitudes.map((solicitud: any, index: any) => (
+                <SolicitudDiv solicitud={solicitud} key={index} index={index} />
+              ))}
             </div>
           </div>
-          {/* assets */}
-          <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">
-            {solicitudes.map((solicitud: any, index: any) => (
-              <SolicitudDiv solicitud={solicitud} key={index} index={index} />
-            ))}
-          </div>
         </div>
-      </div>
-    </Layout>
-  );
+      </Layout>
+    );
+  };
 };
 
 export default Solicitudes;

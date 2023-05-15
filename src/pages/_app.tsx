@@ -6,6 +6,7 @@ import "nprogress/nprogress.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
 import "react-day-picker/dist/style.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,8 +27,8 @@ export default function MyApp({ Component, pageProps, router }: AppProps) {
     };
   }, []);
   return (
-    <UserProvider>
+    <GoogleOAuthProvider clientId="725135857969-k2kksoa5g59mpik0gkbm1me9tvrin8vu.apps.googleusercontent.com">
       <Component {...pageProps} />
-    </UserProvider>
+    </GoogleOAuthProvider>
   );
 }

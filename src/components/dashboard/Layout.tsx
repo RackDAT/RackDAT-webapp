@@ -8,6 +8,7 @@ import { ImLab } from "react-icons/im";
 import { MdInventory } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import logo from "@/assets/img/rackdat_logo_blanco.png";
+import { googleLogout } from "@react-oauth/google";
 
 export const metadata = {
   title: "Create Next App",
@@ -35,6 +36,15 @@ const Opciones = [
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("id_tipo_usuario");
+    router.push("/login");
+    googleLogout();
+  };
+
   return (
     <div className="flex">
       <div className="w-[270px] h-screen flex flex-col align-center p-4 justify-between flex-shrink-0">
@@ -71,7 +81,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="text-white flex justify-center items-center ">
             <div className="hover:bg-white p-[2px] hover:text-black duration-75 rounded cursor-pointer">
-              <HiOutlineLogout className="w-6 h-6" />
+              <HiOutlineLogout className="w-6 h-6" onClick={handleLogout} />
             </div>
           </div>
         </div>

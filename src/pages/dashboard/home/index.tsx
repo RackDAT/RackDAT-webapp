@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdLocationPin } from "react-icons/md";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import Btn from "@/components/global/Btn";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 type Props = {};
 
@@ -24,6 +25,7 @@ const features = [
 ];
 
 const index = (props: Props) => {
+  userIsLogged();
   return (
     <Layout>
       <LayoutHeader title="Home" />

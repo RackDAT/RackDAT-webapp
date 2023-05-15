@@ -10,6 +10,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { GetServerSideProps } from "next";
 import SearchBar from "@/components/dashboard/items/SearchBar";
+import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
 import https from "https";
 
 type Props = {
@@ -19,10 +20,7 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get<User[]>(
-    "https://localhost:7188/Usuarios/GetUsuariosVerificados",
-    {
-      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-    }
+    "https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados"
   );
   const users = response.data.filter((user) => user.verificado);
   const pendingUsers = response.data.filter(
@@ -38,10 +36,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
-  console.log(users);
+  const router = useRouter();
+
+  validateUserRole();
+
   const [usersClient, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState<string>("");
-  const router = useRouter();
 
   const filterUsers = (filterUserString: string) => {
     if (filterUserString === "") {

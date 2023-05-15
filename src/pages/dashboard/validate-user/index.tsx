@@ -10,6 +10,8 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import LayoutHeader from "../../../components/dashboard/LayoutHeader";
 import { toast, ToastContainer } from "react-toastify";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
+import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
 
 type Props = {
   users: User[];
@@ -17,7 +19,7 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/api/RackDAT/usuarios"
+    "https://rackdat.onrender.com/Usuarios/usuarios"
   );
   const users = response.data.filter((user) => user.verificado === false);
   return {
@@ -28,6 +30,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ValidateUser = ({ users }: Props) => {
+  const router = useRouter();
+
+  validateUserRole();
+
   const [search, setSearch] = useState("");
   const [pendingUsers, setUsers] = useState<User[]>(users);
 
@@ -51,7 +57,7 @@ const ValidateUser = ({ users }: Props) => {
   const deleteUser = (userId: number) => {
     try {
       axios.delete<User>(
-        `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
+        `https://rackdat.onrender.com/Usuarios/usuario/${userId}`
       );
       setUsers(pendingUsers.filter((user) => user.id !== userId));
       notifySuccessDelete();

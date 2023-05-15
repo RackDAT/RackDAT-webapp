@@ -11,14 +11,11 @@ import ColumnaDayPicker from "@/components/dashboard/laboratorios/solicitud/Colu
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
-import https from "https";
-import Laboratory from "../[idLab]";
+import { userIsLogged } from "@/assets/middlewares/authUser";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const laboratories = await axios
-    .get("https://localhost:7188/Laboratorios/GetLaboratorios", {
-      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-    })
+    .get("https://rackdat.onrender.com/Laboratorios/labs")
     .then((res) => {
       return res.data;
     });
@@ -32,9 +29,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 type Props = { laboratories: Laboratory[] };
 const Index = ({ laboratories }: Props) => {
-  console.log(laboratories);
-  const [date, setDate] = useState<Date>(new Date());
   const router = useRouter();
+  userIsLogged();
+  const [date, setDate] = useState<Date>(new Date());
   const [idLaboratory, setIDLaboratory] = useState<number>(
     Number(router.query.selectedLab)
   ); // [0
