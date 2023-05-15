@@ -36,16 +36,83 @@ const Index = ({ laboratories }: Props) => {
     Number(router.query.selectedLab)
   ); // [0
 
+  const getUserId = (): number => {
+    const userJSON = localStorage.getItem("user");
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      if (user && user.id) {
+        return user.id;
+      }
+    }
+    return 0;
+  };
+
+  const getDates = (time: string): string => {
+    // const year = date.getFullYear();
+    // const month = date.getMonth() + 1;
+    // const day = date.getDate();
+
+    const pacificDateTimeFormat = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    const pacificSelectedDate = pacificDateTimeFormat.format(date);
+
+    const [timeHours, timeMinutes] = time.split(":").map(Number);
+    const pacifictimeDate = new Date(pacificSelectedDate);
+    pacifictimeDate.setHours(Number(timeHours), Number(timeMinutes));
+
+    const timeFormatted = pacifictimeDate.toISOString();
+    console.log(timeFormatted);
+    return timeFormatted;
+  };
+
   const handleSolicitar = (
     horaInicio: string,
     horaEntrega: string,
     cantidadPersonas: string,
     justificacion: string
   ) => {
-    console.log(horaInicio, horaEntrega, cantidadPersonas, justificacion);
-    toast.success("Deafault Notification", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    console.log(
+      idLaboratory,
+      horaInicio,
+      horaEntrega,
+      cantidadPersonas,
+      getUserId(),
+      justificacion
+    );
+    axios
+      .post("https://rackdat.onrender.com/Solicitudes/solicitud/lab", {
+        lab: idLaboratory,
+        inicio: getDates(horaInicio),
+        final: getDates(horaEntrega),
+        cantidad_personas: cantidadPersonas,
+        usuario: getUserId(),
+        comentario: justificacion,
+      })
+      .then((response) => {
+        console.log("Solicitud enviada correctamente");
+        console.log("Respuesta:", response.data);
+        toast.success("Solicitud realizada con éxito", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        router.push(`/dashboard/solicitudes/${response.data.id_solicitud}`);
+      })
+      // .then(() => {
+      //   router.push(`/dashboard/solicitudes/${response.data.id_solicitud}`)
+      // })
+      .catch((error) => {
+        console.error("Error al enviar la solicitud:", error);
+        toast.error("Se ha producido un error, revisa los campos", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
     // router.push("/dashboard/solicitudes");
   };
 
