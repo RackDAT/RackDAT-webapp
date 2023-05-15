@@ -8,6 +8,8 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Btn from "@/components/global/Btn";
 import { userLogged } from "@/assets/middlewares/authUser";
+import Image from "next/image";
+import RackDATLogo from "../../assets/img/rackdat_logo.png";
 
 type Props = {};
 
@@ -128,7 +130,15 @@ const page = (props: Props) => {
             <label htmlFor="">Loading...</label>
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <span className="text-xl font-bold">Bienvenido a RackDAT</span>
+              <div>
+                <span className="text-xl font-bold">Bienvenido a RackDAT</span>
+                {/* <Image
+                  src={RackDATLogo}
+                  alt="logoRackDAT"
+                  width={150}
+                  height={200}
+                /> */}
+              </div>
               <Btn style="strong" onClick={() => login()}>
                 Sign in with Google 🚀{" "}
               </Btn>

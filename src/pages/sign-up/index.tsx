@@ -7,6 +7,8 @@ import INewProfile from "@/assets/interfaces/newProfile";
 import { GetServerSideProps } from "next";
 import ICareer from "@/assets/interfaces/career";
 import axios from "axios";
+import { userLogged } from "@/assets/middlewares/authUser";
+
 type Props = {
   careers: ICareer[];
 };
@@ -34,6 +36,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const page = ({ careers }: Props) => {
   const router = useRouter();
+  userLogged();
   const props = router.query;
 
   const hola = () => {
