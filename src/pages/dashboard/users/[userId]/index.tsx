@@ -7,22 +7,19 @@ import Image from "next/image";
 import UserProfileSolicitud from "@/components/dashboard/user/userid/UserProfileSolicitud";
 import { GetServerSideProps } from "next";
 import Solitud from "@/assets/interfaces/solicitud";
-import profileImg from "@/assets/img/person.jpg";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} };
   const userId = context.params.userId;
   let user = await axios
-    .get<User>(
-      `https://rackdat.onrender.com/api/RackDAT/usuario/id:int?id=${userId}`
-    )
+    .get<User>(`https://rackdat.onrender.com/Usuarios/usuario/${userId}`)
     .then((res) => {
       return res.data;
     });
 
   let solicitudes = await axios
     .get(
-      `https://rackdat.onrender.com/api/RackDAT/usuario/id:int/solicitudes?id=${userId}`
+      `https://rackdat.onrender.com/Usuarios/solicitudes-historicas/${userId}`
     )
     .then((res) => {
       return res.data;
@@ -49,7 +46,7 @@ const index = ({ user, solicitudes }: Props) => {
       <div className="w-[90%] m-auto">
         <div className="my-10 flex">
           <Image
-            src={profileImg}
+            src={user.imagen}
             alt=""
             width={100}
             height={100}
@@ -65,10 +62,17 @@ const index = ({ user, solicitudes }: Props) => {
             <h4> Matricula: {user.clave}</h4>
           </div>
         </div>
-        <div className="flex flex-col my-10 gap-4">
-          {solicitudes.map((solicitud) => {
-            return <UserProfileSolicitud solicitud={solicitud} />;
-          })}
+        <hr />
+        <div className="flex flex-col my-10 gap-4 items-center">
+          {solicitudes.length > 0 ? (
+            solicitudes.map((solicitud, index) => {
+              return <UserProfileSolicitud solicitud={solicitud} key={index} />;
+            })
+          ) : (
+            <label className="text-slate-400">
+              Este usuario no ha generado solicitudes
+            </label>
+          )}
         </div>
       </div>
     </Layout>
