@@ -73,7 +73,6 @@ const Solicitudes = () => {
         userType = user.id_tipo_usuario;
       }
     }
-    console.log(userType);
     if (userType === 3) {
       getAllUsers();
     } else if (userType === 4) {

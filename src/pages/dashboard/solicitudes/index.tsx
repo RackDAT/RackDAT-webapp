@@ -11,36 +11,84 @@ import { useRouter } from "next/router";
 import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
 import { userIsLogged } from "@/assets/middlewares/authUser";
 import Btn from "@/components/global/Btn";
+import { get } from "http";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const solicitudesPendientes = await axios
-    .get("https://rackdat.onrender.com/Solicitudes/solicitudes-pendientes")
-    .then((res) => res.data);
-
-  const solicitudesHistoricas = await axios
-    .get("https://rackdat.onrender.com/Solicitudes/solicitudes-historicas")
-    .then((res) => res.data);
-
-  return {
-    props: {
-      solicitudesPendientes: solicitudesPendientes,
-      solicitudesHistoricas: solicitudesHistoricas,
-    },
-  };
-};
-
-type Props = { solicitudes: Solicitud[] };
-
-const Solicitudes = ({ solicitudesPendientes, solicitudesHistoricas }: any) => {
+const Solicitudes = () => {
   const router = useRouter();
 
+  const [solicitudesPendientes, setSolicitudesPendientes] = useState<any>([]);
+  const [solicitudesHistoricas, setSolicitudesHistoricas] = useState<any>([]);
   const [filtroSolicitudes, setFiltroSolicitudes] = useState<
     "Pendientes" | "Historicas"
   >("Pendientes");
+
+  const getAllSolicitudes = async () => {
+    const solicitudesPendientes = await axios
+      .get("https://rackdat.onrender.com/Solicitudes/solicitudes-pendientes")
+      .then((res) => {
+        setSolicitudesPendientes(res.data);
+      });
+
+    const solicitudesHistoricas = await axios
+      .get("https://rackdat.onrender.com/Solicitudes/solicitudes-historicas")
+      .then((res) => {
+        setSolicitudesHistoricas(res.data);
+      });
+  };
+
+  const getCarreerSolicitudes = async (carreraId: number) => {
+    const solicitudesPendientes = await axios
+      .get(
+        `https://rackdat.onrender.com/Solicitudes/solicitudes-pendientes/carrera/${carreraId}`
+      )
+      .then((res) => {
+        setSolicitudesPendientes(res.data);
+      });
+
+    const solicitudesHistoricas = await axios
+      .get(
+        `https://rackdat.onrender.com/Solicitudes/solicitudes-historicas/carrera/${carreraId}`
+      )
+      .then((res) => {
+        setSolicitudesHistoricas(res.data);
+      });
+  };
+
+  const getUserSolicitudes = async (userId: number) => {
+    const solicitudesPendientes = await axios
+      .get(
+        `https://rackdat.onrender.com/Usuarios/solicitudes-pendientes/${userId}`
+      )
+      .then((res) => {
+        setSolicitudesPendientes(res.data);
+      });
+
+    const solicitudesHistoricas = await axios
+      .get(
+        `https://rackdat.onrender.com/Usuarios/solicitudes-historicas/${userId}`
+      )
+      .then((res) => {
+        setSolicitudesHistoricas(res.data);
+      });
+  };
+
   useEffect(() => {
-    const validated = validateUserRole();
-    if (!validated) {
-      router.push("/403");
+    let user;
+    let userType;
+    const userJSON = localStorage.getItem("user");
+    if (userJSON) {
+      user = JSON.parse(userJSON);
+      if (user && user.id_tipo_usuario) {
+        userType = user.id_tipo_usuario;
+      }
+    }
+
+    if (userType === 3) {
+      getAllSolicitudes();
+    } else if (userType === 4) {
+      getCarreerSolicitudes(user.id_carrera);
+    } else {
+      getUserSolicitudes(user.id);
     }
   }, []);
 
