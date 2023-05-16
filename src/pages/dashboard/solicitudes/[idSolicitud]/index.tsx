@@ -10,6 +10,7 @@ import { userIsLogged } from "@/assets/middlewares/authUser";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import ISolicitud from "@/assets/interfaces/solicitud";
+import { error } from "console";
 
 // usar contexto para sacar el id, hacer get para sacar el tipo_de_solicitud_id y con eso manejar los divs
 
@@ -35,21 +36,72 @@ const Index = ({ solicitud }: Props) => {
   const tipoSolicitudId = router.query.tipoSolicitudId;
 
   const handleAceptar = () => {
-    toast.success("Deafault Notification", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-    setTimeout(() => {
-      router.push("/dashboard/solicitudes?status=${fssdf}");
-    }, 1000);
+    axios
+      .patch(
+        `https://rackdat.onrender.com/Solicitudes/solicitud-verificar/${
+          solicitud.folio
+        }?verificacion=true&usuarioID=${getUserId()}`
+      )
+      .then((response) => {
+        toast.success("Solicitud aprobada", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setTimeout(() => {
+          router.push("/dashboard/solicitudes");
+        }, 1000);
+      })
+      .catch((error) => {
+        toast.success("Ocurrió un error", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
   };
 
   const handleRechazar = () => {
-    toast.success("Deafault Notification", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    axios
+      .patch(
+        `https://rackdat.onrender.com/Solicitudes/solicitud-verificar/${
+          solicitud.folio
+        }?verificacion=false&usuarioID=${getUserId()}`
+      )
+      .then((response) => {
+        toast.success("Solicitud rechazada", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setTimeout(() => {
+          router.push("/dashboard/solicitudes");
+        }, 1000);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.success("Ocurrió un error", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
+  };
 
-    setTimeout(() => {}, 1000);
-    router.push("/dashboard/solicitudes");
+  const getUserRole = (): number => {
+    if (typeof window !== "undefined") {
+      const userRoleString = localStorage.getItem("id_tipo_usuario");
+      if (userRoleString) {
+        const userRole = parseInt(userRoleString, 10);
+        return userRole;
+      }
+    }
+    return 0;
+  };
+
+  const getUserId = (): number => {
+    if (typeof window !== "undefined") {
+      const userJSON = localStorage.getItem("user");
+      if (userJSON) {
+        const user = JSON.parse(userJSON);
+        if (user && user.id) {
+          return user.id;
+        }
+      }
+    }
+    return 0;
   };
 
   return (
@@ -63,14 +115,18 @@ const Index = ({ solicitud }: Props) => {
             solicitud={solicitud}
           />
         </div>
-        <div className="mt-3 flex gap-2 self-end">
-          <Btn style="strong" onClick={handleAceptar}>
-            Acceptar
-          </Btn>
-          <Btn style="light" onClick={handleRechazar}>
-            Rechazar
-          </Btn>
-        </div>
+        {getUserRole() === 7 ? (
+          <div></div>
+        ) : (
+          <div className="mt-3 flex gap-2 self-end">
+            <Btn style="strong" onClick={handleAceptar}>
+              Acceptar
+            </Btn>
+            <Btn style="light" onClick={handleRechazar}>
+              Rechazar
+            </Btn>
+          </div>
+        )}
         <ToastContainer />
       </div>
     </Layout>

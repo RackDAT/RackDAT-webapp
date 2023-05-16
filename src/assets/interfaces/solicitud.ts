@@ -7,19 +7,22 @@ export default interface ISolicitud {
   aprobacion_tecnico: boolean | null;
   cantidad_equipos: number;
   comentario: string;
-  estado_solicitud: {
+  descripciones: string[];
+  estatus_solicitud: {
     id: number;
     estatus_solicitud: string;
   };
   fecha_pedido: Date;
+  fechas: Date[];
   folio: number;
   id_estatus_solicitud: number;
   id_tipo_solicitud: number;
   imagen: string;
   laboratorio_obtenido: string | null;
+  modelos: string[];
   tipo_solicitud: {
     id: number;
-    tipo_solicitud: string;
+    tipo_solicitud: "Laboratorio" | "Solicitudes" | "Equipo" | "Users";
   };
   usuario: User;
 }

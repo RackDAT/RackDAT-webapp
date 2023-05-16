@@ -1,4 +1,4 @@
 export default interface Estatus {
   id: number;
-  estatus: "aprobado" | "rechazado" | "pendiente";
+  estado_solicitud: "aprobado" | "rechazado" | "pendiente";
 }
