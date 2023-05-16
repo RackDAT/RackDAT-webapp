@@ -26,7 +26,8 @@ type Props = {
 };
 
 const Index = ({ laboratories }: Props) => {
-  userIsLogged();
+  console.log(laboratories);
+
   return (
     <Layout>
       <LayoutHeader title="Laboratorios" />

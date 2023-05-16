@@ -65,15 +65,9 @@ const Laboratory = ({ laboratory }: Props) => {
             <div className="flex flex-col gap-2">
               <div className="flex gap-3 items-center">
                 <span>Capacidad: 30 personas</span>
-                <div className="rounded-full bg-green-300 text-green-800 py-1 px-2 w-fit text-sm">
-                  Disponible
-                </div>
               </div>
               <p className="text-sm text-slate-500">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Suscipit dolor vel, et eligendi sit sapiente enim ab consequatur
-                beatae expedita maiores voluptatibus aperiam iusto obcaecati
-                incidunt quae dolorem? Quidem, illo!
+                {laboratory.descripcion_lab}
               </p>
             </div>
 

@@ -18,7 +18,7 @@ const LabCard = ({ laboratory, index }: Props) => {
   const secondsOfAnimationString = secondsOfAnimation.toString();
   return (
     <div
-      className={`flex rounded-lg bg-white shadow-lg flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer animate-[spawnKeyFrames_${1}s_ease-in-out_infinite] delay-1000`}
+      className={`flex rounded-lg bg-white shadow-lg w-[260px] flex-col overflow-hidden min-w-[200px] hover:scale-[1.01] hover:cursor-pointer `}
       onClick={() => {
         redirectSingleLabView(laboratory.id);
       }}
@@ -27,7 +27,7 @@ const LabCard = ({ laboratory, index }: Props) => {
         <Image
           src={laboratory.imagen}
           alt="hello"
-          className="h-full w-full absolute z-10"
+          className="h-full w-full absolute z-10 object-cover"
           width={200}
           height={200}
         />
