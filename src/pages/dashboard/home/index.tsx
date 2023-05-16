@@ -6,7 +6,9 @@ import { MdLocationPin } from "react-icons/md";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import Btn from "@/components/global/Btn";
 import { userIsLogged } from "@/assets/middlewares/authUser";
-import Link from 'next/link'
+import Link from "next/link";
+import app from "../../../assets/img/app.png";
+import Image from "next/image";
 
 type Props = {};
 
@@ -44,7 +46,15 @@ const index = (props: Props) => {
             </p>
           </div>
           {/* img */}
-          <div className=" w-1/2 bg-[url('https://i.imgur.com/kdNlDpq.png')] bg-cover bg-center h-full" />
+          <div className=" w-1/2 h-full overflow-hidden relative">
+            <Image
+              src={app}
+              alt=""
+              width={500}
+              height={500}
+              style={{ objectFit: "cover", objectPosition: "bottom" }}
+            />
+          </div>
         </div>
 
         {/* features de la app */}
