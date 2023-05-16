@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const itemsPromises = await itemIds.map(async (id) => {
     const cosa = await axios
-      .get(`https://rackdat.onrender.com/api/RackDAT/equipo/id:int?id=${id}`)
+      .get(`https://rackdat.onrender.com/Equipos/equipo/${id}`)
       .then((res) => res.data);
     return cosa;
   });

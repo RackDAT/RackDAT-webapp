@@ -6,13 +6,16 @@ export default interface User {
   correo: string;
   clave: string;
   verificado: boolean;
+  id_tipo_usuario: number;
   tipo_usuario: {
     id: number;
     tipo_usuario: string;
   };
+  id_carrera: number;
   carrera: {
     id: number;
     carrera: string;
     siglas: string;
   };
+  imagen: string;
 }
