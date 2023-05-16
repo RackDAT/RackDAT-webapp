@@ -21,7 +21,7 @@ const ColumnaDateTimePicker = ({ handleSolicitar }: Props) => {
       <div className="flex flex-col gap-2">
         <label className="font-semibold text-xl block">Especificaciones</label>
         <label className="text-slate-400 text-base">
-          La solicitud sera enviada y debera de ser aprobava por el
+          La solicitud sera enviada y debera de ser aprobada por el
           Administrador del DAT y por el coordinador de tu carrera
         </label>
       </div>
