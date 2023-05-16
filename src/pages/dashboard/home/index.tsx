@@ -33,7 +33,7 @@ const index = (props: Props) => {
     <Layout>
       <LayoutHeader title="Home" />
       <div className="w-[80%] m-auto flex flex-col gap-10">
-        <div className="w-full flex justify-around items-center py-4 h-[150px]">
+        <div className="w-full flex justify-around items-center py-4">
           {/* text */}
           <div className="w-1/2 flex flex-col gap-3">
             <h1 className="text-2xl">
@@ -52,7 +52,8 @@ const index = (props: Props) => {
               alt=""
               width={500}
               height={500}
-              style={{ objectFit: "cover", objectPosition: "bottom" }}
+              className="w-full object-cover"
+              // style={{ objectFit: "cover", objectPosition: "bottom", wi }}
             />
           </div>
         </div>
