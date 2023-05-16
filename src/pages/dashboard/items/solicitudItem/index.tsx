@@ -90,7 +90,6 @@ const Index = ({ items }: Props) => {
         comentario: justification,
       })
       .then((response) => {
-        console.log("Respuesta:", response.data);
         toast.success("Solicitud realizada con éxito", {
           position: toast.POSITION.TOP_RIGHT,
         });
