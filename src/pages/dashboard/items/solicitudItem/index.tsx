@@ -43,13 +43,17 @@ type Props = {
 const Index = ({ items }: Props) => {
   userIsLogged();
   const [selectedDay, setSelectedDay] = useState<Date>(new Date());
+  const [justification, setJustification] = useState<string>("");
   const router = useRouter();
 
   const handleSolicitar = () => {
     toast.success("Default Notification", {
       position: toast.POSITION.TOP_RIGHT,
     });
-    router.push("/dashboard/solicitudes");
+    console.log(selectedDay);
+    console.log(justification);
+    console.log(items);
+    // router.push("/dashboard/solicitudes");
   };
   return (
     <Layout>
@@ -63,6 +67,8 @@ const Index = ({ items }: Props) => {
 
         <JustificationColumn
           handleSolicitar={handleSolicitar}
+          justification={justification}
+          setJustification={setJustification}
           day={selectedDay}
         />
       </div>
