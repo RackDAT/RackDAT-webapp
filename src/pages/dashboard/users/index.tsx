@@ -18,34 +18,68 @@ type Props = {
   qtyPendingUsers: number;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados"
-  );
-  const users = response.data.filter((user) => user.verificado);
-  const pendingUsers = response.data.filter(
-    (user) => user.verificado === false
-  );
-  const qtyPendingUsers = pendingUsers.length;
-  return {
-    props: {
-      users: users,
-      qtyPendingUsers: qtyPendingUsers,
-    },
-  };
-};
-
-const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
+const Solicitudes = () => {
   const router = useRouter();
+  const [usersClient, setUsers] = useState<User[]>([]);
+  const [users, setUsersServer] = useState<User[]>([]);
+  const [qtyPendingUsers, setQtyPendingUsers] = useState<number>(0);
+
+  const getAllUsers = async () => {
+    const users = axios
+      .get<User[]>(
+        "https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados"
+      )
+      .then((res) => {
+        setUsers(res.data);
+        setUsersServer(res.data);
+      });
+
+    const qtyPendingUsers = axios
+      .get<number>(
+        "https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad"
+      )
+      .then((res) => setQtyPendingUsers(res.data));
+  };
+
+  const getCarrerUsers = async (carreraId: number) => {
+    const users = axios
+      .get<User[]>(
+        `https://rackdat.onrender.com/Usuarios/usuarios/carrera/${carreraId}`
+      )
+      .then((res) => {
+        setUsers(res.data);
+        setUsersServer(res.data);
+      });
+
+    const qtyPendingUsers = axios
+      .get<number>(
+        `https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad/carrea/${carreraId}`
+      )
+      .then((res) => setQtyPendingUsers(res.data));
+  };
 
   useEffect(() => {
     const validated = validateUserRole();
     if (!validated) {
       router.push("/403");
     }
+
+    let userType;
+    let user;
+    const userJSON = localStorage.getItem("user");
+    if (userJSON) {
+      user = JSON.parse(userJSON);
+      if (user && user.id_tipo_usuario) {
+        userType = user.id_tipo_usuario;
+      }
+    }
+    if (userType === 3) {
+      getAllUsers();
+    } else if (userType === 4) {
+      getCarrerUsers(user.id);
+    }
   }, []);
 
-  const [usersClient, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState<string>("");
 
   const filterUsers = (filterUserString: string) => {
@@ -77,16 +111,19 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
         <div className=" overflow-y-auto w-[90%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between mt-5 items-center">
             <div className="w-[400px]">
-              <SearchBar filterItems={filterUsers} />
+              <SearchBar
+                filterItems={filterUsers}
+                placeholder="Buscar usuarios"
+              />
             </div>
             <div className="flex justify-end">
               <div className="relative p-2 min-w-fit">
                 <Btn style="dark" onClick={handleButtonClick}>
                   <label className="text-sm">Nuevas solicitudes</label>
+                  <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute right-0 top-0">
+                    {qtyPendingUsers}
+                  </div>
                 </Btn>
-              </div>
-              <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute">
-                {qtyPendingUsers}
               </div>
             </div>
           </div>
