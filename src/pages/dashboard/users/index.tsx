@@ -53,7 +53,7 @@ const Solicitudes = () => {
 
     const qtyPendingUsers = axios
       .get<number>(
-        "https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad"
+        `https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad/carrea/${carreraId}`
       )
       .then((res) => setQtyPendingUsers(res.data));
   };
