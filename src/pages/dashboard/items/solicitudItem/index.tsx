@@ -9,9 +9,9 @@ import ItemsColumns from "@/components/dashboard/items/solicitudItem/ItemsColumn
 import Item from "@/assets/interfaces/item";
 import ColumnaDayPicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDayPicker";
 import JustificationColumn from "@/components/dashboard/items/solicitudItem/JustificationColumn";
-import { toast, ToastContainer } from "react-toastify";
-import { createContext } from "react";
+import { toast } from "react-toastify";
 import { userIsLogged } from "@/assets/middlewares/authUser";
+import { format, parseISO } from "date-fns";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const itemIds = ctx.query.selectedItems
@@ -46,14 +46,64 @@ const Index = ({ items }: Props) => {
   const [justification, setJustification] = useState<string>("");
   const router = useRouter();
 
+  const getUserId = (): number => {
+    if (typeof window !== "undefined") {
+      const userJSON = localStorage.getItem("user");
+      if (userJSON) {
+        const user = JSON.parse(userJSON);
+        if (user && user.id) {
+          return user.id;
+        }
+      }
+    }
+    return 0;
+  };
+
+  const dateToString = (date: Date): string => {
+    return date.toISOString();
+  };
+
+  const convertDateFormatStart = (date: Date): string => {
+    const dateString = dateToString(date);
+    const dateTemp = parseISO(dateString);
+    const formattedDate = format(dateTemp, "yyyy-MM-dd") + "T00:00:00.000Z";
+    return formattedDate;
+  };
+
+  const convertDateFormatEnd = (date: Date): string => {
+    const dateString = dateToString(date);
+    const dateTemp = parseISO(dateString);
+    const formattedDate = format(dateTemp, "yyyy-MM-dd") + "T23:59:59.000Z";
+    return formattedDate;
+  };
+
   const handleSolicitar = () => {
-    toast.success("Default Notification", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-    console.log(selectedDay);
-    console.log(justification);
-    console.log(items);
-    // router.push("/dashboard/solicitudes");
+    const equipos = items.map(({ id }) => id);
+    const dateSalida = new Date(convertDateFormatStart(selectedDay));
+    const dateVuelta = new Date(convertDateFormatEnd(selectedDay));
+    axios
+      .post(`https://rackdat.onrender.com/Solicitudes/solicitud/equipo`, {
+        equipos: equipos,
+        salida: dateSalida,
+        vuelta: dateVuelta,
+        usuario: getUserId(),
+        comentario: justification,
+      })
+      .then((response) => {
+        console.log("Respuesta:", response.data);
+        toast.success("Solicitud realizada con éxito", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setTimeout(() => {
+          router.push("/dashboard/solicitudes");
+        }, 1000);
+      })
+      .catch((error) => {
+        console.error("Error al enviar la solicitud:", error);
+        toast.error("Se ha producido un error, revisa los campos", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      });
   };
   return (
     <Layout>

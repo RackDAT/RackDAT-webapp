@@ -79,14 +79,6 @@ const Index = ({ laboratories }: Props) => {
     cantidadPersonas: string,
     justificacion: string
   ) => {
-    console.log(
-      idLaboratory,
-      horaInicio,
-      horaEntrega,
-      cantidadPersonas,
-      getUserId(),
-      justificacion
-    );
     axios
       .post("https://rackdat.onrender.com/Solicitudes/solicitud/lab", {
         lab: idLaboratory,
@@ -97,12 +89,12 @@ const Index = ({ laboratories }: Props) => {
         comentario: justificacion,
       })
       .then((response) => {
-        console.log("Solicitud enviada correctamente");
-        console.log("Respuesta:", response.data);
         toast.success("Solicitud realizada con éxito", {
           position: toast.POSITION.TOP_RIGHT,
         });
-        router.push(`/dashboard/solicitudes`);
+        setTimeout(() => {
+          router.push("/dashboard/solicitudes");
+        }, 1000);
       })
       // .then(() => {
       //   router.push(`/dashboard/solicitudes/${response.data.id_solicitud}`)
