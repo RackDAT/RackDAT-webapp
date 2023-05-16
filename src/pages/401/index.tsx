@@ -16,10 +16,10 @@ const forbbiden = () => {
         height={500}
         alt="Logo RackDAT"
       ></Image>
-      <Link href="/dashboard/home" className="mt-6">
+      <Link href="/login" className="mt-6">
         <Btn style="strong">
           <label htmlFor="" className="font-extrabold hover:cursor-pointer">
-          Ir al inicio
+            Login
           </label>
         </Btn>
       </Link>
