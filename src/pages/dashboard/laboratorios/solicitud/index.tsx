@@ -102,7 +102,7 @@ const Index = ({ laboratories }: Props) => {
         toast.success("Solicitud realizada con éxito", {
           position: toast.POSITION.TOP_RIGHT,
         });
-        router.push(`/dashboard/solicitudes/${response.data.id_solicitud}`);
+        router.push(`/dashboard/solicitudes`);
       })
       // .then(() => {
       //   router.push(`/dashboard/solicitudes/${response.data.id_solicitud}`)
