@@ -22,10 +22,15 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
   const router = useRouter();
   const tipoSolicitudId = solicitud.id_tipo_solicitud;
 
-  const redirectSingleSolicitudView = (id: number) => {
+  const redirectSingleSolicitudView = (folio: number) => {
     router.push({
       pathname: `/dashboard/solicitudes/${solicitud.folio}`,
     });
+  };
+
+  const convertDateToString = (date: Date): string => {
+    const dateString = date.toString();
+    return dateString;
   };
 
   return (
@@ -41,7 +46,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
             {solicitud.tipo_solicitud.tipo_solicitud}
           </span>
           <span className="text-neutral-400 font-">
-            {getDateString(solicitud.fecha_pedido)}
+            {getDateString(convertDateToString(solicitud.fecha_pedido))}
           </span>
         </div>
         <div className="flex gap-3">
@@ -66,9 +71,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
             Tecnico
           </label>
         </div>
-        <EstadoSolicitud
-          estatus={solicitud.estatus_solicitud.estatus_solicitud}
-        />
+        <EstadoSolicitud estatus={solicitud.estatus_solicitud} />
       </div>
 
       {/* content? */}
@@ -103,7 +106,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
           <Btn
             style="strong"
             onClick={() => {
-              redirectSingleSolicitudView(solicitud.id);
+              redirectSingleSolicitudView(solicitud.folio);
             }}
           >
             Ver solicitud

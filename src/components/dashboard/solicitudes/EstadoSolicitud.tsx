@@ -5,23 +5,38 @@ type Props = {
   estatus: Estatus;
 };
 
-const EstadoSolicitud = ({ estatus }: any) => {
+const estatusSolicitud = ({ estatus }: any) => {
   console.log(estatus);
+  useEffect(() => {
+    let color;
+    if (estatus.estatus_solicitud === "pendiente") {
+      color = "bg-yellow-400";
+    }
+    if (estatus.estatus_solicitud === "aprobado") {
+    }
+    if (estatus.estatus_solicitud === "rechazado") {
+    }
+  }, [estatus]);
+  const color = () => {
+    if (estatus.estatus_solicitud === "pendiente") return "bg-yellow-400";
+    if (estatus.estatus_solicitud === "aprobado") return "bg-green-400";
+    if (estatus.estatus_solicitud === "rechazado") return "bg-red-400";
+  };
   return (
     <div className="flex items-center uppercase gap-2">
       <div
         className={
           "rounded-full h-3 w-3 " +
-          (estatus == "pendiente"
+          (estatus.estatus_solicitud === "pendiente"
             ? "bg-orange-400"
-            : estatus == "aprobado"
+            : estatus.estatus_solicitud === "aprobado"
             ? "bg-green-400"
             : "bg-red-400")
         }
       />
-      <label>{estatus}</label>
+      <label>{estatus.estatus_solicitud}</label>
     </div>
   );
 };
 
-export default EstadoSolicitud;
+export default estatusSolicitud;
