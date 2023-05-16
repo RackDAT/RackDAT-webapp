@@ -19,7 +19,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
 
   const redirectSingleSolicitudView = (id: number) => {
     router.push({
-      pathname: `/dashboard/solicitudes/${id}`,
+      pathname: `/dashboard/solicitudes/${solicitud.folio}`,
     });
   };
 
