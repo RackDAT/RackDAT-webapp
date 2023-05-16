@@ -47,7 +47,10 @@ const Solicitudes = () => {
         `https://rackdat.onrender.com/Usuarios/usuarios/carrera/${carreraId}`
       )
       .then((res) => {
-        setUsers(res.data);
+        const filteredUsers = res.data.filter(
+          (user) => user.verificado === true
+        );
+        setUsers(filteredUsers);
         setUsersServer(res.data);
       });
 
