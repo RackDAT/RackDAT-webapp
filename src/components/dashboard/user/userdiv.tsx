@@ -18,6 +18,8 @@ const UserDiv = (props: Props) => {
       {/* header */}
       <div className="border-b-2 w-full border-neutral-300 px-4 py-1 flex justify-between">
         <span className="text-neutral-400 text-sm">{props.user.correo}</span>
+
+        <span className="text-neutral-400">{props.user.clave}</span>
       </div>
 
       {/* content? */}

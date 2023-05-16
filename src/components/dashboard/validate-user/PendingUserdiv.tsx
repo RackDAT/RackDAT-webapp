@@ -1,6 +1,7 @@
 import React from "react";
 import Btn from "@/components/global/Btn";
 import User from "@/assets/interfaces/users";
+import Image from "next/image";
 
 type Props = {
   user: User;
@@ -26,12 +27,14 @@ const PendingUserDiv = ({ user, onAproveUser, onDeleteUser }: Props) => {
       </div>
 
       {/* content? */}
-      <div className="p-4 flex gap-2 items-center justify-between">
+      <div className="p-2 flex gap-2 items-center justify-between">
         <div className="flex items-center space-x-3.5">
-          <img
-            src="https://picsum.photos/200/300"
+          <Image
+            src={user.imagen}
+            width={100}
+            height={100}
             alt=""
-            className="w-28 h-28 ml-10 mr-5 rounded-full"
+            className="w-16 h-16 ml-10 mr-5 rounded-full"
           />
           <div className="flex flex-col justify-between h-5/6">
             <h1 className="text-2xl">
@@ -45,10 +48,10 @@ const PendingUserDiv = ({ user, onAproveUser, onDeleteUser }: Props) => {
         {/* buttons */}
         <div className="flex flex-col gap-2 mr-10">
           <Btn style="strong" onClick={handleAproveUser}>
-            <p className="text-lg">Aprobar</p>
+            <p className="text-sm">Aprobar</p>
           </Btn>
           <Btn style="light" onClick={handleDeleteUser}>
-            <p className="text-lg">Rechazar</p>
+            <p className="text-sm">Rechazar</p>
           </Btn>
         </div>
       </div>
