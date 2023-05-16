@@ -14,35 +14,44 @@ import { useRouter } from "next/router";
 import { validateUserRole } from "../../../assets/middlewares/validateUserRole";
 import SearchBar from "@/components/dashboard/items/SearchBar";
 
-type Props = {
-  users: User[];
-};
+type Props = {};
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/Usuarios/usuarios"
-  );
-  const users = response.data.filter((user) => user.verificado === false);
-  return {
-    props: {
-      users: users,
-    },
-  };
-};
-
-const ValidateUser = ({ users }: Props) => {
+const ValidateUser = (props: Props) => {
   const router = useRouter();
-  console.log(users);
+  const [search, setSearch] = useState("");
+  const [pendingUsers, setPendingUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+
+  const getUnverifiedUsers = async (idCarrera: number) => {
+    const response = await axios
+      .get(
+        `https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/carrera/${idCarrera}`
+      )
+      .then((res) => {
+        setPendingUsers(res.data);
+        setUsers(res.data);
+      });
+  };
 
   useEffect(() => {
     const validated = validateUserRole();
     if (!validated) {
       router.push("/403");
     }
-  }, []);
 
-  const [search, setSearch] = useState("");
-  const [pendingUsers, setPendingUsers] = useState<User[]>(users);
+    const getUserCarrera = (): number => {
+      const userJSON = localStorage.getItem("user");
+      if (userJSON) {
+        const user = JSON.parse(userJSON);
+        if (user && user.id_carrera) {
+          return user.id_carrera;
+        }
+      }
+      return 0;
+    };
+
+    getUnverifiedUsers(getUserCarrera());
+  }, []);
 
   const handleChange = (event: any) => {
     setSearch(event.target.value);

@@ -47,13 +47,16 @@ const Solicitudes = () => {
         `https://rackdat.onrender.com/Usuarios/usuarios/carrera/${carreraId}`
       )
       .then((res) => {
-        setUsers(res.data);
+        const filteredUsers = res.data.filter(
+          (user) => user.verificado === true
+        );
+        setUsers(filteredUsers);
         setUsersServer(res.data);
       });
 
     const qtyPendingUsers = axios
       .get<number>(
-        `https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad/carrea/${carreraId}`
+        `https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad/carrera/${carreraId}`
       )
       .then((res) => setQtyPendingUsers(res.data));
   };
@@ -76,7 +79,7 @@ const Solicitudes = () => {
     if (userType === 3) {
       getAllUsers();
     } else if (userType === 4) {
-      getCarrerUsers(user.id);
+      getCarrerUsers(user.id_carrera);
     }
   }, []);
 
@@ -103,6 +106,17 @@ const Solicitudes = () => {
     router.push("/dashboard/validate-user");
   };
 
+  const getUserRole = (): number => {
+    if (typeof window !== "undefined") {
+      const userRole = localStorage.getItem("id_tipo_usuario");
+      if (userRole) {
+        const finalRole = parseInt(userRole);
+        return finalRole;
+      }
+    }
+    return 0;
+  };
+
   return (
     <Layout>
       <div className="flex flex-col">
@@ -118,12 +132,16 @@ const Solicitudes = () => {
             </div>
             <div className="flex justify-end">
               <div className="relative p-2 min-w-fit">
-                <Btn style="dark" onClick={handleButtonClick}>
-                  <label className="text-sm">Nuevas solicitudes</label>
-                  <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute right-0 top-0">
-                    {qtyPendingUsers}
-                  </div>
-                </Btn>
+                {getUserRole() != 4 ? (
+                  <div></div>
+                ) : (
+                  <Btn style="dark" onClick={handleButtonClick}>
+                    <label className="text-sm">Nuevas solicitudes</label>
+                    <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute right-0 top-0">
+                      {qtyPendingUsers}
+                    </div>
+                  </Btn>
+                )}
               </div>
             </div>
           </div>
