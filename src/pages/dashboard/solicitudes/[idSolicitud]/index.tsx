@@ -46,9 +46,7 @@ const Index = ({ solicitud }: Props) => {
         toast.success("Solicitud aprobada", {
           position: toast.POSITION.TOP_RIGHT,
         });
-        setTimeout(() => {
-          router.push("/dashboard/solicitudes");
-        }, 1000);
+        router.push("/dashboard/solicitudes");
       })
       .catch((error) => {
         toast.success("Ocurrió un error", {

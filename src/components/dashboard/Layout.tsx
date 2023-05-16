@@ -91,7 +91,30 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex">
+        <div className="w-[270px] h-screen flex flex-col align-center p-4 justify-between flex-shrink-0">
+          {/* sidebar */}
+          <div className="flex flex-col">
+            <div className="self-center"></div>
+            <div className="flex flex-col gap-2 mt-10"></div>
+          </div>
+          {/* account */}
+          <div className="flex p-2 rounded-md justify-around border-2 border-neutral-700">
+            <div className="flex flex-col justify-between py-1">
+              <label className="text-white text-[14px]"></label>
+              <label className="text-neutral-400 text-[14px]"></label>
+            </div>
+            <div className="text-white flex justify-center items-center ">
+              <div className="hover:bg-white p-[2px] hover:text-black duration-75 rounded cursor-pointer">
+                <HiOutlineLogout className="w-6 h-6" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-screen rounded-l-2xl  bg-slate-100  overflow-y-auto"></div>
+      </div>
+    );
   }
 
   return (

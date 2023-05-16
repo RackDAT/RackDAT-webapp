@@ -33,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 type Props = { laboratory: laboratory };
 
 const Laboratory = ({ laboratory }: Props) => {
-  console.log(laboratory);
   const router = useRouter();
   userIsLogged();
   return (
@@ -64,7 +63,7 @@ const Laboratory = ({ laboratory }: Props) => {
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex gap-3 items-center">
-                <span>Capacidad: 30 personas</span>
+                <span>Capacidad: {laboratory.capacidad} personas</span>
               </div>
               <p className="text-sm text-slate-500">
                 {laboratory.descripcion_lab}

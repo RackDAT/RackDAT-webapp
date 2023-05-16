@@ -37,7 +37,9 @@ const LabCard = ({ laboratory, index }: Props) => {
       </div>
       <div className="py-[5px] px-2 flex flex-col min-h-[60px] justify-between z-0">
         <label className="text-sm">{laboratory.laboratorio}</label>
-        <label className="text-slate-400 text-xs">Capacidad: 20 personas</label>
+        <label className="text-slate-400 text-xs">
+          Capacidad: {laboratory.capacidad} personas
+        </label>
       </div>
     </div>
   );
