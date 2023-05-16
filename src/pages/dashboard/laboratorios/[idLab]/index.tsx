@@ -50,7 +50,7 @@ const Laboratory = ({ laboratory }: Props) => {
               className=" w-full h-[300px] object-cover m-auto rounded-xl"
             />
           </div>
-          <div className="flex flex-col py-2 max-w-lg w-1/2 h-[300px] justify-between">
+          <div className="flex flex-col py-2 max-w-lg w-1/2  justify-between">
             <div>
               <h3 className="font-thin text-slate-400 text-sm">
                 Cetys campus Ensenada
@@ -62,7 +62,7 @@ const Laboratory = ({ laboratory }: Props) => {
                 </span>
               </h1>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               <div className="flex gap-3 items-center">
                 <span>Capacidad: 30 personas</span>
               </div>
@@ -71,7 +71,7 @@ const Laboratory = ({ laboratory }: Props) => {
               </p>
             </div>
 
-            <div className="">
+            <div className="mt-3">
               <Btn
                 style="strong"
                 onClick={() => {

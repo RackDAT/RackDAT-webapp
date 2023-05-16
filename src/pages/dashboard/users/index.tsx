@@ -77,16 +77,19 @@ const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
         <div className=" overflow-y-auto w-[90%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between mt-5 items-center">
             <div className="w-[400px]">
-              <SearchBar filterItems={filterUsers} />
+              <SearchBar
+                filterItems={filterUsers}
+                placeholder="Buscar usuarios"
+              />
             </div>
             <div className="flex justify-end">
               <div className="relative p-2 min-w-fit">
                 <Btn style="dark" onClick={handleButtonClick}>
                   <label className="text-sm">Nuevas solicitudes</label>
+                  <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute right-0 top-0">
+                    {qtyPendingUsers}
+                  </div>
                 </Btn>
-              </div>
-              <div className="rounded-full bg-orange-400 w-5 h-5 flex items-center justify-center text-white p-3 absolute">
-                {qtyPendingUsers}
               </div>
             </div>
           </div>

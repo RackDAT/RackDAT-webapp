@@ -4,6 +4,7 @@ import { FiSearch } from "react-icons/fi";
 
 type Props = {
   filterItems: (searchBarString: string) => void;
+  placeholder?: string;
 };
 
 const SearchBar = (props: Props) => {
@@ -28,7 +29,9 @@ const SearchBar = (props: Props) => {
         <FiSearch className="w-6 h-6 text-slate-300" />
       </div>
       <input
-        placeholder="Busca lo que quieras"
+        placeholder={
+          props.placeholder ? props.placeholder : "Busca lo que quieras "
+        }
         className="w-full border-none outline-none font-light"
         value={filterString}
         onChange={(e) => {

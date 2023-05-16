@@ -51,7 +51,10 @@ const Index = ({ allEquipos }: Props) => {
     <Layout>
       <LayoutHeader title="Equipos" />
       <div className="m-auto w-[90%] flex flex-col">
-        <SearchBar filterItems={filterItems} />
+        <SearchBar
+          filterItems={filterItems}
+          placeholder="Busca el equipo que necesites"
+        />
 
         {/* filters */}
         {/* <div className="flex justify-between w-full">
