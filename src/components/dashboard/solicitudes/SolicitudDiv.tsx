@@ -7,7 +7,11 @@ import EstadoSolicitud from "@/components/dashboard/solicitudes/EstadoSolicitud"
 import getDateString from "@/components/functions/getDate";
 import Image from "next/image";
 import getIconFromString from "@/utils/icons";
-import { AiFillCheckCircle, AiFillCloseCircle, AiFillExclamationCircle } from "react-icons/ai";
+import {
+  AiFillCheckCircle,
+  AiFillCloseCircle,
+  AiFillExclamationCircle,
+} from "react-icons/ai";
 
 type Props = {
   solicitud: Solicitud;
@@ -18,10 +22,15 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
   const router = useRouter();
   const tipoSolicitudId = solicitud.id_tipo_solicitud;
 
-  const redirectSingleSolicitudView = (id: number) => {
+  const redirectSingleSolicitudView = (folio: number) => {
     router.push({
       pathname: `/dashboard/solicitudes/${solicitud.folio}`,
     });
+  };
+
+  const convertDateToString = (date: Date): string => {
+    const dateString = date.toString();
+    return dateString;
   };
 
   return (
@@ -37,17 +46,32 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
             {solicitud.tipo_solicitud.tipo_solicitud}
           </span>
           <span className="text-neutral-400 font-">
-            {getDateString(solicitud.fecha_pedido)}
+            {getDateString(convertDateToString(solicitud.fecha_pedido))}
           </span>
-
         </div>
         <div className="flex gap-3">
-                <label className="flex items-center gap-1">{solicitud.aprobacion_coordinador == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_coordinador == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Coordinador</label>
-                <label className="flex items-center gap-1">{solicitud.aprobacion_tecnico == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_tecnico == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Tecnico</label>
-          </div>
-        <EstadoSolicitud
-          estatus={solicitud.estatus_solicitud.estatus_solicitud}
-        />
+          <label className="flex items-center gap-1">
+            {solicitud.aprobacion_coordinador == null ? (
+              <AiFillExclamationCircle className="text-orange-400" />
+            ) : solicitud.aprobacion_coordinador == true ? (
+              <AiFillCheckCircle className="text-green-400" />
+            ) : (
+              <AiFillCloseCircle className="text-red-400" />
+            )}
+            Coordinador
+          </label>
+          <label className="flex items-center gap-1">
+            {solicitud.aprobacion_tecnico == null ? (
+              <AiFillExclamationCircle className="text-orange-400" />
+            ) : solicitud.aprobacion_tecnico == true ? (
+              <AiFillCheckCircle className="text-green-400" />
+            ) : (
+              <AiFillCloseCircle className="text-red-400" />
+            )}
+            Tecnico
+          </label>
+        </div>
+        <EstadoSolicitud estatus={solicitud.estatus_solicitud} />
       </div>
 
       {/* content? */}
@@ -82,7 +106,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
           <Btn
             style="strong"
             onClick={() => {
-              redirectSingleSolicitudView(solicitud.id);
+              redirectSingleSolicitudView(solicitud.folio);
             }}
           >
             Ver solicitud
