@@ -19,14 +19,16 @@ type Props = {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await axios.get<User[]>(
-    "https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados"
-  );
-  const users = response.data.filter((user) => user.verificado);
-  const pendingUsers = response.data.filter(
-    (user) => user.verificado === false
-  );
-  const qtyPendingUsers = pendingUsers.length;
+  const users = await axios
+    .get<User[]>("https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados")
+    .then((res) => res.data);
+
+  const qtyPendingUsers = await axios
+    .get<number>(
+      "https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad"
+    )
+    .then((res) => res.data);
+
   return {
     props: {
       users: users,
@@ -36,6 +38,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
+  console.log(qtyPendingUsers);
   const router = useRouter();
 
   useEffect(() => {
