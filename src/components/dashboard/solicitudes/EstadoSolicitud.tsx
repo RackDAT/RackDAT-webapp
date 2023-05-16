@@ -5,15 +5,15 @@ type Props = {
   estatus: Estatus;
 };
 
-const EstadoSolicitud = ({ estatus }: Props) => {
+const EstadoSolicitud = ({ estatus }: any) => {
   useEffect(() => {
     let color;
-    if (estatus.estatus === "pendiente") {
+    if (estatus === "pendiente") {
       color = "bg-yellow-400";
     }
-    if (estatus.estatus === "aprobado") {
+    if (estatus === "aprobado") {
     }
-    if (estatus.estatus === "rechazado") {
+    if (estatus === "rechazado") {
     }
   }, [estatus]);
   const color = () => {
@@ -27,14 +27,14 @@ const EstadoSolicitud = ({ estatus }: Props) => {
       <div
         className={
           "rounded-full h-3 w-3 " +
-          (estatus.estatus === "pendiente"
+          (estatus === "pendiente"
             ? "bg-orange-400"
             : estatus.estatus === "aprobado"
             ? "bg-green-400"
             : "bg-red-400")
         }
       />
-      <label>{estatus.estatus}</label>
+      <label>{estatus}</label>
     </div>
   );
 };

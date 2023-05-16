@@ -39,7 +39,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
             {getDateString(solicitud.fecha_pedido)}
           </span>
         </div>
-        {/* <EstadoSolicitud estatus={solicitud.estatus} /> */}
+        <EstadoSolicitud estatus={solicitud.estatus_solicitud.estatus_solicitud} />
       </div>
 
       {/* content? */}

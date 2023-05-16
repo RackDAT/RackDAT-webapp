@@ -13,9 +13,10 @@ import { GetServerSideProps } from "next";
 
 // usar contexto para sacar el id, hacer get para sacar el tipo_de_solicitud_id y con eso manejar los divs
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const itemIds = ctx.query.idSolicitud
   const solicitud = await axios
-    .get("https://rackdat.onrender.com/Solicitudes/solicitudes-pendientes")
+    .get(`https://rackdat.onrender.com/Solicitudes/solicitud/${itemIds}`)
     .then((res) => res.data);
 
   return {
@@ -29,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = {solicitud: any};
 
 const Index = ({solicitud}: Props) => {
+  console.log(solicitud)
   const router = useRouter();
   userIsLogged();
   const tipoSolicitudId = router.query.tipoSolicitudId;
