@@ -38,7 +38,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
   const router = useRouter();
 
-  validateUserRole();
+  useEffect(() => {
+    const validated = validateUserRole();
+    if (!validated) {
+      router.push("/403");
+    }
+  }, []);
 
   const [usersClient, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState<string>("");

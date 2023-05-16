@@ -6,6 +6,8 @@ import Solicitud from "@/assets/interfaces/solicitud";
 import EstadoSolicitud from "@/components/dashboard/solicitudes/EstadoSolicitud";
 import getDateString from "@/components/functions/getDate";
 import Image from "next/image";
+import getIconFromString from "@/utils/icons";
+import { AiFillCheckCircle, AiFillCloseCircle, AiFillExclamationCircle } from "react-icons/ai";
 
 type Props = {
   solicitud: Solicitud;
@@ -16,10 +18,9 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
   const router = useRouter();
   const tipoSolicitudId = solicitud.id_tipo_solicitud;
 
-  const redirectSingleSolicitudView = (id: number, tipoSolicitudId: number) => {
+  const redirectSingleSolicitudView = (id: number) => {
     router.push({
-      pathname: `/dashboard/solicitudes/${id}`,
-      query: { tipoSolicitudId },
+      pathname: `/dashboard/solicitudes/${solicitud.folio}`,
     });
   };
 
@@ -29,22 +30,30 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
       `}
     >
       {/* header */}
-      <div className="border-b-[1px] w-full border-neutral-300 px-4 py-2 flex justify-between">
+      <div className="border-b-[1px] w-full border-neutral-300 px-2 py-2 flex justify-between">
         <div className="flex gap-4">
-          <span className="font-bold">
+          <span className="font-bold flex gap-1">
+            {getIconFromString(solicitud.tipo_solicitud.tipo_solicitud)}
             {solicitud.tipo_solicitud.tipo_solicitud}
           </span>
           <span className="text-neutral-400 font-">
             {getDateString(solicitud.fecha_pedido)}
           </span>
+
         </div>
-        {/* <EstadoSolicitud estatus={solicitud.estatus} /> */}
+        <div className="flex gap-3">
+                <label className="flex items-center gap-1">{solicitud.aprobacion_coordinador == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_coordinador == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Coordinador</label>
+                <label className="flex items-center gap-1">{solicitud.aprobacion_tecnico == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_tecnico == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Tecnico</label>
+          </div>
+        <EstadoSolicitud
+          estatus={solicitud.estatus_solicitud.estatus_solicitud}
+        />
       </div>
 
       {/* content? */}
-      <div className="px-2 py-2 flex gap-2 items-center justify-between text-sm">
-        <div className="flex items-center space-x-3.5">
-          {solicitud.imagen === "null" && (
+      <div className="px-2 py-2 flex gap-2 items-center  text-sm justify-between">
+        <div className="flex items-center space-x-3.5 ">
+          {solicitud.imagen != null && (
             <Image
               src={solicitud.imagen}
               alt=""
@@ -53,31 +62,27 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
               width={100}
             />
           )}
-          <div className="flex flex-col justify-between border- h-20 py-2">
+          <div className="flex flex-col justify-between h-20 py-2">
             <h1>
-              {solicitud.id_tipo_solicitud === 1
-                ? ""
-                : //@ts-ignore
-                  "Laboratorio " + solicitud.nombre_lab}
+              {solicitud.usuario.nombre + " " + solicitud.usuario.apellido_pat}
             </h1>
-            <label className="text-neutral-500 text-xs">
+            <h1 className="text-neutral-500 text-sm">
               {solicitud.id_tipo_solicitud === 1
-                ? //@ts-ignore
-                  solicitud.cantidad_equipos + " unidades"
-                : ""}
-            </label>
+                ? solicitud.cantidad_equipos + " unidades"
+                : //@ts-ignore
+                  "Laboratorio " + solicitud.laboratorio_obtenido}
+            </h1>
           </div>
         </div>
-        <div className="max-w-xs text-xs flex flex-col gap-4 text-ellipsis overflow-hidden">
+        <div className="max-w-xs h-20 justify-center  py-2 text-xs flex flex-col gap-4 text-ellipsis overflow-hidden ">
           <label>{solicitud.comentario}</label>
-          <label>{}</label>
         </div>
         {/* buttons */}
         <div className="flex flex-col gap-2 text-xs">
           <Btn
             style="strong"
             onClick={() => {
-              redirectSingleSolicitudView(solicitud.id, tipoSolicitudId);
+              redirectSingleSolicitudView(solicitud.id);
             }}
           >
             Ver solicitud

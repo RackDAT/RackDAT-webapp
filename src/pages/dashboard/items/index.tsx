@@ -54,7 +54,7 @@ const Index = ({ allEquipos }: Props) => {
         <SearchBar filterItems={filterItems} />
 
         {/* filters */}
-        <div className="flex justify-between w-full">
+        {/* <div className="flex justify-between w-full">
           <div className="flex gap-2">
             <Filter>
               <option>Tipo de Item</option>
@@ -69,7 +69,7 @@ const Index = ({ allEquipos }: Props) => {
               <option>Lic</option>
             </Filter>
           </div>
-        </div>
+        </div> */}
 
         {/* table */}
         <div className="my-2">
