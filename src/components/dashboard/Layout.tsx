@@ -9,6 +9,9 @@ import { MdInventory } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import logo from "@/assets/img/rackdat_logo_blanco.png";
 import { googleLogout } from "@react-oauth/google";
+import { useEffect, useState } from "react";
+import User from "@/assets/interfaces/users";
+import axios from "axios";
 
 export const metadata = {
   title: "Create Next App",
@@ -37,6 +40,8 @@ const Opciones = [
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const [userId, setUserId] = useState<number>(0);
+  const [user, setUser] = useState<User | null | any>(null);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -44,6 +49,50 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     router.push("/login");
     googleLogout();
   };
+
+  const getUserId = (): number => {
+    const userJSON = localStorage.getItem("user");
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      if (user && user.id) {
+        return user.id;
+      }
+    }
+    return 0;
+  };
+
+  const getUserInfo = async (id: number): Promise<User> => {
+    try {
+      const response = await axios.get(
+        `https://rackdat.onrender.com/Usuarios/usuario/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      // Manejar errores de la petición
+      console.error(error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const id = getUserId();
+      setUserId(id);
+
+      try {
+        const userInfo = await getUserInfo(id);
+        setUser(userInfo);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex">
@@ -55,6 +104,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="flex flex-col gap-2 mt-10">
             {Opciones.map((opcion, index) => {
+              if (opcion.name === "User" && user.id_tipo_usuario === 7) {
+                return null;
+              }
               return (
                 <BarOptions
                   name={opcion.name}
@@ -68,16 +120,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         {/* account */}
         <div className="flex p-2 rounded-md justify-around border-2 border-neutral-700">
-          <img
-            src={
-              "https://agpnoticias.com/news/wp-content/uploads/2019/12/GP_4203-1-e1577058302615.jpg"
-            }
+          <Image
+            src={user.imagen}
+            alt="user image"
+            width={100}
+            height={100}
             className="rounded-full w-12 h-12 object-cover border-2 border-neutral-500"
           />
 
           <div className="flex flex-col justify-between py-1">
-            <label className="text-white text-[14px]">Daniel Barocio</label>
-            <label className="text-neutral-400 text-[14px]">11571</label>
+            <label className="text-white text-[14px]">
+              {user.nombre} {user.apellido_pat}
+            </label>
+            <label className="text-neutral-400 text-[14px]">{user.clave}</label>
           </div>
           <div className="text-white flex justify-center items-center ">
             <div className="hover:bg-white p-[2px] hover:text-black duration-75 rounded cursor-pointer">
