@@ -18,37 +18,69 @@ type Props = {
   qtyPendingUsers: number;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const users = await axios
-    .get<User[]>("https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados")
-    .then((res) => res.data);
-
-  const qtyPendingUsers = await axios
-    .get<number>(
-      "https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad"
-    )
-    .then((res) => res.data);
-
-  return {
-    props: {
-      users: users,
-      qtyPendingUsers: qtyPendingUsers,
-    },
-  };
-};
-
-const Solicitudes = ({ users, qtyPendingUsers }: Props) => {
-  console.log(qtyPendingUsers);
+const Solicitudes = () => {
   const router = useRouter();
+  const [usersClient, setUsers] = useState<User[]>([]);
+  const [users, setUsersServer] = useState<User[]>([]);
+  const [qtyPendingUsers, setQtyPendingUsers] = useState<number>(0);
+
+  const getAllUsers = async () => {
+    const users = axios
+      .get<User[]>(
+        "https://rackdat.onrender.com/Usuarios/GetUsuariosVerificados"
+      )
+      .then((res) => {
+        setUsers(res.data);
+        setUsersServer(res.data);
+      });
+
+    const qtyPendingUsers = axios
+      .get<number>(
+        "https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad"
+      )
+      .then((res) => setQtyPendingUsers(res.data));
+  };
+
+  const getCarrerUsers = async (carreraId: number) => {
+    const users = axios
+      .get<User[]>(
+        `https://rackdat.onrender.com/Usuarios/usuarios/carrera/${carreraId}`
+      )
+      .then((res) => {
+        setUsers(res.data);
+        setUsersServer(res.data);
+      });
+
+    const qtyPendingUsers = axios
+      .get<number>(
+        "https://rackdat.onrender.com/Usuarios/usuarios/not-verificados/cantidad"
+      )
+      .then((res) => setQtyPendingUsers(res.data));
+  };
 
   useEffect(() => {
     const validated = validateUserRole();
     if (!validated) {
       router.push("/403");
     }
+
+    let userType;
+    let user;
+    const userJSON = localStorage.getItem("user");
+    if (userJSON) {
+      user = JSON.parse(userJSON);
+      if (user && user.id_tipo_usuario) {
+        userType = user.id_tipo_usuario;
+      }
+    }
+    console.log(userType);
+    if (userType === 3) {
+      getAllUsers();
+    } else if (userType === 4) {
+      getCarrerUsers(user.id);
+    }
   }, []);
 
-  const [usersClient, setUsers] = useState<User[]>(users);
   const [search, setSearch] = useState<string>("");
 
   const filterUsers = (filterUserString: string) => {
