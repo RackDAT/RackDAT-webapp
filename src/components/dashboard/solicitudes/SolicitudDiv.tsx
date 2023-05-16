@@ -43,7 +43,7 @@ const SolicitudDiv = ({ solicitud, index }: Props) => {
         </div>
         <div className="flex gap-3">
                 <label className="flex items-center gap-1">{solicitud.aprobacion_coordinador == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_coordinador == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Coordinador</label>
-                <label className="flex items-center gap-1">{solicitud.aprobacion_coordinador == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_coordinador == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Tecnico</label>
+                <label className="flex items-center gap-1">{solicitud.aprobacion_tecnico == null? <AiFillExclamationCircle className="text-orange-400"/>: solicitud.aprobacion_tecnico == true? <AiFillCheckCircle className="text-green-400"/>:<AiFillCloseCircle className="text-red-400"/>}Tecnico</label>
           </div>
         <EstadoSolicitud
           estatus={solicitud.estatus_solicitud.estatus_solicitud}
