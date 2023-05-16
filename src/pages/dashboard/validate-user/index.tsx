@@ -34,7 +34,12 @@ const ValidateUser = ({ users }: Props) => {
   const router = useRouter();
   console.log(users);
 
-  validateUserRole();
+  useEffect(() => {
+    const validated = validateUserRole();
+    if (!validated) {
+      router.push("/403");
+    }
+  }, []);
 
   const [search, setSearch] = useState("");
   const [pendingUsers, setPendingUsers] = useState<User[]>(users);
@@ -49,8 +54,12 @@ const ValidateUser = ({ users }: Props) => {
     }
     const newUsers = users.filter((user) => {
       return (
-        user.nombre.toLowerCase().includes(filterPendingUserString.toLowerCase()) ||
-        user.apellido_pat.toLowerCase().includes(filterPendingUserString.toLowerCase())
+        user.nombre
+          .toLowerCase()
+          .includes(filterPendingUserString.toLowerCase()) ||
+        user.apellido_pat
+          .toLowerCase()
+          .includes(filterPendingUserString.toLowerCase())
       );
     });
     setPendingUsers(newUsers);
@@ -107,7 +116,7 @@ const ValidateUser = ({ users }: Props) => {
         <LayoutHeader title="Validar Usuarios" />
         <div className=" overflow-y-auto w-[92%] m-auto flex flex-col gap-2  px-2 h-full">
           <div className="flex justify-between  mt-7 items-center">
-            <SearchBar filterItems={filterPendingUsers}/>
+            <SearchBar filterItems={filterPendingUsers} />
           </div>
           {/* assets */}
           <div className=" m-auto h-full w-full py-4 gap-4 flex flex-col">

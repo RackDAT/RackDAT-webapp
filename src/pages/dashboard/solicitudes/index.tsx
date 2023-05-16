@@ -26,9 +26,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = { solicitudes: Solicitud[] };
 
 const Solicitudes = ({ solicitudes }: Props) => {
-  console.log(solicitudes); 
+  console.log(solicitudes);
   const router = useRouter();
-  validateUserRole();
+  useEffect(() => {
+    const validated = validateUserRole();
+    if (!validated) {
+      router.push("/403");
+    }
+  }, []);
 
   // const [solicitudes, setSolicitudes] = useState<any>([]);
   // useEffect(() => {
