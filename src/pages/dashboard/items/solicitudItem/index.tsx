@@ -9,7 +9,7 @@ import ItemsColumns from "@/components/dashboard/items/solicitudItem/ItemsColumn
 import Item from "@/assets/interfaces/item";
 import ColumnaDayPicker from "@/components/dashboard/laboratorios/solicitud/ColumnaDayPicker";
 import JustificationColumn from "@/components/dashboard/items/solicitudItem/JustificationColumn";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { userIsLogged } from "@/assets/middlewares/authUser";
 import { format, parseISO } from "date-fns";
 
@@ -121,6 +121,8 @@ const Index = ({ items }: Props) => {
           day={selectedDay}
         />
       </div>
+
+      <ToastContainer />
     </Layout>
   );
 };

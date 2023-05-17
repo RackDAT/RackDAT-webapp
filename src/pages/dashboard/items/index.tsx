@@ -12,6 +12,7 @@ import axios, { all } from "axios";
 import { useState } from "react";
 import Item from "@/assets/interfaces/item";
 import { userIsLogged } from "@/assets/middlewares/authUser";
+import { ToastContainer } from "react-toastify";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const equipos = await axios

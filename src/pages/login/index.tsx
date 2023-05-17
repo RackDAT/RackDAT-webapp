@@ -125,20 +125,12 @@ const page = (props: Props) => {
   return (
     <div className="h-screen w-screen flex">
       <ContentTemplate>
-        <div className="w-full h-full ml-20 flex flex-col gap-5 justify-center items-center">
+        <div className="w-full h-full flex flex-col gap-5 justify-center items-center">
           {profile ? (
             <label htmlFor="">Loading...</label>
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center">
-              <div>
-                <span className="text-xl font-bold">Bienvenido a RackDAT</span>
-                {/* <Image
-                  src={RackDATLogo}
-                  alt="logoRackDAT"
-                  width={150}
-                  height={200}
-                /> */}
-              </div>
+            <div className="flex flex-col items-center  gap-2">
+              <span className="text-xl font-bold">Bienvenido a RackDAT</span>
               <Btn style="strong" onClick={() => login()}>
                 Sign in with Google 🚀{" "}
               </Btn>

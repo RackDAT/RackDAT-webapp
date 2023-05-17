@@ -105,27 +105,29 @@ const Index = ({ solicitud }: Props) => {
   return (
     <Layout>
       <LayoutHeader title="Solicitudes" />
-      <div className="w-[90%] flex flex-col m-auto">
-        <div className=" m-auto mt-10 flex gap-2">
-          <SolicitudUserColumn user={solicitud.usuario} />
-          <SolicitudInfomationColumn
-            id_tipo_solicitud={solicitud.id_tipo_solicitud}
-            solicitud={solicitud}
-          />
-        </div>
-        {getUserRole() === 7 ? (
-          <div></div>
-        ) : (
-          <div className="mt-3 flex gap-2 self-end">
-            <Btn style="strong" onClick={handleAceptar}>
-              Acceptar
-            </Btn>
-            <Btn style="light" onClick={handleRechazar}>
-              Rechazar
-            </Btn>
+      <div className="w-[90%] m-auto">
+        <div className="m-auto flex flex-col">
+          <div className=" mt-10 flex gap-2">
+            <SolicitudUserColumn user={solicitud.usuario} />
+            <SolicitudInfomationColumn
+              id_tipo_solicitud={solicitud.id_tipo_solicitud}
+              solicitud={solicitud}
+            />
           </div>
-        )}
-        <ToastContainer />
+          {getUserRole() === 7 ? (
+            <div></div>
+          ) : (
+            <div className="mt-3 flex gap-2 self-end">
+              <Btn style="strong" onClick={handleAceptar}>
+                Acceptar
+              </Btn>
+              <Btn style="light" onClick={handleRechazar}>
+                Rechazar
+              </Btn>
+            </div>
+          )}
+          <ToastContainer />
+        </div>
       </div>
     </Layout>
   );

@@ -60,7 +60,7 @@ const ColumnaDayPicker = ({ daySelected, setDaySelected }: Props) => {
           disabled: { fontSize: "75%" },
         }}
       />
-      <div className="border-t-2 w-full h-[50%]">hello</div>
+      <div className="border-t-2 w-full h-[50%]"></div>
     </div>
   );
 };
